@@ -1,9 +1,10 @@
 ## PM Teeter Ball
 
-Implementarea jocului Teeter Ball pe LCD grafic, controlat prin accelerometru.
-In folder-ul u8glib se gasesc sursele din biblioteca u8glib.
-In folder-ul mpu se gasesc sursele pentru lucrul cu accelerometrul si comunicatia prin I2C.
-In folder-ul project este sursa jocului Teeter Ball.
+Implementarea jocului Teeter Ball pe LCD grafic, controlat prin accelerometru. <br />
+ <br />
+In folder-ul u8glib se gasesc sursele din biblioteca u8glib <br />
+In folder-ul mpu se gasesc sursele pentru lucrul cu accelerometrul si comunicatia prin I2C. <br />
+In folder-ul project este sursa jocului Teeter Ball. <br />
 
 ## Despre joc
 La inceput, apare pagina de start cu "logo-ul". 
