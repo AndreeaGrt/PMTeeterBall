@@ -1,3 +1,4 @@
+/* Gurita Andreea 335CB -Proiect PM */
 #include "u8g.h"
 #include "mpu6050.h"
 #include <avr/interrupt.h>
