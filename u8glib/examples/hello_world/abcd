@@ -1,0 +1,70 @@
+/*u8g_FirstPage(&u8g);
+		do
+		{
+			mpu6050_getRawData(&acc_x, &ay, &az, &gx, &gy, &gz);
+		
+			if (x - acc_x > THRESHOLD){
+				x = acc_x;
+				print_msg(strx, 1, 10);
+			}
+			else if (x - acc_x < THRESHOLD && x - acc_x > -THRESHOLD){
+				
+				print_msg(stz, 1, 10);
+			}
+			else{
+				x = acc_x;
+				print_msg(stry, 1, 10);
+			}
+
+			itoa(acc_x,buffer,10);
+  			u8g_DrawStr(&u8g, 1, 25, buffer);
+  			itoa(x,buffer,10);
+  			u8g_DrawStr(&u8g, 1, 35, buffer);
+
+
+  			if (y - ay > THRESHOLD){
+				y = ay;
+				print_msg(strx1, 90, 10);
+			}
+			else if (y - ay < THRESHOLD && y - ay > -THRESHOLD){
+				
+				print_msg(stz, 90, 10);
+			}
+			else{
+				y= ay;
+				print_msg(stry1, 90, 10);
+			}
+
+			itoa(ay,buffer,10);
+  			u8g_DrawStr(&u8g, 90, 25, buffer);
+  			itoa(y,buffer,10);
+  			u8g_DrawStr(&u8g, 90, 35, buffer);
+  			_delay_ms(50);
+
+		} while ( u8g_NextPage(&u8g) );
+		_delay_ms(1000);*/
+
+		 //Calculate new speed
+	 /*   xVelocity += (xAcceleration * frameTime);
+	    yVelocity += (yAcceleration * frameTime);
+
+	    //Calc distance travelled in that time
+	    float xS = (xVelocity/2)*frameTime;
+	    float yS = (yVelocity/2)*frameTime;
+
+	    //Add to position negative due to sensor 
+	    //readings being opposite to what we want!
+	    xPosition -= xS; 
+	    yPosition -= yS;
+
+	    if (xPosition > xmax) {
+	        xPosition = xmax;
+	    } else if (xPosition < 0) {
+	        xPosition = 0;
+	    }
+	    if (yPosition > ymax) { 
+	        yPosition = ymax;
+	    } else if (yPosition < 0) {
+	        yPosition = 0;
+	    }*/
+	//}
