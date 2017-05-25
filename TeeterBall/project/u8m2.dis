@@ -1257,12 +1257,6 @@ int main(void)
      a42:	dc cf       	rjmp	.-72     	; 0x9fc <main+0x2a>
 
 00000a44 <u8g_DrawHBitmapP>:
-  }
-}
-
-
-void u8g_DrawHBitmapP(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t cnt, const u8g_pgm_uint8_t *bitmap)
-{
      a44:	a0 e0       	ldi	r26, 0x00	; 0
      a46:	b0 e0       	ldi	r27, 0x00	; 0
      a48:	e8 e2       	ldi	r30, 0x28	; 40
@@ -1273,11 +1267,8 @@ void u8g_DrawHBitmapP(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t cnt, co
      a54:	b4 2e       	mov	r11, r20
      a56:	c2 2f       	mov	r28, r18
      a58:	78 01       	movw	r14, r16
-  while( cnt > 0 )
      a5a:	cc 23       	and	r28, r28
      a5c:	69 f0       	breq	.+26     	; 0xa78 <u8g_DrawHBitmapP+0x34>
-  {
-    u8g_Draw8Pixel(u8g, x, y, 0, u8g_pgm_read(bitmap));
      a5e:	f7 01       	movw	r30, r14
      a60:	04 91       	lpm	r16, Z
      a62:	20 e0       	ldi	r18, 0x00	; 0
@@ -1286,25 +1277,17 @@ void u8g_DrawHBitmapP(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t cnt, co
      a68:	c6 01       	movw	r24, r12
      a6a:	1c d6       	rcall	.+3128   	; 0x16a4 <u8g_Draw8Pixel>
      a6c:	ff ef       	ldi	r31, 0xFF	; 255
-    bitmap++;
      a6e:	ef 1a       	sub	r14, r31
      a70:	ff 0a       	sbc	r15, r31
      a72:	c1 50       	subi	r28, 0x01	; 1
-    cnt--;
      a74:	d8 5f       	subi	r29, 0xF8	; 248
-    x+=8;
      a76:	f1 cf       	rjmp	.-30     	; 0xa5a <u8g_DrawHBitmapP+0x16>
      a78:	cd b7       	in	r28, 0x3d	; 61
-  }
-}
      a7a:	de b7       	in	r29, 0x3e	; 62
      a7c:	e9 e0       	ldi	r30, 0x09	; 9
      a7e:	0c 94 67 12 	jmp	0x24ce	; 0x24ce <__epilogue_restores__+0x12>
 
 00000a82 <u8g_DrawBitmapP>:
-
-void u8g_DrawBitmapP(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t cnt, u8g_uint_t h, const u8g_pgm_uint8_t *bitmap)
-{
      a82:	a0 e0       	ldi	r26, 0x00	; 0
      a84:	b0 e0       	ldi	r27, 0x00	; 0
      a86:	e7 e4       	ldi	r30, 0x47	; 71
@@ -1315,7 +1298,6 @@ void u8g_DrawBitmapP(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t cnt, u8g
      a92:	c4 2f       	mov	r28, r20
      a94:	d2 2e       	mov	r13, r18
      a96:	d0 2f       	mov	r29, r16
-  if ( u8g_IsBBXIntersection(u8g, x, y, cnt*8, h) == 0 )
      a98:	22 0f       	add	r18, r18
      a9a:	22 0f       	add	r18, r18
      a9c:	22 0f       	add	r18, r18
@@ -1324,23 +1306,10 @@ void u8g_DrawBitmapP(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t cnt, u8g
      aa2:	79 f0       	breq	.+30     	; 0xac2 <u8g_DrawBitmapP+0x40>
      aa4:	dc 0f       	add	r29, r28
      aa6:	8d 2c       	mov	r8, r13
-    return;
-  while( h > 0 )
-  {
-    u8g_DrawHBitmapP(u8g, x, y, cnt, bitmap);
-    bitmap += cnt;
      aa8:	91 2c       	mov	r9, r1
      aaa:	cd 17       	cp	r28, r29
-
-void u8g_DrawBitmapP(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t cnt, u8g_uint_t h, const u8g_pgm_uint8_t *bitmap)
-{
-  if ( u8g_IsBBXIntersection(u8g, x, y, cnt*8, h) == 0 )
-    return;
-  while( h > 0 )
      aac:	51 f0       	breq	.+20     	; 0xac2 <u8g_DrawBitmapP+0x40>
      aae:	87 01       	movw	r16, r14
-  {
-    u8g_DrawHBitmapP(u8g, x, y, cnt, bitmap);
      ab0:	2d 2d       	mov	r18, r13
      ab2:	4c 2f       	mov	r20, r28
      ab4:	6c 2d       	mov	r22, r12
@@ -1350,23 +1319,12 @@ void u8g_DrawBitmapP(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t cnt, u8g
      abc:	f9 1c       	adc	r15, r9
      abe:	cf 5f       	subi	r28, 0xFF	; 255
      ac0:	f4 cf       	rjmp	.-24     	; 0xaaa <u8g_DrawBitmapP+0x28>
-    bitmap += cnt;
-    y++;
      ac2:	cd b7       	in	r28, 0x3d	; 61
      ac4:	de b7       	in	r29, 0x3e	; 62
-    h--;
-  }
-}
      ac6:	ec e0       	ldi	r30, 0x0C	; 12
      ac8:	0c 94 64 12 	jmp	0x24c8	; 0x24c8 <__epilogue_restores__+0xc>
 
 00000acc <u8g_draw_circle_section>:
-/*=========================================================================*/
-
-static void u8g_draw_circle_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t x0, u8g_uint_t y0, uint8_t option) U8G_NOINLINE;
-
-static void u8g_draw_circle_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t x0, u8g_uint_t y0, uint8_t option)
-{
      acc:	cf 92       	push	r12
      ace:	df 92       	push	r13
      ad0:	ef 92       	push	r14
@@ -1378,19 +1336,14 @@ static void u8g_draw_circle_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_
      adc:	d6 2f       	mov	r29, r22
      ade:	14 2f       	mov	r17, r20
      ae0:	c2 2f       	mov	r28, r18
-    /* upper right */
-    if ( option & U8G_DRAW_UPPER_RIGHT )
      ae2:	e0 fe       	sbrs	r14, 0
      ae4:	0b c0       	rjmp	.+22     	; 0xafc <u8g_draw_circle_section+0x30>
-    {
-      u8g_DrawPixel(u8g, x0 + x, y0 - y);
      ae6:	40 2f       	mov	r20, r16
      ae8:	41 1b       	sub	r20, r17
      aea:	62 2f       	mov	r22, r18
      aec:	6d 0f       	add	r22, r29
      aee:	d3 d5       	rcall	.+2982   	; 0x1696 <u8g_DrawPixel>
      af0:	40 2f       	mov	r20, r16
-      u8g_DrawPixel(u8g, x0 + y, y0 - x);
      af2:	4d 1b       	sub	r20, r29
      af4:	61 2f       	mov	r22, r17
      af6:	6c 0f       	add	r22, r28
@@ -1398,14 +1351,8 @@ static void u8g_draw_circle_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_
      afa:	cd d5       	rcall	.+2970   	; 0x1696 <u8g_DrawPixel>
      afc:	e1 fe       	sbrs	r14, 1
      afe:	0c c0       	rjmp	.+24     	; 0xb18 <u8g_draw_circle_section+0x4c>
-    }
-    
-    /* upper left */
-    if ( option & U8G_DRAW_UPPER_LEFT )
      b00:	40 2f       	mov	r20, r16
      b02:	41 1b       	sub	r20, r17
-    {
-      u8g_DrawPixel(u8g, x0 - x, y0 - y);
      b04:	6c 2f       	mov	r22, r28
      b06:	6d 1b       	sub	r22, r29
      b08:	c6 01       	movw	r24, r12
@@ -1413,7 +1360,6 @@ static void u8g_draw_circle_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_
      b0c:	40 2f       	mov	r20, r16
      b0e:	4d 1b       	sub	r20, r29
      b10:	6c 2f       	mov	r22, r28
-      u8g_DrawPixel(u8g, x0 - y, y0 - x);
      b12:	61 1b       	sub	r22, r17
      b14:	c6 01       	movw	r24, r12
      b16:	bf d5       	rcall	.+2942   	; 0x1696 <u8g_DrawPixel>
@@ -1421,14 +1367,8 @@ static void u8g_draw_circle_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_
      b1a:	0c c0       	rjmp	.+24     	; 0xb34 <u8g_draw_circle_section+0x68>
      b1c:	40 2f       	mov	r20, r16
      b1e:	41 0f       	add	r20, r17
-    }
-    
-    /* lower right */
-    if ( option & U8G_DRAW_LOWER_RIGHT )
      b20:	6c 2f       	mov	r22, r28
      b22:	6d 0f       	add	r22, r29
-    {
-      u8g_DrawPixel(u8g, x0 + x, y0 + y);
      b24:	c6 01       	movw	r24, r12
      b26:	b7 d5       	rcall	.+2926   	; 0x1696 <u8g_DrawPixel>
      b28:	40 2f       	mov	r20, r16
@@ -1436,7 +1376,6 @@ static void u8g_draw_circle_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_
      b2c:	61 2f       	mov	r22, r17
      b2e:	6c 0f       	add	r22, r28
      b30:	c6 01       	movw	r24, r12
-      u8g_DrawPixel(u8g, x0 + y, y0 + x);
      b32:	b1 d5       	rcall	.+2914   	; 0x1696 <u8g_DrawPixel>
      b34:	e2 fe       	sbrs	r14, 2
      b36:	0c c0       	rjmp	.+24     	; 0xb50 <u8g_draw_circle_section+0x84>
@@ -1444,14 +1383,8 @@ static void u8g_draw_circle_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_
      b3a:	41 0f       	add	r20, r17
      b3c:	6c 2f       	mov	r22, r28
      b3e:	6d 1b       	sub	r22, r29
-    }
-    
-    /* lower left */
-    if ( option & U8G_DRAW_LOWER_LEFT )
      b40:	c6 01       	movw	r24, r12
      b42:	a9 d5       	rcall	.+2898   	; 0x1696 <u8g_DrawPixel>
-    {
-      u8g_DrawPixel(u8g, x0 - x, y0 + y);
      b44:	40 2f       	mov	r20, r16
      b46:	4d 0f       	add	r20, r29
      b48:	6c 2f       	mov	r22, r28
@@ -1459,7 +1392,6 @@ static void u8g_draw_circle_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_
      b4c:	c6 01       	movw	r24, r12
      b4e:	a3 d5       	rcall	.+2886   	; 0x1696 <u8g_DrawPixel>
      b50:	df 91       	pop	r29
-      u8g_DrawPixel(u8g, x0 - y, y0 + x);
      b52:	cf 91       	pop	r28
      b54:	1f 91       	pop	r17
      b56:	0f 91       	pop	r16
@@ -1469,12 +1401,6 @@ static void u8g_draw_circle_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_
      b5e:	08 95       	ret
 
 00000b60 <u8g_draw_disc_section>:
-}
-
-static void u8g_draw_disc_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t x0, u8g_uint_t y0, uint8_t option) U8G_NOINLINE;
-
-static void u8g_draw_disc_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t x0, u8g_uint_t y0, uint8_t option)
-{
      b60:	cf 92       	push	r12
      b62:	df 92       	push	r13
      b64:	ef 92       	push	r14
@@ -1486,12 +1412,8 @@ static void u8g_draw_disc_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_ui
      b70:	c6 2f       	mov	r28, r22
      b72:	14 2f       	mov	r17, r20
      b74:	d2 2f       	mov	r29, r18
-    /* upper right */
-    if ( option & U8G_DRAW_UPPER_RIGHT )
      b76:	e0 fe       	sbrs	r14, 0
      b78:	0f c0       	rjmp	.+30     	; 0xb98 <u8g_draw_disc_section+0x38>
-    {
-      u8g_DrawVLine(u8g, x0+x, y0-y, y+1);
      b7a:	21 e0       	ldi	r18, 0x01	; 1
      b7c:	24 0f       	add	r18, r20
      b7e:	40 2f       	mov	r20, r16
@@ -1500,7 +1422,6 @@ static void u8g_draw_disc_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_ui
      b84:	6c 0f       	add	r22, r28
      b86:	c9 d6       	rcall	.+3474   	; 0x191a <u8g_DrawVLine>
      b88:	21 e0       	ldi	r18, 0x01	; 1
-      u8g_DrawVLine(u8g, x0+y, y0-x, x+1);
      b8a:	2c 0f       	add	r18, r28
      b8c:	40 2f       	mov	r20, r16
      b8e:	4c 1b       	sub	r20, r28
@@ -1510,14 +1431,8 @@ static void u8g_draw_disc_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_ui
      b96:	c1 d6       	rcall	.+3458   	; 0x191a <u8g_DrawVLine>
      b98:	e1 fe       	sbrs	r14, 1
      b9a:	10 c0       	rjmp	.+32     	; 0xbbc <u8g_draw_disc_section+0x5c>
-    }
-    
-    /* upper left */
-    if ( option & U8G_DRAW_UPPER_LEFT )
      b9c:	21 e0       	ldi	r18, 0x01	; 1
      b9e:	21 0f       	add	r18, r17
-    {
-      u8g_DrawVLine(u8g, x0-x, y0-y, y+1);
      ba0:	40 2f       	mov	r20, r16
      ba2:	41 1b       	sub	r20, r17
      ba4:	6d 2f       	mov	r22, r29
@@ -1527,7 +1442,6 @@ static void u8g_draw_disc_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_ui
      bac:	21 e0       	ldi	r18, 0x01	; 1
      bae:	2c 0f       	add	r18, r28
      bb0:	40 2f       	mov	r20, r16
-      u8g_DrawVLine(u8g, x0-y, y0-x, x+1);
      bb2:	4c 1b       	sub	r20, r28
      bb4:	6d 2f       	mov	r22, r29
      bb6:	61 1b       	sub	r22, r17
@@ -1537,14 +1451,8 @@ static void u8g_draw_disc_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_ui
      bbe:	0e c0       	rjmp	.+28     	; 0xbdc <u8g_draw_disc_section+0x7c>
      bc0:	21 e0       	ldi	r18, 0x01	; 1
      bc2:	21 0f       	add	r18, r17
-    }
-    
-    /* lower right */
-    if ( option & U8G_DRAW_LOWER_RIGHT )
      bc4:	40 2f       	mov	r20, r16
      bc6:	6d 2f       	mov	r22, r29
-    {
-      u8g_DrawVLine(u8g, x0+x, y0, y+1);
      bc8:	6c 0f       	add	r22, r28
      bca:	c6 01       	movw	r24, r12
      bcc:	a6 d6       	rcall	.+3404   	; 0x191a <u8g_DrawVLine>
@@ -1553,7 +1461,6 @@ static void u8g_draw_disc_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_ui
      bd2:	40 2f       	mov	r20, r16
      bd4:	61 2f       	mov	r22, r17
      bd6:	6d 0f       	add	r22, r29
-      u8g_DrawVLine(u8g, x0+y, y0, x+1);
      bd8:	c6 01       	movw	r24, r12
      bda:	9f d6       	rcall	.+3390   	; 0x191a <u8g_DrawVLine>
      bdc:	e2 fe       	sbrs	r14, 2
@@ -1562,14 +1469,8 @@ static void u8g_draw_disc_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_ui
      be2:	21 0f       	add	r18, r17
      be4:	6d 2f       	mov	r22, r29
      be6:	6c 1b       	sub	r22, r28
-    }
-    
-    /* lower left */
-    if ( option & U8G_DRAW_LOWER_LEFT )
      be8:	40 2f       	mov	r20, r16
      bea:	c6 01       	movw	r24, r12
-    {
-      u8g_DrawVLine(u8g, x0-x, y0, y+1);
      bec:	96 d6       	rcall	.+3372   	; 0x191a <u8g_DrawVLine>
      bee:	21 e0       	ldi	r18, 0x01	; 1
      bf0:	2c 0f       	add	r18, r28
@@ -1578,7 +1479,6 @@ static void u8g_draw_disc_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_ui
      bf6:	40 2f       	mov	r20, r16
      bf8:	c6 01       	movw	r24, r12
      bfa:	8f d6       	rcall	.+3358   	; 0x191a <u8g_DrawVLine>
-      u8g_DrawVLine(u8g, x0-y, y0, x+1);
      bfc:	df 91       	pop	r29
      bfe:	cf 91       	pop	r28
      c00:	1f 91       	pop	r17
@@ -1589,12 +1489,6 @@ static void u8g_draw_disc_section(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_ui
      c0a:	08 95       	ret
 
 00000c0c <u8g_draw_circle>:
-      u8g_DrawPixel(u8g, x0 - y, y0 + x);
-    }
-}
-
-void u8g_draw_circle(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, uint8_t option)
-{
      c0c:	a0 e0       	ldi	r26, 0x00	; 0
      c0e:	b0 e0       	ldi	r27, 0x00	; 0
      c10:	ec e0       	ldi	r30, 0x0C	; 12
@@ -1605,25 +1499,11 @@ void u8g_draw_circle(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, u
      c1c:	a4 2e       	mov	r10, r20
      c1e:	c2 2f       	mov	r28, r18
      c20:	90 2e       	mov	r9, r16
-    u8g_int_t ddF_y;
-    u8g_uint_t x;
-    u8g_uint_t y;
-
-    f = 1;
-    f -= rad;
      c22:	d1 e0       	ldi	r29, 0x01	; 1
      c24:	d2 1b       	sub	r29, r18
-    ddF_x = 1;
-    ddF_y = 0;
-    ddF_y -= rad;
      c26:	f2 2e       	mov	r15, r18
      c28:	f1 94       	neg	r15
-    ddF_y *= 2;
      c2a:	ff 0c       	add	r15, r15
-    x = 0;
-    y = rad;
-
-    u8g_draw_circle_section(u8g, x, y, x0, y0, option);
      c2c:	e0 2e       	mov	r14, r16
      c2e:	04 2f       	mov	r16, r20
      c30:	26 2f       	mov	r18, r22
@@ -1631,43 +1511,20 @@ void u8g_draw_circle(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, u
      c34:	60 e0       	ldi	r22, 0x00	; 0
      c36:	4a df       	rcall	.-364    	; 0xacc <u8g_draw_circle_section>
      c38:	10 e0       	ldi	r17, 0x00	; 0
-    f -= rad;
-    ddF_x = 1;
-    ddF_y = 0;
-    ddF_y -= rad;
-    ddF_y *= 2;
-    x = 0;
      c3a:	1c 17       	cp	r17, r28
-    y = rad;
-
-    u8g_draw_circle_section(u8g, x, y, x0, y0, option);
-    
-    while ( x < y )
      c3c:	98 f4       	brcc	.+38     	; 0xc64 <u8g_draw_circle+0x58>
      c3e:	d7 fd       	sbrc	r29, 7
-    {
-      if (f >= 0) 
      c40:	04 c0       	rjmp	.+8      	; 0xc4a <u8g_draw_circle+0x3e>
      c42:	c1 50       	subi	r28, 0x01	; 1
-      {
-        y--;
      c44:	f3 94       	inc	r15
-        ddF_y += 2;
      c46:	f3 94       	inc	r15
      c48:	df 0d       	add	r29, r15
-        f += ddF_y;
      c4a:	1f 5f       	subi	r17, 0xFF	; 255
-      }
-      x++;
      c4c:	91 2f       	mov	r25, r17
      c4e:	99 0f       	add	r25, r25
      c50:	9f 5f       	subi	r25, 0xFF	; 255
      c52:	d9 0f       	add	r29, r25
-      ddF_x += 2;
-      f += ddF_x;
      c54:	e9 2c       	mov	r14, r9
-
-      u8g_draw_circle_section(u8g, x, y, x0, y0, option);    
      c56:	0a 2d       	mov	r16, r10
      c58:	2b 2d       	mov	r18, r11
      c5a:	4c 2f       	mov	r20, r28
@@ -1677,15 +1534,10 @@ void u8g_draw_circle(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, u
      c62:	eb cf       	rjmp	.-42     	; 0xc3a <u8g_draw_circle+0x2e>
      c64:	cd b7       	in	r28, 0x3d	; 61
      c66:	de b7       	in	r29, 0x3e	; 62
-    }
-}
      c68:	eb e0       	ldi	r30, 0x0B	; 11
      c6a:	0c 94 65 12 	jmp	0x24ca	; 0x24ca <__epilogue_restores__+0xe>
 
 00000c6e <u8g_DrawCircle>:
-
-void u8g_DrawCircle(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, uint8_t option)
-{
      c6e:	a0 e0       	ldi	r26, 0x00	; 0
      c70:	b0 e0       	ldi	r27, 0x00	; 0
      c72:	ed e3       	ldi	r30, 0x3D	; 61
@@ -1696,20 +1548,10 @@ void u8g_DrawCircle(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, ui
      c7e:	f4 2e       	mov	r15, r20
      c80:	e2 2e       	mov	r14, r18
      c82:	d0 2e       	mov	r13, r16
-  /* check for bounding box */
-  {
-    u8g_uint_t radp, radp2;
-    
-    radp = rad;
-    radp++;
      c84:	91 e0       	ldi	r25, 0x01	; 1
      c86:	92 0f       	add	r25, r18
-    radp2 = radp;
-    radp2 *= 2;
      c88:	29 2f       	mov	r18, r25
      c8a:	22 0f       	add	r18, r18
-    
-    if ( u8g_IsBBXIntersection(u8g, x0-radp, y0-radp, radp2, radp2) == 0)
      c8c:	49 1b       	sub	r20, r25
      c8e:	69 1b       	sub	r22, r25
      c90:	02 2f       	mov	r16, r18
@@ -1718,11 +1560,6 @@ void u8g_DrawCircle(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, ui
      c96:	88 23       	and	r24, r24
      c98:	31 f0       	breq	.+12     	; 0xca6 <u8g_DrawCircle+0x38>
      c9a:	0d 2d       	mov	r16, r13
-      return;    
-  }
-  
-  /* draw circle */
-  u8g_draw_circle(u8g, x0, y0, rad, option);
      c9c:	2e 2d       	mov	r18, r14
      c9e:	4f 2d       	mov	r20, r15
      ca0:	61 2f       	mov	r22, r17
@@ -1730,17 +1567,10 @@ void u8g_DrawCircle(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, ui
      ca4:	b3 df       	rcall	.-154    	; 0xc0c <u8g_draw_circle>
      ca6:	cd b7       	in	r28, 0x3d	; 61
      ca8:	de b7       	in	r29, 0x3e	; 62
-}
      caa:	e7 e0       	ldi	r30, 0x07	; 7
      cac:	0c 94 69 12 	jmp	0x24d2	; 0x24d2 <__epilogue_restores__+0x16>
 
 00000cb0 <u8g_draw_disc>:
-      u8g_DrawVLine(u8g, x0-y, y0, x+1);
-    }
-}
-
-void u8g_draw_disc(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, uint8_t option)
-{
      cb0:	a0 e0       	ldi	r26, 0x00	; 0
      cb2:	b0 e0       	ldi	r27, 0x00	; 0
      cb4:	ee e5       	ldi	r30, 0x5E	; 94
@@ -1751,25 +1581,11 @@ void u8g_draw_disc(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, uin
      cc0:	a4 2e       	mov	r10, r20
      cc2:	c2 2f       	mov	r28, r18
      cc4:	90 2e       	mov	r9, r16
-  u8g_int_t ddF_y;
-  u8g_uint_t x;
-  u8g_uint_t y;
-
-  f = 1;
-  f -= rad;
      cc6:	d1 e0       	ldi	r29, 0x01	; 1
      cc8:	d2 1b       	sub	r29, r18
-  ddF_x = 1;
-  ddF_y = 0;
-  ddF_y -= rad;
      cca:	f2 2e       	mov	r15, r18
      ccc:	f1 94       	neg	r15
-  ddF_y *= 2;
      cce:	ff 0c       	add	r15, r15
-  x = 0;
-  y = rad;
-
-  u8g_draw_disc_section(u8g, x, y, x0, y0, option);
      cd0:	e0 2e       	mov	r14, r16
      cd2:	04 2f       	mov	r16, r20
      cd4:	26 2f       	mov	r18, r22
@@ -1777,43 +1593,20 @@ void u8g_draw_disc(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, uin
      cd8:	60 e0       	ldi	r22, 0x00	; 0
      cda:	42 df       	rcall	.-380    	; 0xb60 <u8g_draw_disc_section>
      cdc:	10 e0       	ldi	r17, 0x00	; 0
-  f -= rad;
-  ddF_x = 1;
-  ddF_y = 0;
-  ddF_y -= rad;
-  ddF_y *= 2;
-  x = 0;
      cde:	1c 17       	cp	r17, r28
-  y = rad;
-
-  u8g_draw_disc_section(u8g, x, y, x0, y0, option);
-  
-  while ( x < y )
      ce0:	98 f4       	brcc	.+38     	; 0xd08 <u8g_draw_disc+0x58>
      ce2:	d7 fd       	sbrc	r29, 7
-  {
-    if (f >= 0) 
      ce4:	04 c0       	rjmp	.+8      	; 0xcee <u8g_draw_disc+0x3e>
      ce6:	c1 50       	subi	r28, 0x01	; 1
-    {
-      y--;
      ce8:	f3 94       	inc	r15
-      ddF_y += 2;
      cea:	f3 94       	inc	r15
      cec:	df 0d       	add	r29, r15
-      f += ddF_y;
      cee:	1f 5f       	subi	r17, 0xFF	; 255
-    }
-    x++;
      cf0:	91 2f       	mov	r25, r17
      cf2:	99 0f       	add	r25, r25
      cf4:	9f 5f       	subi	r25, 0xFF	; 255
      cf6:	d9 0f       	add	r29, r25
-    ddF_x += 2;
-    f += ddF_x;
      cf8:	e9 2c       	mov	r14, r9
-
-    u8g_draw_disc_section(u8g, x, y, x0, y0, option);    
      cfa:	0a 2d       	mov	r16, r10
      cfc:	2b 2d       	mov	r18, r11
      cfe:	4c 2f       	mov	r20, r28
@@ -1823,15 +1616,10 @@ void u8g_draw_disc(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, uin
      d06:	eb cf       	rjmp	.-42     	; 0xcde <u8g_draw_disc+0x2e>
      d08:	cd b7       	in	r28, 0x3d	; 61
      d0a:	de b7       	in	r29, 0x3e	; 62
-  }
-}
      d0c:	eb e0       	ldi	r30, 0x0B	; 11
      d0e:	0c 94 65 12 	jmp	0x24ca	; 0x24ca <__epilogue_restores__+0xe>
 
 00000d12 <u8g_DrawDisc>:
-
-void u8g_DrawDisc(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, uint8_t option)
-{
      d12:	a0 e0       	ldi	r26, 0x00	; 0
      d14:	b0 e0       	ldi	r27, 0x00	; 0
      d16:	ef e8       	ldi	r30, 0x8F	; 143
@@ -1842,20 +1630,10 @@ void u8g_DrawDisc(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, uint
      d22:	f4 2e       	mov	r15, r20
      d24:	e2 2e       	mov	r14, r18
      d26:	d0 2e       	mov	r13, r16
-  /* check for bounding box */
-  {
-    u8g_uint_t radp, radp2;
-    
-    radp = rad;
-    radp++;
      d28:	91 e0       	ldi	r25, 0x01	; 1
      d2a:	92 0f       	add	r25, r18
-    radp2 = radp;
-    radp2 *= 2;
      d2c:	29 2f       	mov	r18, r25
      d2e:	22 0f       	add	r18, r18
-    
-    if ( u8g_IsBBXIntersection(u8g, x0-radp, y0-radp, radp2, radp2) == 0)
      d30:	49 1b       	sub	r20, r25
      d32:	69 1b       	sub	r22, r25
      d34:	02 2f       	mov	r16, r18
@@ -1864,11 +1642,6 @@ void u8g_DrawDisc(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, uint
      d3a:	88 23       	and	r24, r24
      d3c:	31 f0       	breq	.+12     	; 0xd4a <u8g_DrawDisc+0x38>
      d3e:	0d 2d       	mov	r16, r13
-      return;    
-  }
-  
-  /* draw disc */
-  u8g_draw_disc(u8g, x0, y0, rad, option);
      d40:	2e 2d       	mov	r18, r14
      d42:	4f 2d       	mov	r20, r15
      d44:	61 2f       	mov	r22, r17
@@ -1876,149 +1649,61 @@ void u8g_DrawDisc(u8g_t *u8g, u8g_uint_t x0, u8g_uint_t y0, u8g_uint_t rad, uint
      d48:	b3 df       	rcall	.-154    	; 0xcb0 <u8g_draw_disc>
      d4a:	cd b7       	in	r28, 0x3d	; 61
      d4c:	de b7       	in	r29, 0x3e	; 62
-}
      d4e:	e7 e0       	ldi	r30, 0x07	; 7
      d50:	0c 94 69 12 	jmp	0x24d2	; 0x24d2 <__epilogue_restores__+0x16>
 
 00000d54 <u8g_IsBBXIntersection>:
-  }
-}
-
-
-uint8_t u8g_IsBBXIntersection(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t w, u8g_uint_t h)
-{
      d54:	0f 93       	push	r16
      d56:	fc 01       	movw	r30, r24
      d58:	01 50       	subi	r16, 0x01	; 1
-  register u8g_uint_t tmp;
-  tmp = y;
-  tmp += h;
-  tmp--;
      d5a:	04 0f       	add	r16, r20
-  if ( u8g_is_intersection_decision_tree(u8g->current_page.y0, u8g->current_page.y1, y, tmp) == 0 )
      d5c:	84 a9       	ldd	r24, Z+52	; 0x34
-//static uint8_t u8g_is_intersection_decision_tree(u8g_uint_t a0, u8g_uint_t a1, u8g_uint_t v0, u8g_uint_t v1) U8G_ALWAYS_INLINE;
-static uint8_t U8G_ALWAYS_INLINE u8g_is_intersection_decision_tree(u8g_uint_t a0, u8g_uint_t a1, u8g_uint_t v0, u8g_uint_t v1) 
-{
-  /* surprisingly the macro leads to larger code */
-  /* return U8G_IS_INTERSECTION_MACRO(a0,a1,v0,v1); */
-  if ( v0 <= a1 )
      d5e:	96 a9       	ldd	r25, Z+54	; 0x36
      d60:	94 17       	cp	r25, r20
      d62:	18 f0       	brcs	.+6      	; 0xd6a <u8g_IsBBXIntersection+0x16>
-  {
-    if ( v1 >= a0 )
      d64:	08 17       	cp	r16, r24
      d66:	28 f4       	brcc	.+10     	; 0xd72 <u8g_IsBBXIntersection+0x1e>
      d68:	02 c0       	rjmp	.+4      	; 0xd6e <u8g_IsBBXIntersection+0x1a>
-      }
-    }
-  }
-  else
-  {
-    if ( v1 >= a0 )
      d6a:	08 17       	cp	r16, r24
      d6c:	50 f0       	brcs	.+20     	; 0xd82 <u8g_IsBBXIntersection+0x2e>
-    {
-      if ( v0 > v1 )
      d6e:	04 17       	cp	r16, r20
      d70:	40 f4       	brcc	.+16     	; 0xd82 <u8g_IsBBXIntersection+0x2e>
      d72:	21 50       	subi	r18, 0x01	; 1
-  if ( u8g_is_intersection_decision_tree(u8g->current_page.y0, u8g->current_page.y1, y, tmp) == 0 )
-    return 0; 
-  
-  tmp = x;
-  tmp += w;
-  tmp--;
      d74:	26 0f       	add	r18, r22
-  return u8g_is_intersection_decision_tree(u8g->current_page.x0, u8g->current_page.x1, x, tmp);
      d76:	83 a9       	ldd	r24, Z+51	; 0x33
-//static uint8_t u8g_is_intersection_decision_tree(u8g_uint_t a0, u8g_uint_t a1, u8g_uint_t v0, u8g_uint_t v1) U8G_ALWAYS_INLINE;
-static uint8_t U8G_ALWAYS_INLINE u8g_is_intersection_decision_tree(u8g_uint_t a0, u8g_uint_t a1, u8g_uint_t v0, u8g_uint_t v1) 
-{
-  /* surprisingly the macro leads to larger code */
-  /* return U8G_IS_INTERSECTION_MACRO(a0,a1,v0,v1); */
-  if ( v0 <= a1 )
      d78:	95 a9       	ldd	r25, Z+53	; 0x35
      d7a:	96 17       	cp	r25, r22
      d7c:	20 f4       	brcc	.+8      	; 0xd86 <u8g_IsBBXIntersection+0x32>
-      }
-    }
-  }
-  else
-  {
-    if ( v1 >= a0 )
      d7e:	28 17       	cp	r18, r24
      d80:	20 f4       	brcc	.+8      	; 0xd8a <u8g_IsBBXIntersection+0x36>
-  register u8g_uint_t tmp;
-  tmp = y;
-  tmp += h;
-  tmp--;
-  if ( u8g_is_intersection_decision_tree(u8g->current_page.y0, u8g->current_page.y1, y, tmp) == 0 )
-    return 0; 
      d82:	80 e0       	ldi	r24, 0x00	; 0
      d84:	07 c0       	rjmp	.+14     	; 0xd94 <u8g_IsBBXIntersection+0x40>
-{
-  /* surprisingly the macro leads to larger code */
-  /* return U8G_IS_INTERSECTION_MACRO(a0,a1,v0,v1); */
-  if ( v0 <= a1 )
-  {
-    if ( v1 >= a0 )
      d86:	28 17       	cp	r18, r24
      d88:	20 f4       	brcc	.+8      	; 0xd92 <u8g_IsBBXIntersection+0x3e>
-  }
-  else
-  {
-    if ( v1 >= a0 )
-    {
-      if ( v0 > v1 )
      d8a:	81 e0       	ldi	r24, 0x01	; 1
      d8c:	26 17       	cp	r18, r22
      d8e:	10 f0       	brcs	.+4      	; 0xd94 <u8g_IsBBXIntersection+0x40>
      d90:	f8 cf       	rjmp	.-16     	; 0xd82 <u8g_IsBBXIntersection+0x2e>
-  /* return U8G_IS_INTERSECTION_MACRO(a0,a1,v0,v1); */
-  if ( v0 <= a1 )
-  {
-    if ( v1 >= a0 )
-    {
-      return 1;
      d92:	81 e0       	ldi	r24, 0x01	; 1
-  
-  tmp = x;
-  tmp += w;
-  tmp--;
-  return u8g_is_intersection_decision_tree(u8g->current_page.x0, u8g->current_page.x1, x, tmp);
-}
      d94:	0f 91       	pop	r16
      d96:	08 95       	ret
 
 00000d98 <u8g_get_avr_io_ptr>:
-#endif
-#endif
-};
-
-static volatile uint8_t *u8g_get_avr_io_ptr(const IO_PTR *base, uint8_t offset)
-{
      d98:	a2 e0       	ldi	r26, 0x02	; 2
      d9a:	b0 e0       	ldi	r27, 0x00	; 0
      d9c:	e2 ed       	ldi	r30, 0xD2	; 210
      d9e:	f6 e0       	ldi	r31, 0x06	; 6
      da0:	0c 94 52 12 	jmp	0x24a4	; 0x24a4 <__prologue_saves__+0x20>
-  volatile uint8_t * tmp;
-  base += offset;
      da4:	86 0f       	add	r24, r22
      da6:	91 1d       	adc	r25, r1
      da8:	86 0f       	add	r24, r22
      daa:	91 1d       	adc	r25, r1
-  memcpy_P(&tmp, base, sizeof(volatile uint8_t * PROGMEM));
      dac:	42 e0       	ldi	r20, 0x02	; 2
      dae:	50 e0       	ldi	r21, 0x00	; 0
      db0:	bc 01       	movw	r22, r24
      db2:	ce 01       	movw	r24, r28
      db4:	01 96       	adiw	r24, 0x01	; 1
      db6:	0e 94 25 14 	call	0x284a	; 0x284a <memcpy_P>
-  return tmp; 
-}
      dba:	89 81       	ldd	r24, Y+1	; 0x01
      dbc:	9a 81       	ldd	r25, Y+2	; 0x02
      dbe:	22 96       	adiw	r28, 0x02	; 2
@@ -2026,12 +1711,6 @@ static volatile uint8_t *u8g_get_avr_io_ptr(const IO_PTR *base, uint8_t offset)
      dc2:	0c 94 6e 12 	jmp	0x24dc	; 0x24dc <__epilogue_restores__+0x20>
 
 00000dc6 <u8g_Pin>:
-uint8_t u8g_Pin(uint8_t port, uint8_t bitpos)
-{
-  port <<= 3;
-  port += bitpos;
-  return port;
-}
      dc6:	98 e0       	ldi	r25, 0x08	; 8
      dc8:	89 9f       	mul	r24, r25
      dca:	60 0d       	add	r22, r0
@@ -2040,15 +1719,8 @@ uint8_t u8g_Pin(uint8_t port, uint8_t bitpos)
      dd0:	08 95       	ret
 
 00000dd2 <u8g_SetPinOutput>:
-  return tmp; 
-}
-
-/* set direction to output of the specified pin (internal pin number) */
-void u8g_SetPinOutput(uint8_t internal_pin_number)
-{
      dd2:	cf 93       	push	r28
      dd4:	c8 2f       	mov	r28, r24
-  *u8g_get_avr_io_ptr(u8g_avr_ddr_P, internal_pin_number>>3) |= _BV(internal_pin_number&7);
      dd6:	68 2f       	mov	r22, r24
      dd8:	66 95       	lsr	r22
      dda:	66 95       	lsr	r22
@@ -2068,21 +1740,13 @@ void u8g_SetPinOutput(uint8_t internal_pin_number)
      df6:	24 2b       	or	r18, r20
      df8:	20 83       	st	Z, r18
      dfa:	cf 91       	pop	r28
-}
      dfc:	08 95       	ret
 
 00000dfe <u8g_SetPinLevel>:
-{
-  *u8g_get_avr_io_ptr(u8g_avr_ddr_P, internal_pin_number>>3) &= ~_BV(internal_pin_number&7);
-}
-
-void u8g_SetPinLevel(uint8_t internal_pin_number, uint8_t level)
-{
      dfe:	cf 93       	push	r28
      e00:	df 93       	push	r29
      e02:	c8 2f       	mov	r28, r24
      e04:	d6 2f       	mov	r29, r22
-  volatile uint8_t * tmp = u8g_get_avr_io_ptr(u8g_avr_port_P, internal_pin_number>>3);
      e06:	68 2f       	mov	r22, r24
      e08:	66 95       	lsr	r22
      e0a:	66 95       	lsr	r22
@@ -2093,21 +1757,9 @@ void u8g_SetPinLevel(uint8_t internal_pin_number, uint8_t level)
      e14:	fc 01       	movw	r30, r24
      e16:	c7 70       	andi	r28, 0x07	; 7
      e18:	8f b7       	in	r24, 0x3f	; 63
-  
-  if ( level == 0 )
-  {
-    U8G_ATOMIC_AND(tmp, ~_BV(internal_pin_number&7));
      e1a:	d1 11       	cpse	r29, r1
-
-void u8g_SetPinLevel(uint8_t internal_pin_number, uint8_t level)
-{
-  volatile uint8_t * tmp = u8g_get_avr_io_ptr(u8g_avr_port_P, internal_pin_number>>3);
-  
-  if ( level == 0 )
      e1c:	0b c0       	rjmp	.+22     	; 0xe34 <u8g_SetPinLevel+0x36>
      e1e:	f8 94       	cli
-  {
-    U8G_ATOMIC_AND(tmp, ~_BV(internal_pin_number&7));
      e20:	90 81       	ld	r25, Z
      e22:	21 e0       	ldi	r18, 0x01	; 1
      e24:	30 e0       	ldi	r19, 0x00	; 0
@@ -2119,11 +1771,6 @@ void u8g_SetPinLevel(uint8_t internal_pin_number, uint8_t level)
      e30:	29 23       	and	r18, r25
      e32:	09 c0       	rjmp	.+18     	; 0xe46 <u8g_SetPinLevel+0x48>
      e34:	f8 94       	cli
-   // *tmp &= ~_BV(internal_pin_number&7);
-  }
-  else
-  {
-    U8G_ATOMIC_OR(tmp, _BV(internal_pin_number&7));
      e36:	90 81       	ld	r25, Z
      e38:	21 e0       	ldi	r18, 0x01	; 1
      e3a:	30 e0       	ldi	r19, 0x00	; 0
@@ -2135,47 +1782,27 @@ void u8g_SetPinLevel(uint8_t internal_pin_number, uint8_t level)
      e46:	20 83       	st	Z, r18
      e48:	8f bf       	out	0x3f, r24	; 63
      e4a:	df 91       	pop	r29
-    //*tmp |= _BV(internal_pin_number&7);
-  }
-  
-}
      e4c:	cf 91       	pop	r28
      e4e:	08 95       	ret
 
 00000e50 <u8g_SetPIOutput>:
-#if defined(U8G_WITH_PINLIST)
-
-void u8g_SetPIOutput(u8g_t *u8g, uint8_t pi)
-{
-  uint8_t pin;
-  pin = u8g->pin_list[pi];
      e50:	86 0f       	add	r24, r22
      e52:	91 1d       	adc	r25, r1
      e54:	fc 01       	movw	r30, r24
      e56:	83 a1       	ldd	r24, Z+35	; 0x23
-  if ( pin != U8G_PIN_NONE )
      e58:	8f 3f       	cpi	r24, 0xFF	; 255
      e5a:	09 f0       	breq	.+2      	; 0xe5e <u8g_SetPIOutput+0xe>
-    u8g_SetPinOutput(pin);
      e5c:	ba cf       	rjmp	.-140    	; 0xdd2 <u8g_SetPinOutput>
      e5e:	08 95       	ret
 
 00000e60 <u8g_SetPILevel>:
-}
-
-void u8g_SetPILevel(u8g_t *u8g, uint8_t pi, uint8_t level)
-{
-  uint8_t pin;
-  pin = u8g->pin_list[pi];
      e60:	86 0f       	add	r24, r22
      e62:	91 1d       	adc	r25, r1
      e64:	fc 01       	movw	r30, r24
      e66:	83 a1       	ldd	r24, Z+35	; 0x23
-  if ( pin != U8G_PIN_NONE )
      e68:	8f 3f       	cpi	r24, 0xFF	; 255
      e6a:	11 f0       	breq	.+4      	; 0xe70 <u8g_SetPILevel+0x10>
      e6c:	64 2f       	mov	r22, r20
-    u8g_SetPinLevel(pin, level);
      e6e:	c7 cf       	rjmp	.-114    	; 0xdfe <u8g_SetPinLevel>
      e70:	08 95       	ret
 
@@ -2188,24 +1815,13 @@ _delay_loop_2(uint16_t __count)
 	__asm__ volatile (
      e72:	2e e9       	ldi	r18, 0x9E	; 158
      e74:	3f e0       	ldi	r19, 0x0F	; 15
-  ==> must be devided by 4, rounded up 7/4 = 2
-*/
-void u8g_Delay(uint16_t val)
-{
-  /* old version did a call to the arduino lib: delay(val); */
-  while( val != 0 )
      e76:	00 97       	sbiw	r24, 0x00	; 0
      e78:	29 f0       	breq	.+10     	; 0xe84 <u8g_Delay+0x12>
      e7a:	f9 01       	movw	r30, r18
      e7c:	31 97       	sbiw	r30, 0x01	; 1
      e7e:	f1 f7       	brne	.-4      	; 0xe7c <u8g_Delay+0xa>
-  {
-    _delay_loop_2( (F_CPU / 4000 ) -2);
-    val--;
      e80:	01 97       	sbiw	r24, 0x01	; 1
      e82:	f9 cf       	rjmp	.-14     	; 0xe76 <u8g_Delay+0x4>
-  }
-}
      e84:	08 95       	ret
 
 00000e86 <u8g_MicroDelay>:
@@ -2223,12 +1839,6 @@ void u8g_Delay(uint16_t val)
      e98:	08 95       	ret
 
 00000e9a <u8g_dev_st7920_128x64_fn>:
-  U8G_ESC_CS(0),             /* disable chip */
-  U8G_ESC_END                /* end of sequence */
-};
-
-uint8_t u8g_dev_st7920_128x64_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
-{
      e9a:	a0 e0       	ldi	r26, 0x00	; 0
      e9c:	b0 e0       	ldi	r27, 0x00	; 0
      e9e:	e3 e5       	ldi	r30, 0x53	; 83
@@ -2238,305 +1848,150 @@ uint8_t u8g_dev_st7920_128x64_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *
      ea8:	eb 01       	movw	r28, r22
      eaa:	e4 2e       	mov	r14, r20
      eac:	59 01       	movw	r10, r18
-  switch(msg)
      eae:	8a e0       	ldi	r24, 0x0A	; 10
      eb0:	48 17       	cp	r20, r24
      eb2:	b1 f0       	breq	.+44     	; 0xee0 <u8g_dev_st7920_128x64_fn+0x46>
      eb4:	e5 e1       	ldi	r30, 0x15	; 21
      eb6:	4e 13       	cpse	r20, r30
      eb8:	55 c0       	rjmp	.+170    	; 0xf64 <u8g_dev_st7920_128x64_fn+0xca>
-      break;
-    case U8G_DEV_MSG_PAGE_NEXT:
-      {
-        uint8_t y, i;
-        uint8_t *ptr;
-        u8g_pb_t *pb = (u8g_pb_t *)(dev->dev_mem);
      eba:	ca 80       	ldd	r12, Y+2	; 0x02
      ebc:	db 80       	ldd	r13, Y+3	; 0x03
-        
-        u8g_SetAddress(u8g, dev, 0);           /* cmd mode */
      ebe:	40 e0       	ldi	r20, 0x00	; 0
      ec0:	c8 01       	movw	r24, r16
      ec2:	0e 94 40 10 	call	0x2080	; 0x2080 <u8g_SetAddress>
-        u8g_SetChipSelect(u8g, dev, 1);
      ec6:	41 e0       	ldi	r20, 0x01	; 1
      ec8:	be 01       	movw	r22, r28
      eca:	c8 01       	movw	r24, r16
      ecc:	0e 94 20 10 	call	0x2040	; 0x2040 <u8g_SetChipSelect>
-        y = pb->p.page_y0;
      ed0:	f6 01       	movw	r30, r12
      ed2:	f2 80       	ldd	r15, Z+2	; 0x02
-        ptr = pb->buf;
      ed4:	c6 80       	ldd	r12, Z+6	; 0x06
      ed6:	d7 80       	ldd	r13, Z+7	; 0x07
      ed8:	88 e0       	ldi	r24, 0x08	; 8
      eda:	98 2e       	mov	r9, r24
      edc:	9f 0c       	add	r9, r15
      ede:	0b c0       	rjmp	.+22     	; 0xef6 <u8g_dev_st7920_128x64_fn+0x5c>
-uint8_t u8g_dev_st7920_128x64_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
-{
-  switch(msg)
-  {
-    case U8G_DEV_MSG_INIT:
-      u8g_InitCom(u8g, dev, U8G_SPI_CLK_CYCLE_400NS);
      ee0:	43 e0       	ldi	r20, 0x03	; 3
      ee2:	c8 01       	movw	r24, r16
      ee4:	0e 94 16 10 	call	0x202c	; 0x202c <u8g_InitCom>
-      u8g_WriteEscSeqP(u8g, dev, u8g_dev_st7920_128x64_init_seq);
      ee8:	46 e0       	ldi	r20, 0x06	; 6
      eea:	51 e0       	ldi	r21, 0x01	; 1
      eec:	be 01       	movw	r22, r28
      eee:	c8 01       	movw	r24, r16
      ef0:	0e 94 5c 10 	call	0x20b8	; 0x20b8 <u8g_WriteEscSeqP>
-      break;
      ef4:	37 c0       	rjmp	.+110    	; 0xf64 <u8g_dev_st7920_128x64_fn+0xca>
-        u8g_SetChipSelect(u8g, dev, 1);
-        y = pb->p.page_y0;
-        ptr = pb->buf;
-        for( i = 0; i < 8; i ++ )
-        {
-          u8g_SetAddress(u8g, dev, 0);           /* cmd mode */
      ef6:	40 e0       	ldi	r20, 0x00	; 0
      ef8:	be 01       	movw	r22, r28
      efa:	c8 01       	movw	r24, r16
      efc:	0e 94 40 10 	call	0x2080	; 0x2080 <u8g_SetAddress>
-          u8g_WriteByte(u8g, dev, 0x03e );      /* enable extended mode */
      f00:	4e e3       	ldi	r20, 0x3E	; 62
      f02:	be 01       	movw	r22, r28
      f04:	c8 01       	movw	r24, r16
      f06:	0e 94 4a 10 	call	0x2094	; 0x2094 <u8g_WriteByte>
-
-          if ( y < 32 )
      f0a:	ff e1       	ldi	r31, 0x1F	; 31
      f0c:	ff 15       	cp	r31, r15
      f0e:	40 f0       	brcs	.+16     	; 0xf20 <u8g_dev_st7920_128x64_fn+0x86>
-          {
-                  u8g_WriteByte(u8g, dev, 0x080 | y );      /* y pos  */
      f10:	4f 2d       	mov	r20, r15
      f12:	40 68       	ori	r20, 0x80	; 128
      f14:	be 01       	movw	r22, r28
      f16:	c8 01       	movw	r24, r16
      f18:	0e 94 4a 10 	call	0x2094	; 0x2094 <u8g_WriteByte>
-                  u8g_WriteByte(u8g, dev, 0x080  );      /* set x pos to 0*/
      f1c:	40 e8       	ldi	r20, 0x80	; 128
      f1e:	08 c0       	rjmp	.+16     	; 0xf30 <u8g_dev_st7920_128x64_fn+0x96>
      f20:	40 ee       	ldi	r20, 0xE0	; 224
      f22:	4f 0d       	add	r20, r15
-          }
-          else
-          {
-                  u8g_WriteByte(u8g, dev, 0x080 | (y-32) );      /* y pos  */
      f24:	40 68       	ori	r20, 0x80	; 128
      f26:	be 01       	movw	r22, r28
      f28:	c8 01       	movw	r24, r16
      f2a:	0e 94 4a 10 	call	0x2094	; 0x2094 <u8g_WriteByte>
-                  u8g_WriteByte(u8g, dev, 0x080 | 8);      /* set x pos to 64*/
      f2e:	48 e8       	ldi	r20, 0x88	; 136
      f30:	be 01       	movw	r22, r28
      f32:	c8 01       	movw	r24, r16
      f34:	0e 94 4a 10 	call	0x2094	; 0x2094 <u8g_WriteByte>
-          }
-          
-          u8g_SetAddress(u8g, dev, 1);                  /* data mode */
      f38:	41 e0       	ldi	r20, 0x01	; 1
      f3a:	be 01       	movw	r22, r28
      f3c:	c8 01       	movw	r24, r16
      f3e:	0e 94 40 10 	call	0x2080	; 0x2080 <u8g_SetAddress>
-          u8g_WriteSequence(u8g, dev, WIDTH/8, ptr);
      f42:	96 01       	movw	r18, r12
      f44:	40 e1       	ldi	r20, 0x10	; 16
      f46:	be 01       	movw	r22, r28
      f48:	c8 01       	movw	r24, r16
      f4a:	0e 94 54 10 	call	0x20a8	; 0x20a8 <u8g_WriteSequence>
-          ptr += WIDTH/8;
      f4e:	80 e1       	ldi	r24, 0x10	; 16
      f50:	c8 0e       	add	r12, r24
      f52:	d1 1c       	adc	r13, r1
-          y++;
      f54:	f3 94       	inc	r15
-        
-        u8g_SetAddress(u8g, dev, 0);           /* cmd mode */
-        u8g_SetChipSelect(u8g, dev, 1);
-        y = pb->p.page_y0;
-        ptr = pb->buf;
-        for( i = 0; i < 8; i ++ )
      f56:	f9 10       	cpse	r15, r9
      f58:	ce cf       	rjmp	.-100    	; 0xef6 <u8g_dev_st7920_128x64_fn+0x5c>
-          u8g_SetAddress(u8g, dev, 1);                  /* data mode */
-          u8g_WriteSequence(u8g, dev, WIDTH/8, ptr);
-          ptr += WIDTH/8;
-          y++;
-        }
-        u8g_SetChipSelect(u8g, dev, 0);
      f5a:	40 e0       	ldi	r20, 0x00	; 0
      f5c:	be 01       	movw	r22, r28
      f5e:	c8 01       	movw	r24, r16
      f60:	0e 94 20 10 	call	0x2040	; 0x2040 <u8g_SetChipSelect>
-      }
-      break;
-  }
-  return u8g_dev_pb8h1_base_fn(u8g, dev, msg, arg);
      f64:	95 01       	movw	r18, r10
      f66:	4e 2d       	mov	r20, r14
      f68:	be 01       	movw	r22, r28
      f6a:	c8 01       	movw	r24, r16
      f6c:	22 d4       	rcall	.+2116   	; 0x17b2 <u8g_dev_pb8h1_base_fn>
      f6e:	cd b7       	in	r28, 0x3d	; 61
-}
      f70:	de b7       	in	r29, 0x3e	; 62
      f72:	eb e0       	ldi	r30, 0x0B	; 11
      f74:	0c 94 65 12 	jmp	0x24ca	; 0x24ca <__epilogue_restores__+0xe>
 
 00000f78 <u8g_font_get_word>:
-
-static uint16_t u8g_font_get_word(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE; 
-static uint16_t u8g_font_get_word(const u8g_fntpgm_uint8_t *font, uint8_t offset)
-{
-    uint16_t pos;
-    font += offset;
      f78:	fc 01       	movw	r30, r24
      f7a:	e6 0f       	add	r30, r22
      f7c:	f1 1d       	adc	r31, r1
-    pos = u8g_pgm_read( (u8g_pgm_uint8_t *)font );
      f7e:	84 91       	lpm	r24, Z
      f80:	90 e0       	ldi	r25, 0x00	; 0
-    font++;
-    pos <<= 8;
      f82:	98 2f       	mov	r25, r24
      f84:	88 27       	eor	r24, r24
-static uint16_t u8g_font_get_word(const u8g_fntpgm_uint8_t *font, uint8_t offset)
-{
-    uint16_t pos;
-    font += offset;
-    pos = u8g_pgm_read( (u8g_pgm_uint8_t *)font );
-    font++;
      f86:	31 96       	adiw	r30, 0x01	; 1
-    pos <<= 8;
-    pos += u8g_pgm_read( (u8g_pgm_uint8_t *)font);
      f88:	e4 91       	lpm	r30, Z
-    return pos;
-}
      f8a:	8e 0f       	add	r24, r30
      f8c:	91 1d       	adc	r25, r1
      f8e:	08 95       	ret
 
 00000f90 <u8g_font_GetFormat>:
-/* removed NOINLINE, because it leads to smaller code, might also be faster */
-//static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
-static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset)
-{
-  font += offset;
-  return u8g_pgm_read( (u8g_pgm_uint8_t *)font );  
      f90:	fc 01       	movw	r30, r24
      f92:	84 91       	lpm	r24, Z
-
-static uint8_t u8g_font_GetFormat(const u8g_fntpgm_uint8_t *font) U8G_NOINLINE;
-static uint8_t u8g_font_GetFormat(const u8g_fntpgm_uint8_t *font)
-{
-  return u8g_font_get_byte(font, 0);
-}
      f94:	08 95       	ret
 
 00000f96 <u8g_font_GetFontGlyphStructureSize>:
-
-static uint8_t u8g_font_GetFontGlyphStructureSize(const u8g_fntpgm_uint8_t *font) U8G_NOINLINE;
-static uint8_t u8g_font_GetFontGlyphStructureSize(const u8g_fntpgm_uint8_t *font)
-{
-  switch(u8g_font_GetFormat(font))
      f96:	fc df       	rcall	.-8      	; 0xf90 <u8g_font_GetFormat>
      f98:	88 23       	and	r24, r24
      f9a:	21 f0       	breq	.+8      	; 0xfa4 <u8g_font_GetFontGlyphStructureSize+0xe>
      f9c:	82 30       	cpi	r24, 0x02	; 2
      f9e:	11 f0       	breq	.+4      	; 0xfa4 <u8g_font_GetFontGlyphStructureSize+0xe>
      fa0:	83 e0       	ldi	r24, 0x03	; 3
-  {
-    case 0: return 6;
-    case 1: return 3;
      fa2:	08 95       	ret
      fa4:	86 e0       	ldi	r24, 0x06	; 6
-static uint8_t u8g_font_GetFontGlyphStructureSize(const u8g_fntpgm_uint8_t *font) U8G_NOINLINE;
-static uint8_t u8g_font_GetFontGlyphStructureSize(const u8g_fntpgm_uint8_t *font)
-{
-  switch(u8g_font_GetFormat(font))
-  {
-    case 0: return 6;
      fa6:	08 95       	ret
 
 00000fa8 <u8g_font_calc_vref_font>:
-/* callback procedures to correct the y position */
-
-u8g_uint_t u8g_font_calc_vref_font(u8g_t *u8g)
-{
-  return 0;
-}
      fa8:	80 e0       	ldi	r24, 0x00	; 0
      faa:	08 95       	ret
 
 00000fac <u8g_font_GetEncoding65Pos>:
-}
-
-uint16_t u8g_font_GetEncoding65Pos(const void *font) U8G_NOINLINE;
-uint16_t u8g_font_GetEncoding65Pos(const void *font)
-{
-    return u8g_font_get_word(font, 6);
      fac:	66 e0       	ldi	r22, 0x06	; 6
      fae:	e4 cf       	rjmp	.-56     	; 0xf78 <u8g_font_get_word>
 
 00000fb0 <u8g_font_GetEncoding97Pos>:
-}
-
-uint16_t u8g_font_GetEncoding97Pos(const void *font) U8G_NOINLINE;
-uint16_t u8g_font_GetEncoding97Pos(const void *font)
-{
-    return u8g_font_get_word(font, 8);
      fb0:	68 e0       	ldi	r22, 0x08	; 8
      fb2:	e2 cf       	rjmp	.-60     	; 0xf78 <u8g_font_get_word>
 
 00000fb4 <u8g_font_GetFontStartEncoding>:
-
-/* removed NOINLINE, because it leads to smaller code, might also be faster */
-//static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
-static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset)
-{
-  font += offset;
      fb4:	0a 96       	adiw	r24, 0x0a	; 10
-  return u8g_pgm_read( (u8g_pgm_uint8_t *)font );  
      fb6:	fc 01       	movw	r30, r24
      fb8:	84 91       	lpm	r24, Z
-}
-
-uint8_t u8g_font_GetFontStartEncoding(const void *font)
-{
-  return u8g_font_get_byte(font, 10);
-}
      fba:	08 95       	ret
 
 00000fbc <u8g_font_GetFontEndEncoding>:
-
-/* removed NOINLINE, because it leads to smaller code, might also be faster */
-//static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
-static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset)
-{
-  font += offset;
      fbc:	0b 96       	adiw	r24, 0x0b	; 11
-  return u8g_pgm_read( (u8g_pgm_uint8_t *)font );  
      fbe:	fc 01       	movw	r30, r24
      fc0:	84 91       	lpm	r24, Z
-}
-
-uint8_t u8g_font_GetFontEndEncoding(const void *font)
-{
-  return u8g_font_get_byte(font, 11);
-}
      fc2:	08 95       	ret
 
 00000fc4 <u8g_GetGlyph>:
-/*
-  Find (with some speed optimization) and return a pointer to the glyph data structure
-  Also uncompress (format 1) and copy the content of the data structure to the u8g structure
-*/
-u8g_glyph_t u8g_GetGlyph(u8g_t *u8g, uint8_t requested_encoding)
-{
      fc4:	a0 e0       	ldi	r26, 0x00	; 0
      fc6:	b0 e0       	ldi	r27, 0x00	; 0
      fc8:	e8 ee       	ldi	r30, 0xE8	; 232
@@ -2544,50 +1999,29 @@ u8g_glyph_t u8g_GetGlyph(u8g_t *u8g, uint8_t requested_encoding)
      fcc:	0c 94 4b 12 	jmp	0x2496	; 0x2496 <__prologue_saves__+0x12>
      fd0:	8c 01       	movw	r16, r24
      fd2:	e6 2e       	mov	r14, r22
-  uint8_t *p = (uint8_t *)(u8g->font);
      fd4:	dc 01       	movw	r26, r24
      fd6:	14 96       	adiw	r26, 0x04	; 4
      fd8:	cd 91       	ld	r28, X+
      fda:	dc 91       	ld	r29, X
      fdc:	15 97       	sbiw	r26, 0x05	; 5
-  uint8_t font_format = u8g_font_GetFormat(u8g->font);
      fde:	ce 01       	movw	r24, r28
      fe0:	d7 df       	rcall	.-82     	; 0xf90 <u8g_font_GetFormat>
      fe2:	f8 2e       	mov	r15, r24
      fe4:	f8 01       	movw	r30, r16
-  uint8_t data_structure_size = u8g_font_GetFontGlyphStructureSize(u8g->font);
      fe6:	84 81       	ldd	r24, Z+4	; 0x04
      fe8:	95 81       	ldd	r25, Z+5	; 0x05
      fea:	d5 df       	rcall	.-86     	; 0xf96 <u8g_font_GetFontGlyphStructureSize>
      fec:	c8 2e       	mov	r12, r24
      fee:	f1 e0       	ldi	r31, 0x01	; 1
      ff0:	ff 12       	cpse	r15, r31
-  uint8_t start, end;
-  uint16_t pos;
-  uint8_t i;
-  uint8_t mask = 255;
-
-  if ( font_format == 1 )
      ff2:	03 c0       	rjmp	.+6      	; 0xffa <u8g_GetGlyph+0x36>
      ff4:	2f e0       	ldi	r18, 0x0F	; 15
      ff6:	b2 2e       	mov	r11, r18
-    mask = 15;
      ff8:	02 c0       	rjmp	.+4      	; 0xffe <u8g_GetGlyph+0x3a>
      ffa:	bb 24       	eor	r11, r11
      ffc:	ba 94       	dec	r11
-  uint8_t font_format = u8g_font_GetFormat(u8g->font);
-  uint8_t data_structure_size = u8g_font_GetFontGlyphStructureSize(u8g->font);
-  uint8_t start, end;
-  uint16_t pos;
-  uint8_t i;
-  uint8_t mask = 255;
      ffe:	d8 01       	movw	r26, r16
     1000:	14 96       	adiw	r26, 0x04	; 4
-
-  if ( font_format == 1 )
-    mask = 15;
-  
-  start = u8g_font_GetFontStartEncoding(u8g->font);
     1002:	8d 91       	ld	r24, X+
     1004:	9c 91       	ld	r25, X
     1006:	15 97       	sbiw	r26, 0x05	; 5
@@ -2596,15 +2030,12 @@ u8g_glyph_t u8g_GetGlyph(u8g_t *u8g, uint8_t requested_encoding)
     100c:	f8 01       	movw	r30, r16
     100e:	84 81       	ldd	r24, Z+4	; 0x04
     1010:	95 81       	ldd	r25, Z+5	; 0x05
-  end = u8g_font_GetFontEndEncoding(u8g->font);
     1012:	d4 df       	rcall	.-88     	; 0xfbc <u8g_font_GetFontEndEncoding>
     1014:	d8 2e       	mov	r13, r24
     1016:	d8 01       	movw	r26, r16
     1018:	14 96       	adiw	r26, 0x04	; 4
     101a:	8d 91       	ld	r24, X+
     101c:	9c 91       	ld	r25, X
-
-  pos = u8g_font_GetEncoding97Pos(u8g->font);
     101e:	15 97       	sbiw	r26, 0x05	; 5
     1020:	c7 df       	rcall	.-114    	; 0xfb0 <u8g_font_GetEncoding97Pos>
     1022:	b0 e6       	ldi	r27, 0x60	; 96
@@ -2612,126 +2043,64 @@ u8g_glyph_t u8g_GetGlyph(u8g_t *u8g, uint8_t requested_encoding)
     1026:	38 f4       	brcc	.+14     	; 0x1036 <u8g_GetGlyph+0x72>
     1028:	00 97       	sbiw	r24, 0x00	; 0
     102a:	29 f0       	breq	.+10     	; 0x1036 <u8g_GetGlyph+0x72>
-  if ( requested_encoding >= 97 && pos > 0 )
     102c:	c8 0f       	add	r28, r24
     102e:	d9 1f       	adc	r29, r25
     1030:	91 e6       	ldi	r25, 0x61	; 97
     1032:	f9 2e       	mov	r15, r25
     1034:	0f c0       	rjmp	.+30     	; 0x1054 <u8g_GetGlyph+0x90>
-  {
-    p+= pos;
     1036:	f8 01       	movw	r30, r16
     1038:	84 81       	ldd	r24, Z+4	; 0x04
-    start = 97;
     103a:	95 81       	ldd	r25, Z+5	; 0x05
     103c:	b7 df       	rcall	.-146    	; 0xfac <u8g_font_GetEncoding65Pos>
     103e:	f0 e4       	ldi	r31, 0x40	; 64
-  }
-  else 
-  {
-    pos = u8g_font_GetEncoding65Pos(u8g->font);
     1040:	fe 15       	cp	r31, r14
     1042:	38 f4       	brcc	.+14     	; 0x1052 <u8g_GetGlyph+0x8e>
     1044:	00 97       	sbiw	r24, 0x00	; 0
     1046:	29 f0       	breq	.+10     	; 0x1052 <u8g_GetGlyph+0x8e>
     1048:	c8 0f       	add	r28, r24
-    if ( requested_encoding >= 65 && pos > 0 )
     104a:	d9 1f       	adc	r29, r25
     104c:	81 e4       	ldi	r24, 0x41	; 65
     104e:	f8 2e       	mov	r15, r24
     1050:	01 c0       	rjmp	.+2      	; 0x1054 <u8g_GetGlyph+0x90>
     1052:	61 96       	adiw	r28, 0x11	; 17
-    {
-      p+= pos;
     1054:	de 14       	cp	r13, r14
     1056:	90 f4       	brcc	.+36     	; 0x107c <u8g_GetGlyph+0xb8>
-      start = 65;
     1058:	d8 01       	movw	r26, r16
     105a:	50 96       	adiw	r26, 0x10	; 16
     105c:	1c 92       	st	X, r1
-    }
-    else
-      p += U8G_FONT_DATA_STRUCT_SIZE;       /* skip font general information */  
     105e:	50 97       	sbiw	r26, 0x10	; 16
-  }
-  
-  if ( requested_encoding > end )
     1060:	53 96       	adiw	r26, 0x13	; 19
     1062:	1c 92       	st	X, r1
-}
-
-//void u8g_FillEmptyGlyphCache(u8g_t *u8g) U8G_NOINLINE;
-static void u8g_FillEmptyGlyphCache(u8g_t *u8g)
-{
-  u8g->glyph_dx = 0;
     1064:	53 97       	sbiw	r26, 0x13	; 19
     1066:	54 96       	adiw	r26, 0x14	; 20
     1068:	1c 92       	st	X, r1
     106a:	54 97       	sbiw	r26, 0x14	; 20
-  u8g->glyph_width = 0;
     106c:	51 96       	adiw	r26, 0x11	; 17
     106e:	1c 92       	st	X, r1
     1070:	51 97       	sbiw	r26, 0x11	; 17
-  u8g->glyph_height = 0;
     1072:	52 96       	adiw	r26, 0x12	; 18
     1074:	1c 92       	st	X, r1
     1076:	80 e0       	ldi	r24, 0x00	; 0
-  u8g->glyph_x = 0;
     1078:	90 e0       	ldi	r25, 0x00	; 0
     107a:	66 c0       	rjmp	.+204    	; 0x1148 <u8g_GetGlyph+0x184>
     107c:	df 14       	cp	r13, r15
-  u8g->glyph_y = 0;
     107e:	60 f3       	brcs	.-40     	; 0x1058 <u8g_GetGlyph+0x94>
     1080:	8c 2d       	mov	r24, r12
-  }
-  
-  if ( requested_encoding > end )
-  {
-    u8g_FillEmptyGlyphCache(u8g);
-    return NULL;                      /* not found */
     1082:	90 e0       	ldi	r25, 0x00	; 0
     1084:	fe 01       	movw	r30, r28
     1086:	24 91       	lpm	r18, Z
-  }
-  
-  i = start;
-  if ( i <= end )
     1088:	2f 3f       	cpi	r18, 0xFF	; 255
     108a:	11 f4       	brne	.+4      	; 0x1090 <u8g_GetGlyph+0xcc>
-        {
-          u8g_CopyGlyphDataToCache(u8g, p);
-          return p;
-        }
-        p += u8g_pgm_read( ((u8g_pgm_uint8_t *)(p)) + 2 ) & mask;
-        p += data_structure_size;
     108c:	21 96       	adiw	r28, 0x01	; 1
     108e:	57 c0       	rjmp	.+174    	; 0x113e <u8g_GetGlyph+0x17a>
-  i = start;
-  if ( i <= end )
-  {
-    for(;;)
-    {
-      if ( u8g_pgm_read((u8g_pgm_uint8_t *)(p)) == 255 )
     1090:	fe 10       	cpse	r15, r14
     1092:	4c c0       	rjmp	.+152    	; 0x112c <u8g_GetGlyph+0x168>
     1094:	d8 01       	movw	r26, r16
     1096:	14 96       	adiw	r26, 0x04	; 4
-      {
-        p += 1;
     1098:	8d 91       	ld	r24, X+
     109a:	9c 91       	ld	r25, X
-      }
-      else
-      {
-        if ( i == requested_encoding )
     109c:	15 97       	sbiw	r26, 0x05	; 5
     109e:	78 df       	rcall	.-272    	; 0xf90 <u8g_font_GetFormat>
-/* glyph handling */
-
-static void u8g_CopyGlyphDataToCache(u8g_t *u8g, u8g_glyph_t g)
-{
-  uint8_t tmp;
-  switch( u8g_font_GetFormat(u8g->font) )
     10a0:	9e 01       	movw	r18, r28
     10a2:	2f 5f       	subi	r18, 0xFF	; 255
     10a4:	3f 4f       	sbci	r19, 0xFF	; 255
@@ -2742,122 +2111,73 @@ static void u8g_CopyGlyphDataToCache(u8g_t *u8g, u8g_glyph_t g)
     10ae:	e1 f4       	brne	.+56     	; 0x10e8 <u8g_GetGlyph+0x124>
     10b0:	84 91       	lpm	r24, Z
     10b2:	d8 01       	movw	r26, r16
-    3             DWIDTH                                          signed
-    4             BBX xoffset                                    signed
-    5             BBX yoffset                                    signed
-  byte 0 == 255 indicates empty glyph
-  */
-      u8g->glyph_width =  u8g_pgm_read( ((u8g_pgm_uint8_t *)g) + 0 );
     10b4:	53 96       	adiw	r26, 0x13	; 19
-/* glyph handling */
-
-static void u8g_CopyGlyphDataToCache(u8g_t *u8g, u8g_glyph_t g)
-{
-  uint8_t tmp;
-  switch( u8g_font_GetFormat(u8g->font) )
     10b6:	8c 93       	st	X, r24
     10b8:	53 97       	sbiw	r26, 0x13	; 19
     10ba:	f9 01       	movw	r30, r18
     10bc:	24 91       	lpm	r18, Z
-    3             DWIDTH                                          signed
-    4             BBX xoffset                                    signed
-    5             BBX yoffset                                    signed
-  byte 0 == 255 indicates empty glyph
-  */
-      u8g->glyph_width =  u8g_pgm_read( ((u8g_pgm_uint8_t *)g) + 0 );
     10be:	54 96       	adiw	r26, 0x14	; 20
     10c0:	2c 93       	st	X, r18
     10c2:	54 97       	sbiw	r26, 0x14	; 20
     10c4:	fe 01       	movw	r30, r28
     10c6:	33 96       	adiw	r30, 0x03	; 3
-      u8g->glyph_height =  u8g_pgm_read( ((u8g_pgm_uint8_t *)g) + 1 );
     10c8:	e4 91       	lpm	r30, Z
     10ca:	50 96       	adiw	r26, 0x10	; 16
     10cc:	ec 93       	st	X, r30
     10ce:	50 97       	sbiw	r26, 0x10	; 16
     10d0:	fe 01       	movw	r30, r28
-      u8g->glyph_dx =  u8g_pgm_read( ((u8g_pgm_uint8_t *)g) + 3 );
     10d2:	34 96       	adiw	r30, 0x04	; 4
     10d4:	e4 91       	lpm	r30, Z
     10d6:	51 96       	adiw	r26, 0x11	; 17
     10d8:	ec 93       	st	X, r30
     10da:	51 97       	sbiw	r26, 0x11	; 17
     10dc:	fe 01       	movw	r30, r28
-      u8g->glyph_x =  u8g_pgm_read( ((u8g_pgm_uint8_t *)g) + 4 );
     10de:	35 96       	adiw	r30, 0x05	; 5
     10e0:	e4 91       	lpm	r30, Z
     10e2:	52 96       	adiw	r26, 0x12	; 18
     10e4:	ec 93       	st	X, r30
     10e6:	20 c0       	rjmp	.+64     	; 0x1128 <u8g_GetGlyph+0x164>
     10e8:	84 91       	lpm	r24, Z
-      u8g->glyph_y =  u8g_pgm_read( ((u8g_pgm_uint8_t *)g) + 5 );
     10ea:	98 2f       	mov	r25, r24
     10ec:	9f 70       	andi	r25, 0x0F	; 15
     10ee:	92 50       	subi	r25, 0x02	; 2
     10f0:	d8 01       	movw	r26, r16
     10f2:	52 96       	adiw	r26, 0x12	; 18
     10f4:	9c 93       	st	X, r25
-  2             data size                                           unsigned -(BBX width + 7)/8 * BBX height  --> lower 4 Bit
-  2             DWIDTH                                          signed --> upper  4 Bit
-  byte 0 == 255 indicates empty glyph
-      */
-    
-      tmp = u8g_pgm_read( ((u8g_pgm_uint8_t *)g) + 0 );
     10f6:	52 97       	sbiw	r26, 0x12	; 18
-      u8g->glyph_y =  tmp & 15;
     10f8:	82 95       	swap	r24
     10fa:	8f 70       	andi	r24, 0x0F	; 15
-      u8g->glyph_y-=2;
     10fc:	51 96       	adiw	r26, 0x11	; 17
     10fe:	8c 93       	st	X, r24
     1100:	51 97       	sbiw	r26, 0x11	; 17
     1102:	f9 01       	movw	r30, r18
     1104:	24 91       	lpm	r18, Z
-      tmp >>= 4;
     1106:	82 2f       	mov	r24, r18
     1108:	8f 70       	andi	r24, 0x0F	; 15
-      u8g->glyph_x =  tmp;
     110a:	54 96       	adiw	r26, 0x14	; 20
     110c:	8c 93       	st	X, r24
     110e:	54 97       	sbiw	r26, 0x14	; 20
-    
-      tmp = u8g_pgm_read( ((u8g_pgm_uint8_t *)g) + 1 );
     1110:	22 95       	swap	r18
     1112:	2f 70       	andi	r18, 0x0F	; 15
-      u8g->glyph_height =  tmp & 15;
     1114:	53 96       	adiw	r26, 0x13	; 19
     1116:	2c 93       	st	X, r18
     1118:	53 97       	sbiw	r26, 0x13	; 19
     111a:	fe 01       	movw	r30, r28
     111c:	32 96       	adiw	r30, 0x02	; 2
-      tmp >>= 4;
     111e:	e4 91       	lpm	r30, Z
     1120:	e2 95       	swap	r30
-      u8g->glyph_width =  tmp;
     1122:	ef 70       	andi	r30, 0x0F	; 15
     1124:	50 96       	adiw	r26, 0x10	; 16
     1126:	ec 93       	st	X, r30
-      
-      tmp = u8g_pgm_read( ((u8g_pgm_uint8_t *)g) + 2 );
     1128:	ce 01       	movw	r24, r28
     112a:	0e c0       	rjmp	.+28     	; 0x1148 <u8g_GetGlyph+0x184>
     112c:	fe 01       	movw	r30, r28
-      tmp >>= 4;
     112e:	32 96       	adiw	r30, 0x02	; 2
     1130:	e4 91       	lpm	r30, Z
-      u8g->glyph_dx = tmp;
     1132:	eb 21       	and	r30, r11
     1134:	9c 01       	movw	r18, r24
-      else
-      {
-        if ( i == requested_encoding )
-        {
-          u8g_CopyGlyphDataToCache(u8g, p);
-          return p;
     1136:	2e 0f       	add	r18, r30
     1138:	31 1d       	adc	r19, r1
-        }
-        p += u8g_pgm_read( ((u8g_pgm_uint8_t *)(p)) + 2 ) & mask;
     113a:	c2 0f       	add	r28, r18
     113c:	d3 1f       	adc	r29, r19
     113e:	fd 14       	cp	r15, r13
@@ -2865,21 +2185,12 @@ static void u8g_CopyGlyphDataToCache(u8g_t *u8g, u8g_glyph_t g)
     1142:	8a cf       	rjmp	.-236    	; 0x1058 <u8g_GetGlyph+0x94>
     1144:	f3 94       	inc	r15
     1146:	9e cf       	rjmp	.-196    	; 0x1084 <u8g_GetGlyph+0xc0>
-        p += data_structure_size;
     1148:	cd b7       	in	r28, 0x3d	; 61
     114a:	de b7       	in	r29, 0x3e	; 62
-      }
-      if ( i == end )
     114c:	e9 e0       	ldi	r30, 0x09	; 9
     114e:	0c 94 67 12 	jmp	0x24ce	; 0x24ce <__epilogue_restores__+0x12>
 
 00001152 <u8g_draw_glyph>:
-  return u8g->glyph_dx;
-}
-#endif
-
-int8_t u8g_draw_glyph(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, uint8_t encoding)
-{
     1152:	4f 92       	push	r4
     1154:	5f 92       	push	r5
     1156:	6f 92       	push	r6
@@ -2901,52 +2212,26 @@ int8_t u8g_draw_glyph(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, uint8_t encoding)
     1176:	2c 01       	movw	r4, r24
     1178:	c6 2e       	mov	r12, r22
     117a:	94 2e       	mov	r9, r20
-  uint8_t w, h;
-  uint8_t i, j;
-  u8g_uint_t ix, iy;
-
-  {
-    u8g_glyph_t g = u8g_GetGlyph(u8g, encoding);
     117c:	62 2f       	mov	r22, r18
     117e:	22 df       	rcall	.-444    	; 0xfc4 <u8g_GetGlyph>
     1180:	7c 01       	movw	r14, r24
     1182:	89 2b       	or	r24, r25
-    if ( g == NULL  )
     1184:	09 f4       	brne	.+2      	; 0x1188 <u8g_draw_glyph+0x36>
     1186:	3a c0       	rjmp	.+116    	; 0x11fc <u8g_draw_glyph+0xaa>
     1188:	f2 01       	movw	r30, r4
-
-
-/* return the data start for a font and the glyph pointer */
-static uint8_t *u8g_font_GetGlyphDataStart(const void *font, u8g_glyph_t g)
-{
-  return ((u8g_fntpgm_uint8_t *)g) + u8g_font_GetFontGlyphStructureSize(font);
     118a:	84 81       	ldd	r24, Z+4	; 0x04
     118c:	95 81       	ldd	r25, Z+5	; 0x05
     118e:	03 df       	rcall	.-506    	; 0xf96 <u8g_font_GetFontGlyphStructureSize>
     1190:	b8 2e       	mov	r11, r24
     1192:	f2 01       	movw	r30, r4
     1194:	13 89       	ldd	r17, Z+19	; 0x13
-    if ( g == NULL  )
-      return 0;
-    data = u8g_font_GetGlyphDataStart(u8g->font, g);
-  }
-  
-  w = u8g->glyph_width;
     1196:	04 89       	ldd	r16, Z+20	; 0x14
     1198:	81 89       	ldd	r24, Z+17	; 0x11
-  h = u8g->glyph_height;
     119a:	c8 0e       	add	r12, r24
-  
-  x += u8g->glyph_x;
     119c:	82 89       	ldd	r24, Z+18	; 0x12
     119e:	98 1a       	sub	r9, r24
     11a0:	d9 2c       	mov	r13, r9
     11a2:	d0 1a       	sub	r13, r16
-  y -= u8g->glyph_y;
-  y--;
-  
-  if ( u8g_IsBBXIntersection(u8g, x, y-h+1, w, h) == 0 )
     11a4:	21 2f       	mov	r18, r17
     11a6:	4d 2d       	mov	r20, r13
     11a8:	6c 2d       	mov	r22, r12
@@ -2957,46 +2242,22 @@ static uint8_t *u8g_font_GetGlyphDataStart(const void *font, u8g_glyph_t g)
     11b2:	eb 0c       	add	r14, r11
     11b4:	f1 1c       	adc	r15, r1
     11b6:	19 5f       	subi	r17, 0xF9	; 249
-
-
-/* return the data start for a font and the glyph pointer */
-static uint8_t *u8g_font_GetGlyphDataStart(const void *font, u8g_glyph_t g)
-{
-  return ((u8g_fntpgm_uint8_t *)g) + u8g_font_GetFontGlyphStructureSize(font);
     11b8:	16 95       	lsr	r17
     11ba:	16 95       	lsr	r17
-  
-  if ( u8g_IsBBXIntersection(u8g, x, y-h+1, w, h) == 0 )
-    return u8g->glyph_dx;
-
-  /* now, w is reused as bytes per line */
-  w += 7;
     11bc:	16 95       	lsr	r17
-  w /= 8;
     11be:	61 2e       	mov	r6, r17
     11c0:	71 2c       	mov	r7, r1
     11c2:	d9 14       	cp	r13, r9
     11c4:	c1 f0       	breq	.+48     	; 0x11f6 <u8g_draw_glyph+0xa4>
     11c6:	3c 2d       	mov	r19, r12
-  
-  iy = y;
-  iy -= h;
-  iy++;
-
-  for( j = 0; j < h; j++ )
     11c8:	57 01       	movw	r10, r14
     11ca:	8a 2d       	mov	r24, r10
     11cc:	8e 19       	sub	r24, r14
     11ce:	81 17       	cp	r24, r17
     11d0:	70 f4       	brcc	.+28     	; 0x11ee <u8g_draw_glyph+0x9c>
     11d2:	f5 01       	movw	r30, r10
-  {
-    ix = x;
-    for( i = 0; i < w; i++ )
     11d4:	04 91       	lpm	r16, Z
     11d6:	20 e0       	ldi	r18, 0x00	; 0
-    {
-      u8g_Draw8Pixel(u8g, ix, iy, 0, u8g_pgm_read(data));
     11d8:	4d 2d       	mov	r20, r13
     11da:	63 2f       	mov	r22, r19
     11dc:	c2 01       	movw	r24, r4
@@ -3006,38 +2267,20 @@ static uint8_t *u8g_font_GetGlyphDataStart(const void *font, u8g_glyph_t g)
     11e4:	af 1a       	sub	r10, r31
     11e6:	bf 0a       	sbc	r11, r31
     11e8:	39 81       	ldd	r19, Y+1	; 0x01
-      data++;
     11ea:	38 5f       	subi	r19, 0xF8	; 248
     11ec:	ee cf       	rjmp	.-36     	; 0x11ca <u8g_draw_glyph+0x78>
     11ee:	e6 0c       	add	r14, r6
-      ix+=8;
     11f0:	f7 1c       	adc	r15, r7
     11f2:	d3 94       	inc	r13
     11f4:	e6 cf       	rjmp	.-52     	; 0x11c2 <u8g_draw_glyph+0x70>
     11f6:	f2 01       	movw	r30, r4
     11f8:	80 89       	ldd	r24, Z+16	; 0x10
-    }
-    iy++;
     11fa:	01 c0       	rjmp	.+2      	; 0x11fe <u8g_draw_glyph+0xac>
     11fc:	80 e0       	ldi	r24, 0x00	; 0
-  }
-  return u8g->glyph_dx;
     11fe:	0f 90       	pop	r0
     1200:	df 91       	pop	r29
     1202:	cf 91       	pop	r28
-  u8g_uint_t ix, iy;
-
-  {
-    u8g_glyph_t g = u8g_GetGlyph(u8g, encoding);
-    if ( g == NULL  )
-      return 0;
     1204:	1f 91       	pop	r17
-      ix+=8;
-    }
-    iy++;
-  }
-  return u8g->glyph_dx;
-}
     1206:	0f 91       	pop	r16
     1208:	ff 90       	pop	r15
     120a:	ef 90       	pop	r14
@@ -3053,12 +2296,6 @@ static uint8_t *u8g_font_GetGlyphDataStart(const void *font, u8g_glyph_t g)
     121e:	08 95       	ret
 
 00001220 <u8g_DrawStr>:
-/*========================================================================*/
-/* string drawing procedures */
-
-
-u8g_uint_t u8g_DrawStr(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, const char *s)
-{
     1220:	af 92       	push	r10
     1222:	bf 92       	push	r11
     1224:	df 92       	push	r13
@@ -3074,12 +2311,6 @@ u8g_uint_t u8g_DrawStr(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, const char *s)
     1238:	7c 01       	movw	r14, r24
     123a:	d6 2e       	mov	r13, r22
     123c:	04 2f       	mov	r16, r20
-  int8_t d;
-  
-  //u8g_uint_t u8g_GetStrWidth(u8g, s);
-  //u8g_font_GetFontAscent(u8g->font)-u8g_font_GetFontDescent(u8g->font);
-  
-  y += u8g->font_calc_vref(u8g);
     123e:	dc 01       	movw	r26, r24
     1240:	55 96       	adiw	r26, 0x15	; 21
     1242:	ed 91       	ld	r30, X+
@@ -3093,40 +2324,20 @@ u8g_uint_t u8g_DrawStr(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, const char *s)
     1252:	a2 2e       	mov	r10, r18
     1254:	3a 81       	ldd	r19, Y+2	; 0x02
     1256:	b3 2e       	mov	r11, r19
-/* string drawing procedures */
-
-
-u8g_uint_t u8g_DrawStr(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, const char *s)
-{
-  u8g_uint_t t = 0;
     1258:	10 e0       	ldi	r17, 0x00	; 0
-  //u8g_uint_t u8g_GetStrWidth(u8g, s);
-  //u8g_font_GetFontAscent(u8g->font)-u8g_font_GetFontDescent(u8g->font);
-  
-  y += u8g->font_calc_vref(u8g);
-  
-  while( *s != '\0' )
     125a:	f5 01       	movw	r30, r10
     125c:	21 91       	ld	r18, Z+
     125e:	5f 01       	movw	r10, r30
     1260:	22 23       	and	r18, r18
     1262:	39 f0       	breq	.+14     	; 0x1272 <u8g_DrawStr+0x52>
-  {
-    d = u8g_draw_glyph(u8g, x, y, *s);
     1264:	40 2f       	mov	r20, r16
     1266:	6d 2d       	mov	r22, r13
     1268:	c7 01       	movw	r24, r14
     126a:	73 df       	rcall	.-282    	; 0x1152 <u8g_draw_glyph>
     126c:	d8 0e       	add	r13, r24
-    x += d;
     126e:	18 0f       	add	r17, r24
-    t += d;
     1270:	f4 cf       	rjmp	.-24     	; 0x125a <u8g_DrawStr+0x3a>
     1272:	81 2f       	mov	r24, r17
-    s++;
-  }
-  return t;
-}
     1274:	0f 90       	pop	r0
     1276:	0f 90       	pop	r0
     1278:	df 91       	pop	r29
@@ -3141,15 +2352,7 @@ u8g_uint_t u8g_DrawStr(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, const char *s)
     128a:	08 95       	ret
 
 0000128c <u8g_UpdateRefHeight>:
-
-/*========================================================================*/
-/* set ascent/descent for reference point calculation */
-
-void u8g_UpdateRefHeight(u8g_t *u8g)
-{
     128c:	dc 01       	movw	r26, r24
-  uint16_t ls;
-  if ( u8g->font == NULL )
     128e:	14 96       	adiw	r26, 0x04	; 4
     1290:	2d 91       	ld	r18, X+
     1292:	3c 91       	ld	r19, X
@@ -3158,122 +2361,41 @@ void u8g_UpdateRefHeight(u8g_t *u8g)
     1298:	31 05       	cpc	r19, r1
     129a:	09 f4       	brne	.+2      	; 0x129e <u8g_UpdateRefHeight+0x12>
     129c:	3f c0       	rjmp	.+126    	; 0x131c <u8g_UpdateRefHeight+0x90>
-    return;
-  if ( u8g->font_height_mode == U8G_FONT_HEIGHT_MODE_TEXT )
     129e:	57 96       	adiw	r26, 0x17	; 23
     12a0:	8c 91       	ld	r24, X
     12a2:	57 97       	sbiw	r26, 0x17	; 23
-
-/* removed NOINLINE, because it leads to smaller code, might also be faster */
-//static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
-static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset)
-{
-  font += offset;
     12a4:	f9 01       	movw	r30, r18
-void u8g_UpdateRefHeight(u8g_t *u8g)
-{
-  uint16_t ls;
-  if ( u8g->font == NULL )
-    return;
-  if ( u8g->font_height_mode == U8G_FONT_HEIGHT_MODE_TEXT )
     12a6:	81 11       	cpse	r24, r1
     12a8:	08 c0       	rjmp	.+16     	; 0x12ba <u8g_UpdateRefHeight+0x2e>
-
-/* removed NOINLINE, because it leads to smaller code, might also be faster */
-//static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
-static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset)
-{
-  font += offset;
     12aa:	35 96       	adiw	r30, 0x05	; 5
-  return u8g_pgm_read( (u8g_pgm_uint8_t *)font );  
     12ac:	e4 91       	lpm	r30, Z
-  uint16_t ls;
-  if ( u8g->font == NULL )
-    return;
-  if ( u8g->font_height_mode == U8G_FONT_HEIGHT_MODE_TEXT )
-  {
-    u8g->font_ref_ascent = u8g_font_GetCapitalAHeight(u8g->font);
     12ae:	58 96       	adiw	r26, 0x18	; 24
     12b0:	ec 93       	st	X, r30
     12b2:	58 97       	sbiw	r26, 0x18	; 24
-
-/* removed NOINLINE, because it leads to smaller code, might also be faster */
-//static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
-static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset)
-{
-  font += offset;
     12b4:	f9 01       	movw	r30, r18
     12b6:	3c 96       	adiw	r30, 0x0c	; 12
     12b8:	11 c0       	rjmp	.+34     	; 0x12dc <u8g_UpdateRefHeight+0x50>
-  if ( u8g->font_height_mode == U8G_FONT_HEIGHT_MODE_TEXT )
-  {
-    u8g->font_ref_ascent = u8g_font_GetCapitalAHeight(u8g->font);
-    u8g->font_ref_descent = u8g_font_GetLowerGDescent(u8g->font);
-  }
-  else if ( u8g->font_height_mode == U8G_FONT_HEIGHT_MODE_XTEXT )
     12ba:	81 30       	cpi	r24, 0x01	; 1
     12bc:	41 f4       	brne	.+16     	; 0x12ce <u8g_UpdateRefHeight+0x42>
-
-/* removed NOINLINE, because it leads to smaller code, might also be faster */
-//static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
-static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset)
-{
-  font += offset;
     12be:	3f 96       	adiw	r30, 0x0f	; 15
-  return u8g_pgm_read( (u8g_pgm_uint8_t *)font );  
     12c0:	e4 91       	lpm	r30, Z
-    u8g->font_ref_ascent = u8g_font_GetCapitalAHeight(u8g->font);
-    u8g->font_ref_descent = u8g_font_GetLowerGDescent(u8g->font);
-  }
-  else if ( u8g->font_height_mode == U8G_FONT_HEIGHT_MODE_XTEXT )
-  {
-    u8g->font_ref_ascent = u8g_font_GetFontXAscent(u8g->font);
     12c2:	58 96       	adiw	r26, 0x18	; 24
     12c4:	ec 93       	st	X, r30
     12c6:	58 97       	sbiw	r26, 0x18	; 24
-
-/* removed NOINLINE, because it leads to smaller code, might also be faster */
-//static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
-static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset)
-{
-  font += offset;
     12c8:	f9 01       	movw	r30, r18
     12ca:	70 96       	adiw	r30, 0x10	; 16
     12cc:	07 c0       	rjmp	.+14     	; 0x12dc <u8g_UpdateRefHeight+0x50>
     12ce:	3d 96       	adiw	r30, 0x0d	; 13
-  return u8g_pgm_read( (u8g_pgm_uint8_t *)font );  
     12d0:	e4 91       	lpm	r30, Z
-    u8g->font_ref_ascent = u8g_font_GetFontXAscent(u8g->font);
-    u8g->font_ref_descent = u8g_font_GetFontXDescent(u8g->font);
-  }
-  else
-  {
-    u8g->font_ref_ascent = u8g_font_GetFontAscent(u8g->font);
     12d2:	58 96       	adiw	r26, 0x18	; 24
     12d4:	ec 93       	st	X, r30
     12d6:	58 97       	sbiw	r26, 0x18	; 24
-
-/* removed NOINLINE, because it leads to smaller code, might also be faster */
-//static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset) U8G_NOINLINE;
-static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset)
-{
-  font += offset;
     12d8:	f9 01       	movw	r30, r18
     12da:	3e 96       	adiw	r30, 0x0e	; 14
-  return u8g_pgm_read( (u8g_pgm_uint8_t *)font );  
     12dc:	e4 91       	lpm	r30, Z
-    u8g->font_ref_descent = u8g_font_GetFontXDescent(u8g->font);
-  }
-  else
-  {
-    u8g->font_ref_ascent = u8g_font_GetFontAscent(u8g->font);
-    u8g->font_ref_descent = u8g_font_GetFontDescent(u8g->font);
     12de:	59 96       	adiw	r26, 0x19	; 25
     12e0:	ec 93       	st	X, r30
     12e2:	59 97       	sbiw	r26, 0x19	; 25
-  }
-  
-  ls = u8g->font_ref_ascent - u8g->font_ref_descent;
     12e4:	58 96       	adiw	r26, 0x18	; 24
     12e6:	8c 91       	ld	r24, X
     12e8:	58 97       	sbiw	r26, 0x18	; 24
@@ -3287,37 +2409,24 @@ static uint8_t u8g_font_get_byte(const u8g_fntpgm_uint8_t *font, uint8_t offset)
     12f8:	91 09       	sbc	r25, r1
     12fa:	27 fd       	sbrc	r18, 7
     12fc:	93 95       	inc	r25
-  if ( u8g->font_line_spacing_factor != 64 )
     12fe:	5a 96       	adiw	r26, 0x1a	; 26
     1300:	2c 91       	ld	r18, X
     1302:	5a 97       	sbiw	r26, 0x1a	; 26
     1304:	20 34       	cpi	r18, 0x40	; 64
     1306:	41 f0       	breq	.+16     	; 0x1318 <u8g_UpdateRefHeight+0x8c>
-  {
-    ls &= 255;
-    ls *= u8g->font_line_spacing_factor;
     1308:	82 9f       	mul	r24, r18
     130a:	c0 01       	movw	r24, r0
     130c:	11 24       	eor	r1, r1
-    ls >>= 6;
     130e:	26 e0       	ldi	r18, 0x06	; 6
     1310:	96 95       	lsr	r25
     1312:	87 95       	ror	r24
     1314:	2a 95       	dec	r18
     1316:	e1 f7       	brne	.-8      	; 0x1310 <u8g_UpdateRefHeight+0x84>
-  }
-  u8g->line_spacing = ls;
     1318:	5b 96       	adiw	r26, 0x1b	; 27
     131a:	8c 93       	st	X, r24
     131c:	08 95       	ret
 
 0000131e <u8g_SetFontPosBaseline>:
-  return 0;
-}
-
-void u8g_SetFontPosBaseline(u8g_t *u8g)
-{
-  u8g->font_calc_vref = u8g_font_calc_vref_font;
     131e:	24 ed       	ldi	r18, 0xD4	; 212
     1320:	37 e0       	ldi	r19, 0x07	; 7
     1322:	fc 01       	movw	r30, r24
@@ -3326,15 +2435,8 @@ void u8g_SetFontPosBaseline(u8g_t *u8g)
     1328:	08 95       	ret
 
 0000132a <u8g_SetFont>:
-    buf.y_max = cap_a;
-  u8g_font_get_str_box_fill_args(u8g, s, &buf, x, y, width, height);
-}
-
-void u8g_SetFont(u8g_t *u8g, const u8g_fntpgm_uint8_t  *font)
-{
     132a:	cf 93       	push	r28
     132c:	df 93       	push	r29
-  if ( u8g->font != font )
     132e:	fc 01       	movw	r30, r24
     1330:	24 81       	ldd	r18, Z+4	; 0x04
     1332:	35 81       	ldd	r19, Z+5	; 0x05
@@ -3342,39 +2444,18 @@ void u8g_SetFont(u8g_t *u8g, const u8g_fntpgm_uint8_t  *font)
     1336:	37 07       	cpc	r19, r23
     1338:	41 f0       	breq	.+16     	; 0x134a <u8g_SetFont+0x20>
     133a:	ec 01       	movw	r28, r24
-  {
-    u8g->font = font;
     133c:	75 83       	std	Z+5, r23	; 0x05
     133e:	64 83       	std	Z+4, r22	; 0x04
-    u8g_UpdateRefHeight(u8g);
     1340:	a5 df       	rcall	.-182    	; 0x128c <u8g_UpdateRefHeight>
     1342:	84 ed       	ldi	r24, 0xD4	; 212
-  return 0;
-}
-
-void u8g_SetFontPosBaseline(u8g_t *u8g)
-{
-  u8g->font_calc_vref = u8g_font_calc_vref_font;
     1344:	97 e0       	ldi	r25, 0x07	; 7
     1346:	9e 8b       	std	Y+22, r25	; 0x16
     1348:	8d 8b       	std	Y+21, r24	; 0x15
     134a:	df 91       	pop	r29
-  {
-    u8g->font = font;
-    u8g_UpdateRefHeight(u8g);
-    u8g_SetFontPosBaseline(u8g);
-  }
-}
     134c:	cf 91       	pop	r28
     134e:	08 95       	ret
 
 00001350 <u8g_DrawLine>:
-*/
-
-#include "u8g.h"
-
-void u8g_DrawLine(u8g_t *u8g, u8g_uint_t x1, u8g_uint_t y1, u8g_uint_t x2, u8g_uint_t y2)
-{
     1350:	a0 e0       	ldi	r26, 0x00	; 0
     1352:	b0 e0       	ldi	r27, 0x00	; 0
     1354:	ee ea       	ldi	r30, 0xAE	; 174
@@ -3384,12 +2465,6 @@ void u8g_DrawLine(u8g_t *u8g, u8g_uint_t x1, u8g_uint_t y1, u8g_uint_t x2, u8g_u
     135e:	c6 2f       	mov	r28, r22
     1360:	14 2f       	mov	r17, r20
     1362:	d2 2f       	mov	r29, r18
-
-  uint8_t swapxy = 0;
-  
-  /* no BBX intersection check at the moment, should be added... */
-
-  if ( x1 > x2 ) dx = x1-x2; else dx = x2-x1;
     1364:	26 17       	cp	r18, r22
     1366:	18 f4       	brcc	.+6      	; 0x136e <u8g_DrawLine+0x1e>
     1368:	f6 2e       	mov	r15, r22
@@ -3397,13 +2472,10 @@ void u8g_DrawLine(u8g_t *u8g, u8g_uint_t x1, u8g_uint_t y1, u8g_uint_t x2, u8g_u
     136c:	02 c0       	rjmp	.+4      	; 0x1372 <u8g_DrawLine+0x22>
     136e:	f2 2e       	mov	r15, r18
     1370:	f6 1a       	sub	r15, r22
-  if ( y1 > y2 ) dy = y1-y2; else dy = y2-y1;
     1372:	01 17       	cp	r16, r17
     1374:	70 f4       	brcc	.+28     	; 0x1392 <u8g_DrawLine+0x42>
     1376:	e1 2e       	mov	r14, r17
     1378:	e0 1a       	sub	r14, r16
-
-  if ( dy > dx ) 
     137a:	fe 14       	cp	r15, r14
     137c:	f0 f4       	brcc	.+60     	; 0x13ba <u8g_DrawLine+0x6a>
     137e:	8f 2d       	mov	r24, r15
@@ -3416,16 +2488,8 @@ void u8g_DrawLine(u8g_t *u8g, u8g_uint_t x1, u8g_uint_t y1, u8g_uint_t x2, u8g_u
     138c:	c0 2f       	mov	r28, r16
     138e:	08 2f       	mov	r16, r24
     1390:	0d c0       	rjmp	.+26     	; 0x13ac <u8g_DrawLine+0x5c>
-  uint8_t swapxy = 0;
-  
-  /* no BBX intersection check at the moment, should be added... */
-
-  if ( x1 > x2 ) dx = x1-x2; else dx = x2-x1;
-  if ( y1 > y2 ) dy = y1-y2; else dy = y2-y1;
     1392:	e0 2e       	mov	r14, r16
     1394:	e1 1a       	sub	r14, r17
-
-  if ( dy > dx ) 
     1396:	fe 14       	cp	r15, r14
     1398:	80 f5       	brcc	.+96     	; 0x13fa <u8g_DrawLine+0xaa>
     139a:	8f 2d       	mov	r24, r15
@@ -3437,35 +2501,15 @@ void u8g_DrawLine(u8g_t *u8g, u8g_uint_t x1, u8g_uint_t y1, u8g_uint_t x2, u8g_u
     13a6:	8c 2f       	mov	r24, r28
     13a8:	c1 2f       	mov	r28, r17
     13aa:	18 2f       	mov	r17, r24
-  {
-    swapxy = 1;
     13ac:	cc 24       	eor	r12, r12
     13ae:	c3 94       	inc	r12
-  if ( x1 > x2 ) 
-  {
-    tmp = x1; x1 =x2; x2 = tmp;
-    tmp = y1; y1 =y2; y2 = tmp;
-  }
-  err = dx >> 1;
     13b0:	df 2c       	mov	r13, r15
     13b2:	d6 94       	lsr	r13
-  if ( y2 > y1 ) ystep = 1; else ystep = -1;
     13b4:	10 17       	cp	r17, r16
     13b6:	50 f0       	brcs	.+20     	; 0x13cc <u8g_DrawLine+0x7c>
     13b8:	29 c0       	rjmp	.+82     	; 0x140c <u8g_DrawLine+0xbc>
-    swapxy = 1;
-    tmp = dx; dx =dy; dy = tmp;
-    tmp = x1; x1 =y1; y1 = tmp;
-    tmp = x2; x2 =y2; y2 = tmp;
-  }
-  if ( x1 > x2 ) 
     13ba:	dc 17       	cp	r29, r28
     13bc:	48 f5       	brcc	.+82     	; 0x1410 <u8g_DrawLine+0xc0>
-  {
-    tmp = x1; x1 =x2; x2 = tmp;
-    tmp = y1; y1 =y2; y2 = tmp;
-  }
-  err = dx >> 1;
     13be:	df 2c       	mov	r13, r15
     13c0:	d6 94       	lsr	r13
     13c2:	10 2f       	mov	r17, r16
@@ -3473,76 +2517,32 @@ void u8g_DrawLine(u8g_t *u8g, u8g_uint_t x1, u8g_uint_t y1, u8g_uint_t x2, u8g_u
     13c6:	cd 2f       	mov	r28, r29
     13c8:	d8 2f       	mov	r29, r24
     13ca:	c1 2c       	mov	r12, r1
-  if ( y2 > y1 ) ystep = 1; else ystep = -1;
     13cc:	01 e0       	ldi	r16, 0x01	; 1
-  y = y1;
-
-#ifndef  U8G_16BIT
-  if ( x2 == 255 )
     13ce:	df 3f       	cpi	r29, 0xFF	; 255
     13d0:	71 f4       	brne	.+28     	; 0x13ee <u8g_DrawLine+0x9e>
-    x2--;
     13d2:	de ef       	ldi	r29, 0xFE	; 254
-#else
-  if ( x2 == 0xffff )
-    x2--;
-#endif
-
-  for( x = x1; x <= x2; x++ )
     13d4:	0c c0       	rjmp	.+24     	; 0x13ee <u8g_DrawLine+0x9e>
-  {
-    if ( swapxy == 0 ) 
     13d6:	c1 10       	cpse	r12, r1
     13d8:	0d c0       	rjmp	.+26     	; 0x13f4 <u8g_DrawLine+0xa4>
-      u8g_DrawPixel(u8g, x, y); 
     13da:	41 2f       	mov	r20, r17
     13dc:	6c 2f       	mov	r22, r28
-    else 
-      u8g_DrawPixel(u8g, y, x); 
     13de:	c5 01       	movw	r24, r10
     13e0:	5a d1       	rcall	.+692    	; 0x1696 <u8g_DrawPixel>
     13e2:	de 18       	sub	r13, r14
-    err -= (uint8_t)dy;
     13e4:	d7 fe       	sbrs	r13, 7
-    if ( err < 0 ) 
     13e6:	02 c0       	rjmp	.+4      	; 0x13ec <u8g_DrawLine+0x9c>
     13e8:	10 0f       	add	r17, r16
-    {
-      y += (u8g_uint_t)ystep;
     13ea:	df 0c       	add	r13, r15
-      err += (u8g_uint_t)dx;
     13ec:	cf 5f       	subi	r28, 0xFF	; 255
-#else
-  if ( x2 == 0xffff )
-    x2--;
-#endif
-
-  for( x = x1; x <= x2; x++ )
     13ee:	dc 17       	cp	r29, r28
     13f0:	90 f7       	brcc	.-28     	; 0x13d6 <u8g_DrawLine+0x86>
     13f2:	10 c0       	rjmp	.+32     	; 0x1414 <u8g_DrawLine+0xc4>
     13f4:	4c 2f       	mov	r20, r28
-  {
-    if ( swapxy == 0 ) 
-      u8g_DrawPixel(u8g, x, y); 
-    else 
-      u8g_DrawPixel(u8g, y, x); 
     13f6:	61 2f       	mov	r22, r17
     13f8:	f2 cf       	rjmp	.-28     	; 0x13de <u8g_DrawLine+0x8e>
     13fa:	dc 17       	cp	r29, r28
-    swapxy = 1;
-    tmp = dx; dx =dy; dy = tmp;
-    tmp = x1; x1 =y1; y1 = tmp;
-    tmp = x2; x2 =y2; y2 = tmp;
-  }
-  if ( x1 > x2 ) 
     13fc:	48 f4       	brcc	.+18     	; 0x1410 <u8g_DrawLine+0xc0>
     13fe:	df 2c       	mov	r13, r15
-  {
-    tmp = x1; x1 =x2; x2 = tmp;
-    tmp = y1; y1 =y2; y2 = tmp;
-  }
-  err = dx >> 1;
     1400:	d6 94       	lsr	r13
     1402:	10 2f       	mov	r17, r16
     1404:	8c 2f       	mov	r24, r28
@@ -3550,137 +2550,66 @@ void u8g_DrawLine(u8g_t *u8g, u8g_uint_t x1, u8g_uint_t y1, u8g_uint_t x2, u8g_u
     1408:	d8 2f       	mov	r29, r24
     140a:	c1 2c       	mov	r12, r1
     140c:	0f ef       	ldi	r16, 0xFF	; 255
-  if ( y2 > y1 ) ystep = 1; else ystep = -1;
     140e:	df cf       	rjmp	.-66     	; 0x13ce <u8g_DrawLine+0x7e>
     1410:	c1 2c       	mov	r12, r1
-    swapxy = 1;
-    tmp = dx; dx =dy; dy = tmp;
-    tmp = x1; x1 =y1; y1 = tmp;
-    tmp = x2; x2 =y2; y2 = tmp;
-  }
-  if ( x1 > x2 ) 
     1412:	ce cf       	rjmp	.-100    	; 0x13b0 <u8g_DrawLine+0x60>
     1414:	cd b7       	in	r28, 0x3d	; 61
-    {
-      y += (u8g_uint_t)ystep;
-      err += (u8g_uint_t)dx;
-    }
-  }
-}
     1416:	de b7       	in	r29, 0x3e	; 62
     1418:	ea e0       	ldi	r30, 0x0A	; 10
     141a:	0c 94 66 12 	jmp	0x24cc	; 0x24cc <__epilogue_restores__+0x10>
 
 0000141e <u8g_init_data>:
-  /* 9 Dec 2012: u8g_scale.c requires update of current page */
-  u8g_call_dev_fn(u8g, u8g->dev, U8G_DEV_MSG_GET_PAGE_BOX, &(u8g->current_page));
-}
-
-static void u8g_init_data(u8g_t *u8g)
-{
     141e:	1f 93       	push	r17
     1420:	cf 93       	push	r28
     1422:	df 93       	push	r29
     1424:	ec 01       	movw	r28, r24
-  u8g->font = NULL;
     1426:	1d 82       	std	Y+5, r1	; 0x05
     1428:	1c 82       	std	Y+4, r1	; 0x04
-  u8g->cursor_font = NULL;
     142a:	1f 82       	std	Y+7, r1	; 0x07
     142c:	1e 82       	std	Y+6, r1	; 0x06
-  u8g->cursor_bg_color = 0;
     142e:	19 86       	std	Y+9, r1	; 0x09
-  u8g->cursor_fg_color = 1;
     1430:	81 e0       	ldi	r24, 0x01	; 1
     1432:	88 87       	std	Y+8, r24	; 0x08
-  u8g->cursor_encoding = 34;
     1434:	82 e2       	ldi	r24, 0x22	; 34
     1436:	8a 87       	std	Y+10, r24	; 0x0a
-  u8g->cursor_fn = (u8g_draw_cursor_fn)0;
     1438:	1f 86       	std	Y+15, r1	; 0x0f
     143a:	1e 86       	std	Y+14, r1	; 0x0e
     143c:	fe 01       	movw	r30, r28
     143e:	b3 96       	adiw	r30, 0x23	; 35
     1440:	ce 01       	movw	r24, r28
     1442:	c1 96       	adiw	r24, 0x31	; 49
-
-#if defined(U8G_WITH_PINLIST)  
-  {
-    uint8_t i;
-    for( i = 0; i < U8G_PIN_LIST_LEN; i++ )
-      u8g->pin_list[i] = U8G_PIN_NONE;
     1444:	2f ef       	ldi	r18, 0xFF	; 255
     1446:	21 93       	st	Z+, r18
-  u8g->cursor_fn = (u8g_draw_cursor_fn)0;
-
-#if defined(U8G_WITH_PINLIST)  
-  {
-    uint8_t i;
-    for( i = 0; i < U8G_PIN_LIST_LEN; i++ )
     1448:	e8 17       	cp	r30, r24
     144a:	f9 07       	cpc	r31, r25
     144c:	e1 f7       	brne	.-8      	; 0x1446 <u8g_init_data+0x28>
-  u8g_call_dev_fn(u8g, u8g->dev, U8G_DEV_MSG_SET_COLOR_ENTRY, &irgb);
-}
-
-void u8g_SetColorIndex(u8g_t *u8g, uint8_t idx)
-{
-  u8g->arg_pixel.color = idx;
     144e:	11 e0       	ldi	r17, 0x01	; 1
     1450:	18 a3       	std	Y+32, r17	; 0x20
-  }
-#endif
-  
-  u8g_SetColorIndex(u8g, 1);
-
-  u8g_SetFontPosBaseline(u8g);
     1452:	ce 01       	movw	r24, r28
     1454:	64 df       	rcall	.-312    	; 0x131e <u8g_SetFontPosBaseline>
     1456:	1f 8b       	std	Y+23, r17	; 0x17
-  
-  u8g->font_height_mode = U8G_FONT_HEIGHT_MODE_XTEXT;
     1458:	18 8e       	std	Y+24, r1	; 0x18
-  u8g->font_ref_ascent = 0;
     145a:	19 8e       	std	Y+25, r1	; 0x19
-  u8g->font_ref_descent = 0;
     145c:	80 e4       	ldi	r24, 0x40	; 64
-  u8g->font_line_spacing_factor = 64;           /* 64 = 1.0, 77 = 1.2 line spacing factor */
     145e:	8a 8f       	std	Y+26, r24	; 0x1a
     1460:	1b 8e       	std	Y+27, r1	; 0x1b
-  u8g->line_spacing = 0;
     1462:	87 e3       	ldi	r24, 0x37	; 55
-  
-  u8g->state_cb = u8g_state_dummy_cb;
     1464:	9e e0       	ldi	r25, 0x0E	; 14
     1466:	9a ab       	std	Y+50, r25	; 0x32
     1468:	89 ab       	std	Y+49, r24	; 0x31
     146a:	df 91       	pop	r29
-
-}
     146c:	cf 91       	pop	r28
     146e:	1f 91       	pop	r17
     1470:	08 95       	ret
 
 00001472 <u8g_call_dev_fn>:
-#include <stddef.h>
-#include "u8g.h"
-
-uint8_t u8g_call_dev_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
-{
-  return dev->dev_fn(u8g, dev, msg, arg); 
     1472:	db 01       	movw	r26, r22
     1474:	ed 91       	ld	r30, X+
     1476:	fc 91       	ld	r31, X
     1478:	09 95       	icall
-}
     147a:	08 95       	ret
 
 0000147c <u8g_InitLL>:
-
-/*====================================================================*/
-
-uint8_t u8g_InitLL(u8g_t *u8g, u8g_dev_t *dev)
-{
     147c:	ef 92       	push	r14
     147e:	ff 92       	push	r15
     1480:	1f 93       	push	r17
@@ -3690,8 +2619,6 @@ uint8_t u8g_InitLL(u8g_t *u8g, u8g_dev_t *dev)
     1488:	cd b7       	in	r28, 0x3d	; 61
     148a:	de b7       	in	r29, 0x3e	; 62
     148c:	7c 01       	movw	r14, r24
-  uint8_t r;
-  u8g->state_cb(U8G_STATE_MSG_BACKUP_ENV);
     148e:	dc 01       	movw	r26, r24
     1490:	d1 96       	adiw	r26, 0x31	; 49
     1492:	ed 91       	ld	r30, X+
@@ -3701,7 +2628,6 @@ uint8_t u8g_InitLL(u8g_t *u8g, u8g_dev_t *dev)
     149a:	69 83       	std	Y+1, r22	; 0x01
     149c:	7a 83       	std	Y+2, r23	; 0x02
     149e:	09 95       	icall
-  r =  u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_INIT, NULL);
     14a0:	20 e0       	ldi	r18, 0x00	; 0
     14a2:	30 e0       	ldi	r19, 0x00	; 0
     14a4:	4a e0       	ldi	r20, 0x0A	; 10
@@ -3711,7 +2637,6 @@ uint8_t u8g_InitLL(u8g_t *u8g, u8g_dev_t *dev)
     14ac:	e2 df       	rcall	.-60     	; 0x1472 <u8g_call_dev_fn>
     14ae:	18 2f       	mov	r17, r24
     14b0:	d7 01       	movw	r26, r14
-  u8g->state_cb(U8G_STATE_MSG_BACKUP_U8G);
     14b2:	d1 96       	adiw	r26, 0x31	; 49
     14b4:	ed 91       	ld	r30, X+
     14b6:	fc 91       	ld	r31, X
@@ -3719,7 +2644,6 @@ uint8_t u8g_InitLL(u8g_t *u8g, u8g_dev_t *dev)
     14ba:	83 e0       	ldi	r24, 0x03	; 3
     14bc:	09 95       	icall
     14be:	d7 01       	movw	r26, r14
-  u8g->state_cb(U8G_STATE_MSG_RESTORE_ENV);
     14c0:	d1 96       	adiw	r26, 0x31	; 49
     14c2:	ed 91       	ld	r30, X+
     14c4:	fc 91       	ld	r31, X
@@ -3727,8 +2651,6 @@ uint8_t u8g_InitLL(u8g_t *u8g, u8g_dev_t *dev)
     14c8:	80 e0       	ldi	r24, 0x00	; 0
     14ca:	09 95       	icall
     14cc:	81 2f       	mov	r24, r17
-  return r;
-}
     14ce:	0f 90       	pop	r0
     14d0:	0f 90       	pop	r0
     14d2:	df 91       	pop	r29
@@ -3739,26 +2661,20 @@ uint8_t u8g_InitLL(u8g_t *u8g, u8g_dev_t *dev)
     14dc:	08 95       	ret
 
 000014de <u8g_FirstPageLL>:
-
-void u8g_FirstPageLL(u8g_t *u8g, u8g_dev_t *dev)
-{  
     14de:	0f 93       	push	r16
     14e0:	1f 93       	push	r17
     14e2:	cf 93       	push	r28
     14e4:	df 93       	push	r29
     14e6:	ec 01       	movw	r28, r24
     14e8:	8b 01       	movw	r16, r22
-  u8g->state_cb(U8G_STATE_MSG_BACKUP_ENV);
     14ea:	e9 a9       	ldd	r30, Y+49	; 0x31
     14ec:	fa a9       	ldd	r31, Y+50	; 0x32
     14ee:	82 e0       	ldi	r24, 0x02	; 2
     14f0:	09 95       	icall
-  u8g->state_cb(U8G_STATE_MSG_RESTORE_U8G);
     14f2:	e9 a9       	ldd	r30, Y+49	; 0x31
     14f4:	fa a9       	ldd	r31, Y+50	; 0x32
     14f6:	81 e0       	ldi	r24, 0x01	; 1
     14f8:	09 95       	icall
-  u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_PAGE_FIRST, NULL);
     14fa:	20 e0       	ldi	r18, 0x00	; 0
     14fc:	30 e0       	ldi	r19, 0x00	; 0
     14fe:	44 e1       	ldi	r20, 0x14	; 20
@@ -3766,7 +2682,6 @@ void u8g_FirstPageLL(u8g_t *u8g, u8g_dev_t *dev)
     1502:	ce 01       	movw	r24, r28
     1504:	b6 df       	rcall	.-148    	; 0x1472 <u8g_call_dev_fn>
     1506:	9e 01       	movw	r18, r28
-  u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_GET_PAGE_BOX, &(u8g->current_page));
     1508:	2d 5c       	subi	r18, 0xCD	; 205
     150a:	3f 4f       	sbci	r19, 0xFF	; 255
     150c:	47 e1       	ldi	r20, 0x17	; 23
@@ -3775,20 +2690,15 @@ void u8g_FirstPageLL(u8g_t *u8g, u8g_dev_t *dev)
     1512:	af df       	rcall	.-162    	; 0x1472 <u8g_call_dev_fn>
     1514:	e9 a9       	ldd	r30, Y+49	; 0x31
     1516:	fa a9       	ldd	r31, Y+50	; 0x32
-  u8g->state_cb(U8G_STATE_MSG_RESTORE_ENV);
     1518:	80 e0       	ldi	r24, 0x00	; 0
     151a:	09 95       	icall
     151c:	df 91       	pop	r29
     151e:	cf 91       	pop	r28
-}
     1520:	1f 91       	pop	r17
     1522:	0f 91       	pop	r16
     1524:	08 95       	ret
 
 00001526 <u8g_NextPageLL>:
-
-uint8_t u8g_NextPageLL(u8g_t *u8g, u8g_dev_t *dev)
-{  
     1526:	ef 92       	push	r14
     1528:	ff 92       	push	r15
     152a:	1f 93       	push	r17
@@ -3796,18 +2706,14 @@ uint8_t u8g_NextPageLL(u8g_t *u8g, u8g_dev_t *dev)
     152e:	df 93       	push	r29
     1530:	ec 01       	movw	r28, r24
     1532:	7b 01       	movw	r14, r22
-  uint8_t r;
-  u8g->state_cb(U8G_STATE_MSG_BACKUP_ENV);
     1534:	e9 a9       	ldd	r30, Y+49	; 0x31
     1536:	fa a9       	ldd	r31, Y+50	; 0x32
     1538:	82 e0       	ldi	r24, 0x02	; 2
     153a:	09 95       	icall
-  u8g->state_cb(U8G_STATE_MSG_RESTORE_U8G);
     153c:	e9 a9       	ldd	r30, Y+49	; 0x31
     153e:	fa a9       	ldd	r31, Y+50	; 0x32
     1540:	81 e0       	ldi	r24, 0x01	; 1
     1542:	09 95       	icall
-  r = u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_PAGE_NEXT, NULL);
     1544:	20 e0       	ldi	r18, 0x00	; 0
     1546:	30 e0       	ldi	r19, 0x00	; 0
     1548:	45 e1       	ldi	r20, 0x15	; 21
@@ -3816,11 +2722,8 @@ uint8_t u8g_NextPageLL(u8g_t *u8g, u8g_dev_t *dev)
     154e:	91 df       	rcall	.-222    	; 0x1472 <u8g_call_dev_fn>
     1550:	18 2f       	mov	r17, r24
     1552:	88 23       	and	r24, r24
-  if ( r != 0 )
     1554:	39 f0       	breq	.+14     	; 0x1564 <u8g_NextPageLL+0x3e>
     1556:	9e 01       	movw	r18, r28
-  {
-    u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_GET_PAGE_BOX, &(u8g->current_page));
     1558:	2d 5c       	subi	r18, 0xCD	; 205
     155a:	3f 4f       	sbci	r19, 0xFF	; 255
     155c:	47 e1       	ldi	r20, 0x17	; 23
@@ -3829,14 +2732,10 @@ uint8_t u8g_NextPageLL(u8g_t *u8g, u8g_dev_t *dev)
     1562:	87 df       	rcall	.-242    	; 0x1472 <u8g_call_dev_fn>
     1564:	e9 a9       	ldd	r30, Y+49	; 0x31
     1566:	fa a9       	ldd	r31, Y+50	; 0x32
-  }
-  u8g->state_cb(U8G_STATE_MSG_RESTORE_ENV);
     1568:	80 e0       	ldi	r24, 0x00	; 0
     156a:	09 95       	icall
     156c:	81 2f       	mov	r24, r17
     156e:	df 91       	pop	r29
-  return r;
-}
     1570:	cf 91       	pop	r28
     1572:	1f 91       	pop	r17
     1574:	ff 90       	pop	r15
@@ -3844,122 +2743,74 @@ uint8_t u8g_NextPageLL(u8g_t *u8g, u8g_dev_t *dev)
     1578:	08 95       	ret
 
 0000157a <u8g_DrawPixelLL>:
-}
-
-void u8g_DrawPixelLL(u8g_t *u8g, u8g_dev_t *dev, u8g_uint_t x, u8g_uint_t y)
-{
-  u8g_dev_arg_pixel_t *arg = &(u8g->arg_pixel);
-  arg->x = x;
     157a:	fc 01       	movw	r30, r24
     157c:	44 8f       	std	Z+28, r20	; 0x1c
-  arg->y = y;
     157e:	25 8f       	std	Z+29, r18	; 0x1d
-  return u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_CONTRAST, &contrast);
-}
-
-void u8g_DrawPixelLL(u8g_t *u8g, u8g_dev_t *dev, u8g_uint_t x, u8g_uint_t y)
-{
-  u8g_dev_arg_pixel_t *arg = &(u8g->arg_pixel);
     1580:	9c 01       	movw	r18, r24
     1582:	24 5e       	subi	r18, 0xE4	; 228
     1584:	3f 4f       	sbci	r19, 0xFF	; 255
-  arg->x = x;
-  arg->y = y;
-  u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_SET_PIXEL, arg);
     1586:	42 e3       	ldi	r20, 0x32	; 50
     1588:	74 cf       	rjmp	.-280    	; 0x1472 <u8g_call_dev_fn>
 
 0000158a <u8g_GetWidthLL>:
-#endif
-
-
-
-u8g_uint_t u8g_GetWidthLL(u8g_t *u8g, u8g_dev_t *dev)
-{
     158a:	a1 e0       	ldi	r26, 0x01	; 1
     158c:	b0 e0       	ldi	r27, 0x00	; 0
     158e:	ea ec       	ldi	r30, 0xCA	; 202
     1590:	fa e0       	ldi	r31, 0x0A	; 10
     1592:	88 c7       	rjmp	.+3856   	; 0x24a4 <__prologue_saves__+0x20>
     1594:	9e 01       	movw	r18, r28
-  u8g_uint_t r;
-  u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_GET_WIDTH, &r);
     1596:	2f 5f       	subi	r18, 0xFF	; 255
     1598:	3f 4f       	sbci	r19, 0xFF	; 255
     159a:	46 e4       	ldi	r20, 0x46	; 70
     159c:	6a df       	rcall	.-300    	; 0x1472 <u8g_call_dev_fn>
     159e:	89 81       	ldd	r24, Y+1	; 0x01
     15a0:	21 96       	adiw	r28, 0x01	; 1
-  return r;
-}
     15a2:	e2 e0       	ldi	r30, 0x02	; 2
     15a4:	9b c7       	rjmp	.+3894   	; 0x24dc <__epilogue_restores__+0x20>
 
 000015a6 <u8g_GetHeightLL>:
-
-u8g_uint_t u8g_GetHeightLL(u8g_t *u8g, u8g_dev_t *dev)
-{       
     15a6:	a1 e0       	ldi	r26, 0x01	; 1
     15a8:	b0 e0       	ldi	r27, 0x00	; 0
     15aa:	e8 ed       	ldi	r30, 0xD8	; 216
     15ac:	fa e0       	ldi	r31, 0x0A	; 10
     15ae:	7a c7       	rjmp	.+3828   	; 0x24a4 <__prologue_saves__+0x20>
     15b0:	9e 01       	movw	r18, r28
-  u8g_uint_t r;
-  u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_GET_HEIGHT, &r);
     15b2:	2f 5f       	subi	r18, 0xFF	; 255
     15b4:	3f 4f       	sbci	r19, 0xFF	; 255
     15b6:	47 e4       	ldi	r20, 0x47	; 71
     15b8:	5c df       	rcall	.-328    	; 0x1472 <u8g_call_dev_fn>
     15ba:	89 81       	ldd	r24, Y+1	; 0x01
     15bc:	21 96       	adiw	r28, 0x01	; 1
-  return r;
-}
     15be:	e2 e0       	ldi	r30, 0x02	; 2
     15c0:	8d c7       	rjmp	.+3866   	; 0x24dc <__epilogue_restores__+0x20>
 
 000015c2 <u8g_GetModeLL>:
-
-u8g_uint_t u8g_GetModeLL(u8g_t *u8g, u8g_dev_t *dev)
-{       
-  return u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_GET_MODE, NULL);
     15c2:	20 e0       	ldi	r18, 0x00	; 0
     15c4:	30 e0       	ldi	r19, 0x00	; 0
     15c6:	48 e4       	ldi	r20, 0x48	; 72
     15c8:	54 cf       	rjmp	.-344    	; 0x1472 <u8g_call_dev_fn>
 
 000015ca <u8g_UpdateDimension>:
-
-
-/*====================================================================*/
-
-void u8g_UpdateDimension(u8g_t *u8g)
-{
     15ca:	cf 93       	push	r28
     15cc:	df 93       	push	r29
     15ce:	ec 01       	movw	r28, r24
-  u8g->width = u8g_GetWidthLL(u8g, u8g->dev);
     15d0:	6a 81       	ldd	r22, Y+2	; 0x02
     15d2:	7b 81       	ldd	r23, Y+3	; 0x03
     15d4:	da df       	rcall	.-76     	; 0x158a <u8g_GetWidthLL>
     15d6:	88 83       	st	Y, r24
     15d8:	6a 81       	ldd	r22, Y+2	; 0x02
-  u8g->height = u8g_GetHeightLL(u8g, u8g->dev);
     15da:	7b 81       	ldd	r23, Y+3	; 0x03
     15dc:	ce 01       	movw	r24, r28
     15de:	e3 df       	rcall	.-58     	; 0x15a6 <u8g_GetHeightLL>
     15e0:	89 83       	std	Y+1, r24	; 0x01
     15e2:	6a 81       	ldd	r22, Y+2	; 0x02
     15e4:	7b 81       	ldd	r23, Y+3	; 0x03
-  u8g->mode = u8g_GetModeLL(u8g, u8g->dev);
     15e6:	ce 01       	movw	r24, r28
     15e8:	ec df       	rcall	.-40     	; 0x15c2 <u8g_GetModeLL>
     15ea:	8b 87       	std	Y+11, r24	; 0x0b
     15ec:	9e 01       	movw	r18, r28
     15ee:	2d 5c       	subi	r18, 0xCD	; 205
     15f0:	3f 4f       	sbci	r19, 0xFF	; 255
-  /* 9 Dec 2012: u8g_scale.c requires update of current page */
-  u8g_call_dev_fn(u8g, u8g->dev, U8G_DEV_MSG_GET_PAGE_BOX, &(u8g->current_page));
     15f2:	6a 81       	ldd	r22, Y+2	; 0x02
     15f4:	7b 81       	ldd	r23, Y+3	; 0x03
     15f6:	47 e1       	ldi	r20, 0x17	; 23
@@ -3970,41 +2821,22 @@ void u8g_UpdateDimension(u8g_t *u8g)
     1600:	08 95       	ret
 
 00001602 <u8g_Begin>:
-  u8g->state_cb = u8g_state_dummy_cb;
-
-}
-
-uint8_t u8g_Begin(u8g_t *u8g)
-{
     1602:	cf 93       	push	r28
     1604:	df 93       	push	r29
     1606:	ec 01       	movw	r28, r24
-  /* call and init low level driver and com device */
-  if ( u8g_InitLL(u8g, u8g->dev) == 0 )
     1608:	6a 81       	ldd	r22, Y+2	; 0x02
     160a:	7b 81       	ldd	r23, Y+3	; 0x03
     160c:	37 df       	rcall	.-402    	; 0x147c <u8g_InitLL>
     160e:	88 23       	and	r24, r24
     1610:	19 f0       	breq	.+6      	; 0x1618 <u8g_Begin+0x16>
     1612:	ce 01       	movw	r24, r28
-    return 0;
-  /* fetch width and height from the low level */
-  u8g_UpdateDimension(u8g);
     1614:	da df       	rcall	.-76     	; 0x15ca <u8g_UpdateDimension>
     1616:	81 e0       	ldi	r24, 0x01	; 1
     1618:	df 91       	pop	r29
-  return 1;
     161a:	cf 91       	pop	r28
-}
     161c:	08 95       	ret
 
 0000161e <u8g_InitSPI>:
-}
-
-
-#if defined(U8G_WITH_PINLIST)  
-uint8_t u8g_InitSPI(u8g_t *u8g, u8g_dev_t *dev, uint8_t sck, uint8_t mosi, uint8_t cs, uint8_t a0, uint8_t reset)
-{
     161e:	8f 92       	push	r8
     1620:	9f 92       	push	r9
     1622:	af 92       	push	r10
@@ -4019,41 +2851,23 @@ uint8_t u8g_InitSPI(u8g_t *u8g, u8g_dev_t *dev, uint8_t sck, uint8_t mosi, uint8
     1634:	de b7       	in	r29, 0x3e	; 62
     1636:	4c 01       	movw	r8, r24
     1638:	5b 01       	movw	r10, r22
-  
-  /* fill data structure with some suitable values */
-  u8g_init_data(u8g);
     163a:	2a 83       	std	Y+2, r18	; 0x02
     163c:	49 83       	std	Y+1, r20	; 0x01
     163e:	ef de       	rcall	.-546    	; 0x141e <u8g_init_data>
     1640:	f4 01       	movw	r30, r8
-  u8g->dev = dev;
     1642:	b3 82       	std	Z+3, r11	; 0x03
     1644:	a2 82       	std	Z+2, r10	; 0x02
     1646:	49 81       	ldd	r20, Y+1	; 0x01
-    
-  /* assign user pins */
-  u8g->pin_list[U8G_PI_SCK] = sck;
     1648:	47 a3       	std	Z+39, r20	; 0x27
     164a:	2a 81       	ldd	r18, Y+2	; 0x02
-  u8g->pin_list[U8G_PI_MOSI] = mosi;
     164c:	20 a7       	std	Z+40, r18	; 0x28
     164e:	05 a3       	std	Z+37, r16	; 0x25
-  u8g->pin_list[U8G_PI_CS] = cs;
     1650:	e4 a2       	std	Z+36, r14	; 0x24
-  u8g->pin_list[U8G_PI_A0] = a0;
     1652:	c3 a2       	std	Z+35, r12	; 0x23
-  u8g->pin_list[U8G_PI_RESET] = reset;
     1654:	c4 01       	movw	r24, r8
-  
-  /* On the Arduino Environment this will lead to two calls to u8g_Begin(), the following line will be called first (by U8glib constructors) */
-  /* if - in future releases - this is removed, then still call u8g_UpdateDimension() */
-  /* if Arduino call u8g_UpdateDimension else u8g_Begin */
-  /* issue 146 */
-  return u8g_Begin(u8g);
     1656:	d5 df       	rcall	.-86     	; 0x1602 <u8g_Begin>
     1658:	0f 90       	pop	r0
     165a:	0f 90       	pop	r0
-}
     165c:	df 91       	pop	r29
     165e:	cf 91       	pop	r28
     1660:	0f 91       	pop	r16
@@ -4066,54 +2880,31 @@ uint8_t u8g_InitSPI(u8g_t *u8g, u8g_dev_t *dev, uint8_t sck, uint8_t mosi, uint8
     166e:	08 95       	ret
 
 00001670 <u8g_FirstPage>:
-}
-#endif /* defined(U8G_WITH_PINLIST)  */
-
-void u8g_FirstPage(u8g_t *u8g)
-{
-  u8g_FirstPageLL(u8g, u8g->dev);
     1670:	fc 01       	movw	r30, r24
     1672:	62 81       	ldd	r22, Z+2	; 0x02
     1674:	73 81       	ldd	r23, Z+3	; 0x03
     1676:	33 cf       	rjmp	.-410    	; 0x14de <u8g_FirstPageLL>
 
 00001678 <u8g_NextPage>:
-}
-
-uint8_t u8g_NextPage(u8g_t *u8g)
-{
     1678:	cf 93       	push	r28
     167a:	df 93       	push	r29
     167c:	ec 01       	movw	r28, r24
-  if  ( u8g->cursor_fn != (u8g_draw_cursor_fn)0 )
     167e:	ee 85       	ldd	r30, Y+14	; 0x0e
     1680:	ff 85       	ldd	r31, Y+15	; 0x0f
     1682:	30 97       	sbiw	r30, 0x00	; 0
     1684:	09 f0       	breq	.+2      	; 0x1688 <u8g_NextPage+0x10>
-  {
-    u8g->cursor_fn(u8g);
     1686:	09 95       	icall
-  }
-  return u8g_NextPageLL(u8g, u8g->dev);
     1688:	6a 81       	ldd	r22, Y+2	; 0x02
     168a:	7b 81       	ldd	r23, Y+3	; 0x03
     168c:	ce 01       	movw	r24, r28
     168e:	4b df       	rcall	.-362    	; 0x1526 <u8g_NextPageLL>
     1690:	df 91       	pop	r29
-}
     1692:	cf 91       	pop	r28
     1694:	08 95       	ret
 
 00001696 <u8g_DrawPixel>:
-  u8g_call_dev_fn(u8g, u8g->dev, U8G_DEV_MSG_SLEEP_OFF, NULL);
-}
-
-
-void u8g_DrawPixel(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y)
-{
     1696:	36 2f       	mov	r19, r22
     1698:	24 2f       	mov	r18, r20
-  u8g_DrawPixelLL(u8g, u8g->dev, x, y);
     169a:	fc 01       	movw	r30, r24
     169c:	62 81       	ldd	r22, Z+2	; 0x02
     169e:	73 81       	ldd	r23, Z+3	; 0x03
@@ -4121,88 +2912,36 @@ void u8g_DrawPixel(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y)
     16a2:	6b cf       	rjmp	.-298    	; 0x157a <u8g_DrawPixelLL>
 
 000016a4 <u8g_Draw8Pixel>:
-}
-
-void u8g_Draw8Pixel(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, uint8_t dir, uint8_t pixel)
-{
     16a4:	0f 93       	push	r16
     16a6:	fc 01       	movw	r30, r24
-  u8g_Draw8PixelLL(u8g, u8g->dev, x, y, dir, pixel);
     16a8:	82 81       	ldd	r24, Z+2	; 0x02
     16aa:	93 81       	ldd	r25, Z+3	; 0x03
-}
-
-void u8g_Draw8PixelLL(u8g_t *u8g, u8g_dev_t *dev, u8g_uint_t x, u8g_uint_t y, uint8_t dir, uint8_t pixel)
-{
-  u8g_dev_arg_pixel_t *arg = &(u8g->arg_pixel);
-  arg->x = x;
     16ac:	64 8f       	std	Z+28, r22	; 0x1c
-  arg->y = y;
     16ae:	45 8f       	std	Z+29, r20	; 0x1d
-  arg->dir = dir;
     16b0:	27 8f       	std	Z+31, r18	; 0x1f
-  arg->pixel = pixel;
     16b2:	06 8f       	std	Z+30, r16	; 0x1e
-  u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_SET_PIXEL, arg);
-}
-
-void u8g_Draw8PixelLL(u8g_t *u8g, u8g_dev_t *dev, u8g_uint_t x, u8g_uint_t y, uint8_t dir, uint8_t pixel)
-{
-  u8g_dev_arg_pixel_t *arg = &(u8g->arg_pixel);
     16b4:	9f 01       	movw	r18, r30
     16b6:	24 5e       	subi	r18, 0xE4	; 228
     16b8:	3f 4f       	sbci	r19, 0xFF	; 255
-  arg->x = x;
-  arg->y = y;
-  arg->dir = dir;
-  arg->pixel = pixel;
-  u8g_call_dev_fn(u8g, dev, U8G_DEV_MSG_SET_8PIXEL, arg);
     16ba:	4b e3       	ldi	r20, 0x3B	; 59
     16bc:	bc 01       	movw	r22, r24
     16be:	cf 01       	movw	r24, r30
     16c0:	d8 de       	rcall	.-592    	; 0x1472 <u8g_call_dev_fn>
     16c2:	0f 91       	pop	r16
-}
-
-void u8g_Draw8Pixel(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, uint8_t dir, uint8_t pixel)
-{
-  u8g_Draw8PixelLL(u8g, u8g->dev, x, y, dir, pixel);
-}
     16c4:	08 95       	ret
 
 000016c6 <u8g_pb8h1_set_pixel>:
-  u8g_pb_Clear(b);
-}
-
-/* limitation: total buffer must not exceed 256 bytes */
-void u8g_pb8h1_set_pixel(u8g_pb_t *b, u8g_uint_t x, u8g_uint_t y, uint8_t color_index)
-{
     16c6:	0f 93       	push	r16
     16c8:	1f 93       	push	r17
     16ca:	cf 93       	push	r28
     16cc:	df 93       	push	r29
     16ce:	ec 01       	movw	r28, r24
-//    return;
-//  u8g_pb8h1_state_set_pixel(&s, color_index);
-#else
-  register uint8_t mask;
-  u8g_uint_t tmp;
-  uint8_t *ptr = b->buf;
     16d0:	0e 81       	ldd	r16, Y+6	; 0x06
     16d2:	1f 81       	ldd	r17, Y+7	; 0x07
-  
-  y -= b->p.page_y0;
-  tmp = b->width;
     16d4:	9d 81       	ldd	r25, Y+5	; 0x05
-  tmp >>= 3;
     16d6:	96 95       	lsr	r25
     16d8:	96 95       	lsr	r25
     16da:	96 95       	lsr	r25
-  tmp *= (uint8_t)y;
-  ptr += tmp;
-  
-  mask = 0x080;
-  mask >>= x & 7;
     16dc:	86 2f       	mov	r24, r22
     16de:	87 70       	andi	r24, 0x07	; 7
     16e0:	a0 e8       	ldi	r26, 0x80	; 128
@@ -4212,29 +2951,14 @@ void u8g_pb8h1_set_pixel(u8g_pb_t *b, u8g_uint_t x, u8g_uint_t y, uint8_t color_
     16e8:	a7 95       	ror	r26
     16ea:	8a 95       	dec	r24
     16ec:	e2 f7       	brpl	.-8      	; 0x16e6 <u8g_pb8h1_set_pixel+0x20>
-#else
-  register uint8_t mask;
-  u8g_uint_t tmp;
-  uint8_t *ptr = b->buf;
-  
-  y -= b->p.page_y0;
     16ee:	8a 81       	ldd	r24, Y+2	; 0x02
     16f0:	48 1b       	sub	r20, r24
-  tmp = b->width;
-  tmp >>= 3;
-  tmp *= (uint8_t)y;
     16f2:	49 9f       	mul	r20, r25
     16f4:	40 2d       	mov	r20, r0
     16f6:	11 24       	eor	r1, r1
-  ptr += tmp;
-  
-  mask = 0x080;
-  mask >>= x & 7;
-  x >>= 3;
     16f8:	66 95       	lsr	r22
     16fa:	66 95       	lsr	r22
     16fc:	66 95       	lsr	r22
-  ptr += x;
     16fe:	e6 2f       	mov	r30, r22
     1700:	f0 e0       	ldi	r31, 0x00	; 0
     1702:	e4 0f       	add	r30, r20
@@ -4242,24 +2966,13 @@ void u8g_pb8h1_set_pixel(u8g_pb_t *b, u8g_uint_t x, u8g_uint_t y, uint8_t color_
     1706:	e0 0f       	add	r30, r16
     1708:	f1 1f       	adc	r31, r17
     170a:	80 81       	ld	r24, Z
-  if ( color_index )
     170c:	22 23       	and	r18, r18
     170e:	11 f0       	breq	.+4      	; 0x1714 <u8g_pb8h1_set_pixel+0x4e>
-  {
-    *ptr |= mask;
     1710:	a8 2b       	or	r26, r24
     1712:	02 c0       	rjmp	.+4      	; 0x1718 <u8g_pb8h1_set_pixel+0x52>
-  }
-  else
-  {
-    mask ^=0xff;
     1714:	a0 95       	com	r26
-    *ptr &= mask;
     1716:	a8 23       	and	r26, r24
     1718:	a0 83       	st	Z, r26
-  }
-#endif
-}
     171a:	df 91       	pop	r29
     171c:	cf 91       	pop	r28
     171e:	1f 91       	pop	r17
@@ -4267,45 +2980,28 @@ void u8g_pb8h1_set_pixel(u8g_pb_t *b, u8g_uint_t x, u8g_uint_t y, uint8_t color_
     1722:	08 95       	ret
 
 00001724 <u8g_pb8h1_SetPixel>:
-
-
-void u8g_pb8h1_SetPixel(u8g_pb_t *b, const u8g_dev_arg_pixel_t * const arg_pixel)
-{
     1724:	fc 01       	movw	r30, r24
     1726:	db 01       	movw	r26, r22
-  if ( arg_pixel->y < b->p.page_y0 )
     1728:	11 96       	adiw	r26, 0x01	; 1
     172a:	4c 91       	ld	r20, X
     172c:	11 97       	sbiw	r26, 0x01	; 1
     172e:	82 81       	ldd	r24, Z+2	; 0x02
     1730:	48 17       	cp	r20, r24
     1732:	58 f0       	brcs	.+22     	; 0x174a <u8g_pb8h1_SetPixel+0x26>
-    return;
-  if ( arg_pixel->y > b->p.page_y1 )
     1734:	83 81       	ldd	r24, Z+3	; 0x03
     1736:	84 17       	cp	r24, r20
     1738:	40 f0       	brcs	.+16     	; 0x174a <u8g_pb8h1_SetPixel+0x26>
-    return;
-  if ( arg_pixel->x >= b->width )
     173a:	6c 91       	ld	r22, X
     173c:	85 81       	ldd	r24, Z+5	; 0x05
     173e:	68 17       	cp	r22, r24
     1740:	20 f4       	brcc	.+8      	; 0x174a <u8g_pb8h1_SetPixel+0x26>
     1742:	cf 01       	movw	r24, r30
-    return;
-  u8g_pb8h1_set_pixel(b, arg_pixel->x, arg_pixel->y, arg_pixel->color);
     1744:	14 96       	adiw	r26, 0x04	; 4
     1746:	2c 91       	ld	r18, X
     1748:	be cf       	rjmp	.-132    	; 0x16c6 <u8g_pb8h1_set_pixel>
     174a:	08 95       	ret
 
 0000174c <u8g_pb8h1_Set8PixelOpt2>:
-    pixel <<= 1;
-  } while( pixel != 0  );
-}
-
-void u8g_pb8h1_Set8PixelOpt2(u8g_pb_t *b, u8g_dev_arg_pixel_t *arg_pixel)
-{
     174c:	cf 92       	push	r12
     174e:	df 92       	push	r13
     1750:	ff 92       	push	r15
@@ -4315,12 +3011,7 @@ void u8g_pb8h1_Set8PixelOpt2(u8g_pb_t *b, u8g_dev_arg_pixel_t *arg_pixel)
     1758:	df 93       	push	r29
     175a:	6c 01       	movw	r12, r24
     175c:	eb 01       	movw	r28, r22
-  register uint8_t pixel = arg_pixel->pixel;
     175e:	fa 80       	ldd	r15, Y+2	; 0x02
-  u8g_uint_t dx = 0;
-  u8g_uint_t dy = 0;
-  
-  switch( arg_pixel->dir )
     1760:	9b 81       	ldd	r25, Y+3	; 0x03
     1762:	91 30       	cpi	r25, 0x01	; 1
     1764:	51 f0       	breq	.+20     	; 0x177a <u8g_pb8h1_Set8PixelOpt2+0x2e>
@@ -4329,84 +3020,32 @@ void u8g_pb8h1_Set8PixelOpt2(u8g_pb_t *b, u8g_dev_arg_pixel_t *arg_pixel)
     176a:	49 f0       	breq	.+18     	; 0x177e <u8g_pb8h1_Set8PixelOpt2+0x32>
     176c:	93 30       	cpi	r25, 0x03	; 3
     176e:	51 f4       	brne	.+20     	; 0x1784 <u8g_pb8h1_Set8PixelOpt2+0x38>
-  {
-    case 0: dx++; break;
-    case 1: dy++; break;
-    case 2: dx--; break;
-    case 3: dy--; break;
     1770:	1f ef       	ldi	r17, 0xFF	; 255
     1772:	09 c0       	rjmp	.+18     	; 0x1786 <u8g_pb8h1_Set8PixelOpt2+0x3a>
-
-void u8g_pb8h1_Set8PixelOpt2(u8g_pb_t *b, u8g_dev_arg_pixel_t *arg_pixel)
-{
-  register uint8_t pixel = arg_pixel->pixel;
-  u8g_uint_t dx = 0;
-  u8g_uint_t dy = 0;
     1774:	10 e0       	ldi	r17, 0x00	; 0
-  
-  switch( arg_pixel->dir )
-  {
-    case 0: dx++; break;
     1776:	01 e0       	ldi	r16, 0x01	; 1
     1778:	07 c0       	rjmp	.+14     	; 0x1788 <u8g_pb8h1_Set8PixelOpt2+0x3c>
-    case 1: dy++; break;
     177a:	11 e0       	ldi	r17, 0x01	; 1
     177c:	04 c0       	rjmp	.+8      	; 0x1786 <u8g_pb8h1_Set8PixelOpt2+0x3a>
-
-void u8g_pb8h1_Set8PixelOpt2(u8g_pb_t *b, u8g_dev_arg_pixel_t *arg_pixel)
-{
-  register uint8_t pixel = arg_pixel->pixel;
-  u8g_uint_t dx = 0;
-  u8g_uint_t dy = 0;
     177e:	10 e0       	ldi	r17, 0x00	; 0
-  
-  switch( arg_pixel->dir )
-  {
-    case 0: dx++; break;
-    case 1: dy++; break;
-    case 2: dx--; break;
     1780:	0f ef       	ldi	r16, 0xFF	; 255
     1782:	02 c0       	rjmp	.+4      	; 0x1788 <u8g_pb8h1_Set8PixelOpt2+0x3c>
-
-void u8g_pb8h1_Set8PixelOpt2(u8g_pb_t *b, u8g_dev_arg_pixel_t *arg_pixel)
-{
-  register uint8_t pixel = arg_pixel->pixel;
-  u8g_uint_t dx = 0;
-  u8g_uint_t dy = 0;
     1784:	10 e0       	ldi	r17, 0x00	; 0
-}
-
-void u8g_pb8h1_Set8PixelOpt2(u8g_pb_t *b, u8g_dev_arg_pixel_t *arg_pixel)
-{
-  register uint8_t pixel = arg_pixel->pixel;
-  u8g_uint_t dx = 0;
     1786:	00 e0       	ldi	r16, 0x00	; 0
-    case 3: dy--; break;
-  }
-  
-  do
-  {
-    if ( pixel & 128 )
     1788:	f7 fe       	sbrs	r15, 7
     178a:	03 c0       	rjmp	.+6      	; 0x1792 <u8g_pb8h1_Set8PixelOpt2+0x46>
-      u8g_pb8h1_SetPixel(b, arg_pixel);
     178c:	be 01       	movw	r22, r28
     178e:	c6 01       	movw	r24, r12
     1790:	c9 df       	rcall	.-110    	; 0x1724 <u8g_pb8h1_SetPixel>
     1792:	98 81       	ld	r25, Y
-    arg_pixel->x += dx;
     1794:	90 0f       	add	r25, r16
     1796:	98 83       	st	Y, r25
     1798:	99 81       	ldd	r25, Y+1	; 0x01
-    arg_pixel->y += dy;
     179a:	91 0f       	add	r25, r17
     179c:	99 83       	std	Y+1, r25	; 0x01
     179e:	ff 0c       	add	r15, r15
-    pixel <<= 1;
     17a0:	99 f7       	brne	.-26     	; 0x1788 <u8g_pb8h1_Set8PixelOpt2+0x3c>
-  } while( pixel != 0  );  
     17a2:	df 91       	pop	r29
-}
     17a4:	cf 91       	pop	r28
     17a6:	1f 91       	pop	r17
     17a8:	0f 91       	pop	r16
@@ -4416,22 +3055,14 @@ void u8g_pb8h1_Set8PixelOpt2(u8g_pb_t *b, u8g_dev_arg_pixel_t *arg_pixel)
     17b0:	08 95       	ret
 
 000017b2 <u8g_dev_pb8h1_base_fn>:
-  }
-}
-#endif
-
-uint8_t u8g_dev_pb8h1_base_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
-{
     17b2:	0f 93       	push	r16
     17b4:	1f 93       	push	r17
     17b6:	cf 93       	push	r28
     17b8:	df 93       	push	r29
     17ba:	89 01       	movw	r16, r18
-  u8g_pb_t *pb = (u8g_pb_t *)(dev->dev_mem);
     17bc:	fb 01       	movw	r30, r22
     17be:	c2 81       	ldd	r28, Z+2	; 0x02
     17c0:	d3 81       	ldd	r29, Z+3	; 0x03
-  switch(msg)
     17c2:	42 33       	cpi	r20, 0x32	; 50
     17c4:	d9 f0       	breq	.+54     	; 0x17fc <u8g_dev_pb8h1_base_fn+0x4a>
     17c6:	58 f4       	brcc	.+22     	; 0x17de <u8g_dev_pb8h1_base_fn+0x2c>
@@ -4441,283 +3072,131 @@ uint8_t u8g_dev_pb8h1_base_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg
     17ce:	09 f1       	breq	.+66     	; 0x1812 <u8g_dev_pb8h1_base_fn+0x60>
     17d0:	44 31       	cpi	r20, 0x14	; 20
     17d2:	41 f5       	brne	.+80     	; 0x1824 <u8g_dev_pb8h1_base_fn+0x72>
-    case U8G_DEV_MSG_INIT:
-      break;
-    case U8G_DEV_MSG_STOP:
-      break;
-    case U8G_DEV_MSG_PAGE_FIRST:
-      u8g_pb_Clear(pb);
     17d4:	ce 01       	movw	r24, r28
     17d6:	2c d0       	rcall	.+88     	; 0x1830 <u8g_pb_Clear>
     17d8:	ce 01       	movw	r24, r28
-      u8g_page_First(&(pb->p));
     17da:	71 d5       	rcall	.+2786   	; 0x22be <u8g_page_First>
     17dc:	23 c0       	rjmp	.+70     	; 0x1824 <u8g_dev_pb8h1_base_fn+0x72>
     17de:	46 34       	cpi	r20, 0x46	; 70
     17e0:	e1 f0       	breq	.+56     	; 0x181a <u8g_dev_pb8h1_base_fn+0x68>
-#endif
-
-uint8_t u8g_dev_pb8h1_base_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
-{
-  u8g_pb_t *pb = (u8g_pb_t *)(dev->dev_mem);
-  switch(msg)
     17e2:	47 34       	cpi	r20, 0x47	; 71
     17e4:	e1 f0       	breq	.+56     	; 0x181e <u8g_dev_pb8h1_base_fn+0x6c>
     17e6:	4b 33       	cpi	r20, 0x3B	; 59
     17e8:	e9 f4       	brne	.+58     	; 0x1824 <u8g_dev_pb8h1_base_fn+0x72>
     17ea:	b9 01       	movw	r22, r18
     17ec:	ce 01       	movw	r24, r28
-    case U8G_DEV_MSG_SET_8PIXEL:
-#ifdef NEW_CODE
-      if ( u8g_pb_Is8PixelVisible(pb, (u8g_dev_arg_pixel_t *)arg) )
-        u8g_pb8h1_Set8PixelState(pb, (u8g_dev_arg_pixel_t *)arg);
-#else
-      if ( u8g_pb_Is8PixelVisible(pb, (u8g_dev_arg_pixel_t *)arg) )
     17ee:	56 d0       	rcall	.+172    	; 0x189c <u8g_pb_Is8PixelVisible>
     17f0:	88 23       	and	r24, r24
     17f2:	c1 f0       	breq	.+48     	; 0x1824 <u8g_dev_pb8h1_base_fn+0x72>
     17f4:	b8 01       	movw	r22, r16
     17f6:	ce 01       	movw	r24, r28
     17f8:	a9 df       	rcall	.-174    	; 0x174c <u8g_pb8h1_Set8PixelOpt2>
-        u8g_pb8h1_Set8PixelOpt2(pb, (u8g_dev_arg_pixel_t *)arg);
     17fa:	14 c0       	rjmp	.+40     	; 0x1824 <u8g_dev_pb8h1_base_fn+0x72>
     17fc:	b9 01       	movw	r22, r18
     17fe:	ce 01       	movw	r24, r28
     1800:	91 df       	rcall	.-222    	; 0x1724 <u8g_pb8h1_SetPixel>
     1802:	10 c0       	rjmp	.+32     	; 0x1824 <u8g_dev_pb8h1_base_fn+0x72>
-#endif
-      break;
-    case U8G_DEV_MSG_SET_PIXEL:
-      u8g_pb8h1_SetPixel(pb, (u8g_dev_arg_pixel_t *)arg);
     1804:	ce 01       	movw	r24, r28
     1806:	62 d5       	rcall	.+2756   	; 0x22cc <u8g_page_Next>
     1808:	88 23       	and	r24, r24
     180a:	69 f0       	breq	.+26     	; 0x1826 <u8g_dev_pb8h1_base_fn+0x74>
     180c:	ce 01       	movw	r24, r28
-    case U8G_DEV_MSG_PAGE_FIRST:
-      u8g_pb_Clear(pb);
-      u8g_page_First(&(pb->p));
-      break;
-    case U8G_DEV_MSG_PAGE_NEXT:
-      if ( u8g_page_Next(&(pb->p)) == 0 )
     180e:	10 d0       	rcall	.+32     	; 0x1830 <u8g_pb_Clear>
     1810:	09 c0       	rjmp	.+18     	; 0x1824 <u8g_dev_pb8h1_base_fn+0x72>
     1812:	b9 01       	movw	r22, r18
     1814:	ce 01       	movw	r24, r28
     1816:	32 d0       	rcall	.+100    	; 0x187c <u8g_pb_GetPageBox>
-        return 0;
-      u8g_pb_Clear(pb);
     1818:	05 c0       	rjmp	.+10     	; 0x1824 <u8g_dev_pb8h1_base_fn+0x72>
     181a:	8d 81       	ldd	r24, Y+5	; 0x05
     181c:	01 c0       	rjmp	.+2      	; 0x1820 <u8g_dev_pb8h1_base_fn+0x6e>
     181e:	89 81       	ldd	r24, Y+1	; 0x01
-#ifdef U8G_DEV_MSG_IS_BBX_INTERSECTION
-    case U8G_DEV_MSG_IS_BBX_INTERSECTION:
-      return u8g_pb_IsIntersection(pb, (u8g_dev_arg_bbx_t *)arg);
-#endif
-    case U8G_DEV_MSG_GET_PAGE_BOX:
-      u8g_pb_GetPageBox(pb, (u8g_box_t *)arg);
     1820:	f8 01       	movw	r30, r16
     1822:	80 83       	st	Z, r24
     1824:	81 e0       	ldi	r24, 0x01	; 1
     1826:	df 91       	pop	r29
     1828:	cf 91       	pop	r28
-      break;
-    case U8G_DEV_MSG_GET_WIDTH:
-      *((u8g_uint_t *)arg) = pb->width;
     182a:	1f 91       	pop	r17
     182c:	0f 91       	pop	r16
-      break;
-    case U8G_DEV_MSG_GET_HEIGHT:
-      *((u8g_uint_t *)arg) = pb->p.total_height;
     182e:	08 95       	ret
 
 00001830 <u8g_pb_Clear>:
-
-#include "u8g.h"
-
-void u8g_pb_Clear(u8g_pb_t *b)
-{
-  uint8_t *ptr = (uint8_t *)b->buf;
     1830:	dc 01       	movw	r26, r24
     1832:	16 96       	adiw	r26, 0x06	; 6
     1834:	ed 91       	ld	r30, X+
     1836:	fc 91       	ld	r31, X
     1838:	17 97       	sbiw	r26, 0x07	; 7
-  uint8_t *end_ptr = ptr;
-  end_ptr += b->width;
     183a:	15 96       	adiw	r26, 0x05	; 5
     183c:	8c 91       	ld	r24, X
     183e:	9f 01       	movw	r18, r30
     1840:	28 0f       	add	r18, r24
     1842:	31 1d       	adc	r19, r1
     1844:	c9 01       	movw	r24, r18
-  do
-  {
-    *ptr++ = 0;
     1846:	11 92       	st	Z+, r1
-  } while( ptr != end_ptr );
     1848:	e8 17       	cp	r30, r24
     184a:	f9 07       	cpc	r31, r25
     184c:	e1 f7       	brne	.-8      	; 0x1846 <u8g_pb_Clear+0x16>
-}
     184e:	08 95       	ret
 
 00001850 <u8g_pb_IsYIntersection>:
-  return 0;
-}
-*/
-
-uint8_t u8g_pb_IsYIntersection(u8g_pb_t *pb, u8g_uint_t v0, u8g_uint_t v1)
-{
     1850:	fc 01       	movw	r30, r24
-  uint8_t c1, c2, c3, tmp;
-  c1 = v0 <= pb->p.page_y1;
     1852:	91 e0       	ldi	r25, 0x01	; 1
     1854:	83 81       	ldd	r24, Z+3	; 0x03
     1856:	86 17       	cp	r24, r22
     1858:	08 f4       	brcc	.+2      	; 0x185c <u8g_pb_IsYIntersection+0xc>
     185a:	90 e0       	ldi	r25, 0x00	; 0
-  c2 = v1 >= pb->p.page_y0;
-  c3 = v0 > v1;
     185c:	31 e0       	ldi	r19, 0x01	; 1
     185e:	46 17       	cp	r20, r22
     1860:	08 f0       	brcs	.+2      	; 0x1864 <u8g_pb_IsYIntersection+0x14>
     1862:	30 e0       	ldi	r19, 0x00	; 0
-  
-  tmp = c1;
-  c1 &= c2;
-  c2 &= c3;
-  c3 &= tmp;
-  c1 |= c2;
     1864:	83 2f       	mov	r24, r19
     1866:	89 2b       	or	r24, r25
-
-uint8_t u8g_pb_IsYIntersection(u8g_pb_t *pb, u8g_uint_t v0, u8g_uint_t v1)
-{
-  uint8_t c1, c2, c3, tmp;
-  c1 = v0 <= pb->p.page_y1;
-  c2 = v1 >= pb->p.page_y0;
     1868:	21 e0       	ldi	r18, 0x01	; 1
     186a:	52 81       	ldd	r21, Z+2	; 0x02
     186c:	45 17       	cp	r20, r21
     186e:	08 f4       	brcc	.+2      	; 0x1872 <u8g_pb_IsYIntersection+0x22>
     1870:	20 e0       	ldi	r18, 0x00	; 0
-  
-  tmp = c1;
-  c1 &= c2;
-  c2 &= c3;
-  c3 &= tmp;
-  c1 |= c2;
     1872:	28 23       	and	r18, r24
-  */
-  
-  tmp = c1;
-  c1 &= c2;
-  c2 &= c3;
-  c3 &= tmp;
     1874:	83 2f       	mov	r24, r19
     1876:	89 23       	and	r24, r25
-  c1 |= c2;
-  c1 |= c3;
-  return c1 & 1;
-}
     1878:	82 2b       	or	r24, r18
     187a:	08 95       	ret
 
 0000187c <u8g_pb_GetPageBox>:
-    
-  return u8g_pb_IsXIntersection(pb, bbx->x, tmp);
-}
-
-void u8g_pb_GetPageBox(u8g_pb_t *pb, u8g_box_t *box)
-{
     187c:	dc 01       	movw	r26, r24
     187e:	fb 01       	movw	r30, r22
-  box->x0 = 0;
     1880:	10 82       	st	Z, r1
-  box->y0 = pb->p.page_y0;
     1882:	12 96       	adiw	r26, 0x02	; 2
     1884:	8c 91       	ld	r24, X
     1886:	12 97       	sbiw	r26, 0x02	; 2
     1888:	81 83       	std	Z+1, r24	; 0x01
-  box->x1 = pb->width;
-  box->x1--;
     188a:	15 96       	adiw	r26, 0x05	; 5
     188c:	8c 91       	ld	r24, X
     188e:	15 97       	sbiw	r26, 0x05	; 5
     1890:	81 50       	subi	r24, 0x01	; 1
     1892:	82 83       	std	Z+2, r24	; 0x02
-  box->y1 = pb->p.page_y1;
     1894:	13 96       	adiw	r26, 0x03	; 3
     1896:	8c 91       	ld	r24, X
     1898:	83 83       	std	Z+3, r24	; 0x03
     189a:	08 95       	ret
 
 0000189c <u8g_pb_Is8PixelVisible>:
-
-
-uint8_t u8g_pb_Is8PixelVisible(u8g_pb_t *b, u8g_dev_arg_pixel_t *arg_pixel)
-{
-  u8g_uint_t v0, v1;
-  v0 = arg_pixel->y;
     189c:	fb 01       	movw	r30, r22
     189e:	41 81       	ldd	r20, Z+1	; 0x01
-  v1 = v0;
-  switch( arg_pixel->dir )
     18a0:	23 81       	ldd	r18, Z+3	; 0x03
     18a2:	21 30       	cpi	r18, 0x01	; 1
     18a4:	29 f0       	breq	.+10     	; 0x18b0 <u8g_pb_Is8PixelVisible+0x14>
     18a6:	23 30       	cpi	r18, 0x03	; 3
     18a8:	31 f4       	brne	.+12     	; 0x18b6 <u8g_pb_Is8PixelVisible+0x1a>
-      v1 += 8;          /* this is independent from the page height */
-      break;
-    case 2:  
-      break;
-    case 3: 
-      v0 -= 8;
     18aa:	68 ef       	ldi	r22, 0xF8	; 248
     18ac:	64 0f       	add	r22, r20
-      break;
     18ae:	04 c0       	rjmp	.+8      	; 0x18b8 <u8g_pb_Is8PixelVisible+0x1c>
-
-
-uint8_t u8g_pb_Is8PixelVisible(u8g_pb_t *b, u8g_dev_arg_pixel_t *arg_pixel)
-{
-  u8g_uint_t v0, v1;
-  v0 = arg_pixel->y;
     18b0:	64 2f       	mov	r22, r20
-  switch( arg_pixel->dir )
-  {
-    case 0:
-      break;
-    case 1:  
-      v1 += 8;          /* this is independent from the page height */
     18b2:	48 5f       	subi	r20, 0xF8	; 248
-      break;
     18b4:	01 c0       	rjmp	.+2      	; 0x18b8 <u8g_pb_Is8PixelVisible+0x1c>
-
-
-uint8_t u8g_pb_Is8PixelVisible(u8g_pb_t *b, u8g_dev_arg_pixel_t *arg_pixel)
-{
-  u8g_uint_t v0, v1;
-  v0 = arg_pixel->y;
     18b6:	64 2f       	mov	r22, r20
-      break;
-    case 3: 
-      v0 -= 8;
-      break;
-  }
-  return u8g_pb_IsYIntersection(b, v0, v1);
     18b8:	cb cf       	rjmp	.-106    	; 0x1850 <u8g_pb_IsYIntersection>
 
 000018ba <u8g_draw_vline>:
-    u8g_Draw8Pixel(u8g, x, y, 0, pixel);
-  }
-}
-
-void u8g_draw_vline(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t h)
-{
     18ba:	a0 e0       	ldi	r26, 0x00	; 0
     18bc:	b0 e0       	ldi	r27, 0x00	; 0
     18be:	e2 e6       	ldi	r30, 0x62	; 98
@@ -4728,8 +3207,6 @@ void u8g_draw_vline(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t h)
     18c8:	d4 2f       	mov	r29, r20
     18ca:	c2 2f       	mov	r28, r18
     18cc:	12 2f       	mov	r17, r18
-  uint8_t pixel = 0x0ff;
-  while( h >= 8 )
     18ce:	c4 2e       	mov	r12, r20
     18d0:	c2 0e       	add	r12, r18
     18d2:	4c 2d       	mov	r20, r12
@@ -4737,15 +3214,12 @@ void u8g_draw_vline(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t h)
     18d6:	18 30       	cpi	r17, 0x08	; 8
     18d8:	38 f0       	brcs	.+14     	; 0x18e8 <u8g_draw_vline+0x2e>
     18da:	0f ef       	ldi	r16, 0xFF	; 255
-  {
-    u8g_Draw8Pixel(u8g, x, y, 1, pixel);
     18dc:	21 e0       	ldi	r18, 0x01	; 1
     18de:	6d 2d       	mov	r22, r13
     18e0:	c7 01       	movw	r24, r14
     18e2:	e0 de       	rcall	.-576    	; 0x16a4 <u8g_Draw8Pixel>
     18e4:	18 50       	subi	r17, 0x08	; 8
     18e6:	f5 cf       	rjmp	.-22     	; 0x18d2 <u8g_draw_vline+0x18>
-    h-=8;
     18e8:	4c 2f       	mov	r20, r28
     18ea:	48 7f       	andi	r20, 0xF8	; 248
     18ec:	4d 0f       	add	r20, r29
@@ -4753,17 +3227,10 @@ void u8g_draw_vline(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t h)
     18f0:	27 70       	andi	r18, 0x07	; 7
     18f2:	79 f0       	breq	.+30     	; 0x1912 <u8g_draw_vline+0x58>
     18f4:	97 e0       	ldi	r25, 0x07	; 7
-    y+=8;
-  }
-  if ( h != 0 )
     18f6:	29 27       	eor	r18, r25
-  {
-    h ^=7;
     18f8:	2f 5f       	subi	r18, 0xFF	; 255
     18fa:	27 70       	andi	r18, 0x07	; 7
-    h++;
     18fc:	0f ef       	ldi	r16, 0xFF	; 255
-    pixel <<= h&7;
     18fe:	10 e0       	ldi	r17, 0x00	; 0
     1900:	02 c0       	rjmp	.+4      	; 0x1906 <u8g_draw_vline+0x4c>
     1902:	00 0f       	add	r16, r16
@@ -4772,23 +3239,14 @@ void u8g_draw_vline(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t h)
     1908:	e2 f7       	brpl	.-8      	; 0x1902 <u8g_draw_vline+0x48>
     190a:	21 e0       	ldi	r18, 0x01	; 1
     190c:	6d 2d       	mov	r22, r13
-    u8g_Draw8Pixel(u8g, x, y, 1, pixel);
     190e:	c7 01       	movw	r24, r14
     1910:	c9 de       	rcall	.-622    	; 0x16a4 <u8g_Draw8Pixel>
     1912:	cd b7       	in	r28, 0x3d	; 61
     1914:	de b7       	in	r29, 0x3e	; 62
     1916:	e8 e0       	ldi	r30, 0x08	; 8
-  }
-}
     1918:	db c5       	rjmp	.+2998   	; 0x24d0 <__epilogue_restores__+0x14>
 
 0000191a <u8g_DrawVLine>:
-    return;
-  u8g_draw_hline(u8g, x, y, w);
-}
-
-void u8g_DrawVLine(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t w)
-{
     191a:	ef 92       	push	r14
     191c:	ff 92       	push	r15
     191e:	0f 93       	push	r16
@@ -4799,42 +3257,26 @@ void u8g_DrawVLine(u8g_t *u8g, u8g_uint_t x, u8g_uint_t y, u8g_uint_t w)
     1928:	16 2f       	mov	r17, r22
     192a:	f4 2e       	mov	r15, r20
     192c:	e2 2e       	mov	r14, r18
-  if ( u8g_IsBBXIntersection(u8g, x, y, 1, w) == 0 )
     192e:	02 2f       	mov	r16, r18
     1930:	21 e0       	ldi	r18, 0x01	; 1
     1932:	10 da       	rcall	.-3040   	; 0xd54 <u8g_IsBBXIntersection>
     1934:	88 23       	and	r24, r24
     1936:	29 f0       	breq	.+10     	; 0x1942 <u8g_DrawVLine+0x28>
     1938:	2e 2d       	mov	r18, r14
-    return;
-  u8g_draw_vline(u8g, x, y, w);
     193a:	4f 2d       	mov	r20, r15
     193c:	61 2f       	mov	r22, r17
     193e:	ce 01       	movw	r24, r28
     1940:	bc df       	rcall	.-136    	; 0x18ba <u8g_draw_vline>
     1942:	cd b7       	in	r28, 0x3d	; 61
     1944:	de b7       	in	r29, 0x3e	; 62
-}
     1946:	e6 e0       	ldi	r30, 0x06	; 6
     1948:	c5 c5       	rjmp	.+2954   	; 0x24d4 <__epilogue_restores__+0x18>
 
 0000194a <u8g_dev_rot_dummy_fn>:
-uint8_t u8g_dev_rot270_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg);
-
-uint8_t u8g_dev_rot_dummy_fn(void *u8g, void *dev, uint8_t msg, void *arg)
-{
-  return 0;
-}
     194a:	80 e0       	ldi	r24, 0x00	; 0
     194c:	08 95       	ret
 
 0000194e <u8g_dev_rot180_fn>:
-  }
-  return 1;
-}
-
-uint8_t u8g_dev_rot180_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
-{
     194e:	8f 92       	push	r8
     1950:	9f 92       	push	r9
     1952:	bf 92       	push	r11
@@ -4851,11 +3293,9 @@ uint8_t u8g_dev_rot180_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     1968:	de b7       	in	r29, 0x3e	; 62
     196a:	8c 01       	movw	r16, r24
     196c:	49 01       	movw	r8, r18
-  u8g_dev_t *rotation_chain = (u8g_dev_t *)(dev->dev_mem);
     196e:	fb 01       	movw	r30, r22
     1970:	e2 80       	ldd	r14, Z+2	; 0x02
     1972:	f3 80       	ldd	r15, Z+3	; 0x03
-  switch(msg)
     1974:	42 33       	cpi	r20, 0x32	; 50
     1976:	09 f4       	brne	.+2      	; 0x197a <u8g_dev_rot180_fn+0x2c>
     1978:	42 c0       	rjmp	.+132    	; 0x19fe <u8g_dev_rot180_fn+0xb0>
@@ -4876,33 +3316,16 @@ uint8_t u8g_dev_rot180_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     1996:	4b 33       	cpi	r20, 0x3B	; 59
     1998:	09 f4       	brne	.+2      	; 0x199c <u8g_dev_rot180_fn+0x4e>
     199a:	43 c0       	rjmp	.+134    	; 0x1a22 <u8g_dev_rot180_fn+0xd4>
-    case U8G_DEV_MSG_PAGE_FIRST:
-    case U8G_DEV_MSG_PAGE_NEXT:
-    case U8G_DEV_MSG_SET_COLOR_ENTRY:
-    case U8G_DEV_MSG_SET_XY_CB:
-    */
-      return u8g_call_dev_fn(u8g, rotation_chain, msg, arg);
     199c:	94 01       	movw	r18, r8
     199e:	b7 01       	movw	r22, r14
     19a0:	c8 01       	movw	r24, r16
     19a2:	67 dd       	rcall	.-1330   	; 0x1472 <u8g_call_dev_fn>
     19a4:	59 c0       	rjmp	.+178    	; 0x1a58 <u8g_dev_rot180_fn+0x10a>
     19a6:	47 e1       	ldi	r20, 0x17	; 23
-      }
-      return u8g_call_dev_fn(u8g, rotation_chain, msg, arg);
-#endif /* U8G_DEV_MSG_IS_BBX_INTERSECTION */
-    case U8G_DEV_MSG_GET_PAGE_BOX:
-      /* get page size from next device in the chain */
-      u8g_call_dev_fn(u8g, rotation_chain, msg, arg);
     19a8:	b7 01       	movw	r22, r14
     19aa:	63 dd       	rcall	.-1338   	; 0x1472 <u8g_call_dev_fn>
     19ac:	b7 01       	movw	r22, r14
     19ae:	c8 01       	movw	r24, r16
-      //printf("pre x: %3d..%3d y: %3d..%3d   ", ((u8g_box_t *)arg)->x0, ((u8g_box_t *)arg)->x1, ((u8g_box_t *)arg)->y0, ((u8g_box_t *)arg)->y1);
-      {
-	u8g_box_t new_box;
-	
-	new_box.x0 = u8g_GetWidthLL(u8g,rotation_chain) - ((u8g_box_t *)arg)->x1 - 1;
     19b0:	ec dd       	rcall	.-1064   	; 0x158a <u8g_GetWidthLL>
     19b2:	f4 01       	movw	r30, r8
     19b4:	b2 80       	ldd	r11, Z+2	; 0x02
@@ -4911,7 +3334,6 @@ uint8_t u8g_dev_rot180_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     19ba:	b7 01       	movw	r22, r14
     19bc:	c8 01       	movw	r24, r16
     19be:	e5 dd       	rcall	.-1078   	; 0x158a <u8g_GetWidthLL>
-	new_box.x1 = u8g_GetWidthLL(u8g,rotation_chain) - ((u8g_box_t *)arg)->x0 - 1;
     19c0:	f4 01       	movw	r30, r8
     19c2:	d0 80       	ld	r13, Z
     19c4:	d0 94       	com	r13
@@ -4920,7 +3342,6 @@ uint8_t u8g_dev_rot180_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     19ca:	c8 01       	movw	r24, r16
     19cc:	ec dd       	rcall	.-1064   	; 0x15a6 <u8g_GetHeightLL>
     19ce:	f4 01       	movw	r30, r8
-	new_box.y0 = u8g_GetHeightLL(u8g,rotation_chain) - ((u8g_box_t *)arg)->y1 - 1;
     19d0:	c3 80       	ldd	r12, Z+3	; 0x03
     19d2:	c0 94       	com	r12
     19d4:	c8 0e       	add	r12, r24
@@ -4929,7 +3350,6 @@ uint8_t u8g_dev_rot180_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     19da:	e5 dd       	rcall	.-1078   	; 0x15a6 <u8g_GetHeightLL>
     19dc:	f4 01       	movw	r30, r8
     19de:	91 81       	ldd	r25, Z+1	; 0x01
-	new_box.y1 = u8g_GetHeightLL(u8g,rotation_chain) - ((u8g_box_t *)arg)->y0 - 1;
     19e0:	90 95       	com	r25
     19e2:	89 0f       	add	r24, r25
     19e4:	b0 82       	st	Z, r11
@@ -4938,36 +3358,21 @@ uint8_t u8g_dev_rot180_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     19ea:	83 83       	std	Z+3, r24	; 0x03
     19ec:	34 c0       	rjmp	.+104    	; 0x1a56 <u8g_dev_rot180_fn+0x108>
     19ee:	b7 01       	movw	r22, r14
-	*((u8g_box_t *)arg) = new_box;
     19f0:	cc dd       	rcall	.-1128   	; 0x158a <u8g_GetWidthLL>
     19f2:	02 c0       	rjmp	.+4      	; 0x19f8 <u8g_dev_rot180_fn+0xaa>
     19f4:	b7 01       	movw	r22, r14
     19f6:	d7 dd       	rcall	.-1106   	; 0x15a6 <u8g_GetHeightLL>
     19f8:	f4 01       	movw	r30, r8
-	//printf("post x: %3d..%3d y: %3d..%3d\n", ((u8g_box_t *)arg)->x0, ((u8g_box_t *)arg)->x1, ((u8g_box_t *)arg)->y0, ((u8g_box_t *)arg)->y1);
-      }
-      break;
-    case U8G_DEV_MSG_GET_WIDTH:
-      *((u8g_uint_t *)arg) = u8g_GetWidthLL(u8g,rotation_chain);
     19fa:	80 83       	st	Z, r24
     19fc:	2c c0       	rjmp	.+88     	; 0x1a56 <u8g_dev_rot180_fn+0x108>
     19fe:	b7 01       	movw	r22, r14
     1a00:	c8 01       	movw	r24, r16
-      break;
-    case U8G_DEV_MSG_GET_HEIGHT:
-      *((u8g_uint_t *)arg) = u8g_GetHeightLL(u8g, rotation_chain);
     1a02:	49 83       	std	Y+1, r20	; 0x01
     1a04:	d0 dd       	rcall	.-1120   	; 0x15a6 <u8g_GetHeightLL>
     1a06:	f4 01       	movw	r30, r8
     1a08:	d1 80       	ldd	r13, Z+1	; 0x01
     1a0a:	d0 94       	com	r13
     1a0c:	d8 0e       	add	r13, r24
-    case U8G_DEV_MSG_SET_PIXEL:
-    case U8G_DEV_MSG_SET_TPIXEL:
-      {
-        u8g_uint_t x, y;
-
-        y = u8g_GetHeightLL(u8g, rotation_chain);
     1a0e:	b7 01       	movw	r22, r14
     1a10:	c8 01       	movw	r24, r16
     1a12:	bb dd       	rcall	.-1162   	; 0x158a <u8g_GetWidthLL>
@@ -4976,11 +3381,7 @@ uint8_t u8g_dev_rot180_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     1a18:	90 95       	com	r25
     1a1a:	89 0f       	add	r24, r25
     1a1c:	80 83       	st	Z, r24
-        y -= ((u8g_dev_arg_pixel_t *)arg)->y; 
-        y--;
     1a1e:	d1 82       	std	Z+1, r13	; 0x01
-        
-        x = u8g_GetWidthLL(u8g, rotation_chain);
     1a20:	15 c0       	rjmp	.+42     	; 0x1a4c <u8g_dev_rot180_fn+0xfe>
     1a22:	b7 01       	movw	r22, r14
     1a24:	c8 01       	movw	r24, r16
@@ -4988,21 +3389,10 @@ uint8_t u8g_dev_rot180_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     1a28:	be dd       	rcall	.-1156   	; 0x15a6 <u8g_GetHeightLL>
     1a2a:	f4 01       	movw	r30, r8
     1a2c:	d1 80       	ldd	r13, Z+1	; 0x01
-        x -= ((u8g_dev_arg_pixel_t *)arg)->x; 
-        x--;
     1a2e:	d0 94       	com	r13
-        
-        ((u8g_dev_arg_pixel_t *)arg)->x = x;
     1a30:	d8 0e       	add	r13, r24
-        ((u8g_dev_arg_pixel_t *)arg)->y = y;
     1a32:	b7 01       	movw	r22, r14
     1a34:	c8 01       	movw	r24, r16
-    case U8G_DEV_MSG_SET_8PIXEL:
-    case U8G_DEV_MSG_SET_4TPIXEL:
-      {
-        u8g_uint_t x, y;
-        
-        y = u8g_GetHeightLL(u8g, rotation_chain);
     1a36:	a9 dd       	rcall	.-1198   	; 0x158a <u8g_GetWidthLL>
     1a38:	f4 01       	movw	r30, r8
     1a3a:	90 81       	ld	r25, Z
@@ -5011,11 +3401,7 @@ uint8_t u8g_dev_rot180_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     1a40:	80 83       	st	Z, r24
     1a42:	d1 82       	std	Z+1, r13	; 0x01
     1a44:	83 81       	ldd	r24, Z+3	; 0x03
-        y -= ((u8g_dev_arg_pixel_t *)arg)->y; 
-        y--;
     1a46:	8e 5f       	subi	r24, 0xFE	; 254
-        
-        x = u8g_GetWidthLL(u8g, rotation_chain);
     1a48:	83 70       	andi	r24, 0x03	; 3
     1a4a:	83 83       	std	Z+3, r24	; 0x03
     1a4c:	94 01       	movw	r18, r8
@@ -5023,40 +3409,22 @@ uint8_t u8g_dev_rot180_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     1a50:	b7 01       	movw	r22, r14
     1a52:	c8 01       	movw	r24, r16
     1a54:	0e dd       	rcall	.-1508   	; 0x1472 <u8g_call_dev_fn>
-        x -= ((u8g_dev_arg_pixel_t *)arg)->x; 
-        x--;
     1a56:	81 e0       	ldi	r24, 0x01	; 1
-        
-        ((u8g_dev_arg_pixel_t *)arg)->x = x;
     1a58:	0f 90       	pop	r0
-        ((u8g_dev_arg_pixel_t *)arg)->y = y;
     1a5a:	df 91       	pop	r29
-        ((u8g_dev_arg_pixel_t *)arg)->dir+=2;
     1a5c:	cf 91       	pop	r28
     1a5e:	1f 91       	pop	r17
-        ((u8g_dev_arg_pixel_t *)arg)->dir &= 3;
     1a60:	0f 91       	pop	r16
     1a62:	ff 90       	pop	r15
-      }
-      u8g_call_dev_fn(u8g, rotation_chain, msg, arg);
     1a64:	ef 90       	pop	r14
     1a66:	df 90       	pop	r13
     1a68:	cf 90       	pop	r12
     1a6a:	bf 90       	pop	r11
     1a6c:	9f 90       	pop	r9
     1a6e:	8f 90       	pop	r8
-      break;
-  }
-  return 1;
     1a70:	08 95       	ret
 
 00001a72 <u8g_SetRot180>:
-  u8g_UpdateDimension(u8g);
-}
-
-void u8g_SetRot180(u8g_t *u8g)
-{
-  if ( u8g->dev != &u8g_dev_rot )
     1a72:	fc 01       	movw	r30, r24
     1a74:	22 81       	ldd	r18, Z+2	; 0x02
     1a76:	33 81       	ldd	r19, Z+3	; 0x03
@@ -5064,32 +3432,20 @@ void u8g_SetRot180(u8g_t *u8g)
     1a7a:	2f 36       	cpi	r18, 0x6F	; 111
     1a7c:	3f 07       	cpc	r19, r31
     1a7e:	49 f0       	breq	.+18     	; 0x1a92 <u8g_SetRot180+0x20>
-  {
-    u8g_dev_rot.dev_mem = u8g->dev;
     1a80:	30 93 72 01 	sts	0x0172, r19
     1a84:	20 93 71 01 	sts	0x0171, r18
-    u8g->dev = &u8g_dev_rot;
     1a88:	2f e6       	ldi	r18, 0x6F	; 111
     1a8a:	31 e0       	ldi	r19, 0x01	; 1
     1a8c:	fc 01       	movw	r30, r24
     1a8e:	33 83       	std	Z+3, r19	; 0x03
     1a90:	22 83       	std	Z+2, r18	; 0x02
-  }
-  u8g_dev_rot.dev_fn = u8g_dev_rot180_fn;
     1a92:	27 ea       	ldi	r18, 0xA7	; 167
     1a94:	3c e0       	ldi	r19, 0x0C	; 12
     1a96:	30 93 70 01 	sts	0x0170, r19
     1a9a:	20 93 6f 01 	sts	0x016F, r18
-  u8g_UpdateDimension(u8g);
     1a9e:	95 cd       	rjmp	.-1238   	; 0x15ca <u8g_UpdateDimension>
 
 00001aa0 <u8g_dev_scale_2x2_fn>:
-  u8g_UpdateDimension(u8g);
-}
-
-
-uint8_t u8g_dev_scale_2x2_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
-{
     1aa0:	a1 e0       	ldi	r26, 0x01	; 1
     1aa2:	b0 e0       	ldi	r27, 0x00	; 0
     1aa4:	e5 e5       	ldi	r30, 0x55	; 85
@@ -5098,16 +3454,9 @@ uint8_t u8g_dev_scale_2x2_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     1aaa:	8c 01       	movw	r16, r24
     1aac:	39 01       	movw	r6, r18
     1aae:	fb 01       	movw	r30, r22
-  u8g_dev_t *chain = (u8g_dev_t *)(dev->dev_mem);
     1ab0:	e2 80       	ldd	r14, Z+2	; 0x02
     1ab2:	f3 80       	ldd	r15, Z+3	; 0x03
     1ab4:	4b 33       	cpi	r20, 0x3B	; 59
-  uint16_t scaled_pixel;
-  uint8_t i;
-  uint8_t dir;
-  u8g_uint_t x, y, xx,yy;
-  
-  switch(msg)
     1ab6:	09 f4       	brne	.+2      	; 0x1aba <u8g_dev_scale_2x2_fn+0x1a>
     1ab8:	4d c0       	rjmp	.+154    	; 0x1b54 <u8g_dev_scale_2x2_fn+0xb4>
     1aba:	28 f4       	brcc	.+10     	; 0x1ac6 <u8g_dev_scale_2x2_fn+0x26>
@@ -5121,24 +3470,16 @@ uint8_t u8g_dev_scale_2x2_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     1aca:	47 34       	cpi	r20, 0x47	; 71
     1acc:	41 f0       	breq	.+16     	; 0x1ade <u8g_dev_scale_2x2_fn+0x3e>
     1ace:	93 01       	movw	r18, r6
-  {
-    default:
-      return u8g_call_dev_fn(u8g, chain, msg, arg);
     1ad0:	b7 01       	movw	r22, r14
     1ad2:	c8 01       	movw	r24, r16
     1ad4:	ce dc       	rcall	.-1636   	; 0x1472 <u8g_call_dev_fn>
     1ad6:	a2 c0       	rjmp	.+324    	; 0x1c1c <u8g_dev_scale_2x2_fn+0x17c>
     1ad8:	b7 01       	movw	r22, r14
     1ada:	57 dd       	rcall	.-1362   	; 0x158a <u8g_GetWidthLL>
-    case U8G_DEV_MSG_GET_WIDTH:
-      *((u8g_uint_t *)arg) = u8g_GetWidthLL(u8g, chain) / 2;
     1adc:	02 c0       	rjmp	.+4      	; 0x1ae2 <u8g_dev_scale_2x2_fn+0x42>
     1ade:	b7 01       	movw	r22, r14
     1ae0:	62 dd       	rcall	.-1340   	; 0x15a6 <u8g_GetHeightLL>
     1ae2:	86 95       	lsr	r24
-      break;
-    case U8G_DEV_MSG_GET_HEIGHT:
-      *((u8g_uint_t *)arg) = u8g_GetHeightLL(u8g, chain) / 2;
     1ae4:	f3 01       	movw	r30, r6
     1ae6:	80 83       	st	Z, r24
     1ae8:	98 c0       	rjmp	.+304    	; 0x1c1a <u8g_dev_scale_2x2_fn+0x17a>
@@ -5146,189 +3487,100 @@ uint8_t u8g_dev_scale_2x2_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     1aec:	b7 01       	movw	r22, r14
     1aee:	c1 dc       	rcall	.-1662   	; 0x1472 <u8g_call_dev_fn>
     1af0:	f3 01       	movw	r30, r6
-      break;
-    case U8G_DEV_MSG_GET_PAGE_BOX:
-      /* get page size from next device in the chain */
-      u8g_call_dev_fn(u8g, chain, msg, arg);
     1af2:	80 81       	ld	r24, Z
     1af4:	86 95       	lsr	r24
     1af6:	80 83       	st	Z, r24
     1af8:	82 81       	ldd	r24, Z+2	; 0x02
-      ((u8g_box_t *)arg)->x0 /= 2;
     1afa:	86 95       	lsr	r24
     1afc:	82 83       	std	Z+2, r24	; 0x02
     1afe:	81 81       	ldd	r24, Z+1	; 0x01
     1b00:	86 95       	lsr	r24
-      ((u8g_box_t *)arg)->x1 /= 2;
     1b02:	81 83       	std	Z+1, r24	; 0x01
     1b04:	83 81       	ldd	r24, Z+3	; 0x03
     1b06:	86 95       	lsr	r24
-      ((u8g_box_t *)arg)->y0 /= 2;
     1b08:	83 83       	std	Z+3, r24	; 0x03
     1b0a:	87 c0       	rjmp	.+270    	; 0x1c1a <u8g_dev_scale_2x2_fn+0x17a>
     1b0c:	f9 01       	movw	r30, r18
-      ((u8g_box_t *)arg)->y1 /= 2;
     1b0e:	c0 80       	ld	r12, Z
     1b10:	cc 0c       	add	r12, r12
     1b12:	d1 80       	ldd	r13, Z+1	; 0x01
     1b14:	dd 0c       	add	r13, r13
-      return 1;
-    case U8G_DEV_MSG_SET_PIXEL:
-      x = ((u8g_dev_arg_pixel_t *)arg)->x;
     1b16:	c0 82       	st	Z, r12
     1b18:	d1 82       	std	Z+1, r13	; 0x01
-      x *= 2;
     1b1a:	42 e3       	ldi	r20, 0x32	; 50
-      y = ((u8g_dev_arg_pixel_t *)arg)->y;
     1b1c:	b7 01       	movw	r22, r14
-      y *= 2;
     1b1e:	a9 dc       	rcall	.-1710   	; 0x1472 <u8g_call_dev_fn>
-      ((u8g_dev_arg_pixel_t *)arg)->x = x;
     1b20:	bb 24       	eor	r11, r11
-      ((u8g_dev_arg_pixel_t *)arg)->y = y;
     1b22:	b3 94       	inc	r11
-      u8g_call_dev_fn(u8g, chain, msg, arg);
     1b24:	bc 0c       	add	r11, r12
     1b26:	f3 01       	movw	r30, r6
     1b28:	b0 82       	st	Z, r11
     1b2a:	d1 82       	std	Z+1, r13	; 0x01
-      x++;
     1b2c:	93 01       	movw	r18, r6
     1b2e:	42 e3       	ldi	r20, 0x32	; 50
     1b30:	b7 01       	movw	r22, r14
-      ((u8g_dev_arg_pixel_t *)arg)->x = x;
     1b32:	c8 01       	movw	r24, r16
     1b34:	9e dc       	rcall	.-1732   	; 0x1472 <u8g_call_dev_fn>
-      ((u8g_dev_arg_pixel_t *)arg)->y = y;
     1b36:	d3 94       	inc	r13
-      u8g_call_dev_fn(u8g, chain, msg, arg);
     1b38:	f3 01       	movw	r30, r6
     1b3a:	b0 82       	st	Z, r11
     1b3c:	d1 82       	std	Z+1, r13	; 0x01
     1b3e:	93 01       	movw	r18, r6
     1b40:	42 e3       	ldi	r20, 0x32	; 50
     1b42:	b7 01       	movw	r22, r14
-      y++;
     1b44:	c8 01       	movw	r24, r16
-      ((u8g_dev_arg_pixel_t *)arg)->x = x;
     1b46:	95 dc       	rcall	.-1750   	; 0x1472 <u8g_call_dev_fn>
     1b48:	f3 01       	movw	r30, r6
-      ((u8g_dev_arg_pixel_t *)arg)->y = y;
     1b4a:	c0 82       	st	Z, r12
-      u8g_call_dev_fn(u8g, chain, msg, arg);
     1b4c:	d1 82       	std	Z+1, r13	; 0x01
     1b4e:	93 01       	movw	r18, r6
     1b50:	42 e3       	ldi	r20, 0x32	; 50
     1b52:	60 c0       	rjmp	.+192    	; 0x1c14 <u8g_dev_scale_2x2_fn+0x174>
     1b54:	f9 01       	movw	r30, r18
     1b56:	92 81       	ldd	r25, Z+2	; 0x02
-      x--;
-      ((u8g_dev_arg_pixel_t *)arg)->x = x;
     1b58:	c3 80       	ldd	r12, Z+3	; 0x03
     1b5a:	88 e0       	ldi	r24, 0x08	; 8
-      ((u8g_dev_arg_pixel_t *)arg)->y = y;
     1b5c:	a1 2c       	mov	r10, r1
-      u8g_call_dev_fn(u8g, chain, msg, arg);    
     1b5e:	b1 2c       	mov	r11, r1
     1b60:	aa 0c       	add	r10, r10
     1b62:	bb 1c       	adc	r11, r11
-      break;
-    case U8G_DEV_MSG_SET_8PIXEL:
-      pixel = ((u8g_dev_arg_pixel_t *)arg)->pixel;
     1b64:	aa 0c       	add	r10, r10
     1b66:	bb 1c       	adc	r11, r11
-      dir = ((u8g_dev_arg_pixel_t *)arg)->dir;
     1b68:	97 ff       	sbrs	r25, 7
     1b6a:	02 c0       	rjmp	.+4      	; 0x1b70 <u8g_dev_scale_2x2_fn+0xd0>
-      scaled_pixel = 0;
     1b6c:	f3 e0       	ldi	r31, 0x03	; 3
     1b6e:	af 2a       	or	r10, r31
-      for( i = 0; i < 8; i++ )
-      {
-	scaled_pixel<<=2;
     1b70:	99 0f       	add	r25, r25
     1b72:	81 50       	subi	r24, 0x01	; 1
     1b74:	a9 f7       	brne	.-22     	; 0x1b60 <u8g_dev_scale_2x2_fn+0xc0>
     1b76:	f3 01       	movw	r30, r6
-	if ( pixel & 128 )
     1b78:	d0 80       	ld	r13, Z
     1b7a:	dd 0c       	add	r13, r13
-	{
-	  scaled_pixel |= 3;
     1b7c:	51 81       	ldd	r21, Z+1	; 0x01
     1b7e:	55 0f       	add	r21, r21
-	}
-	pixel<<=1;
     1b80:	c0 fe       	sbrs	r12, 0
     1b82:	05 c0       	rjmp	.+10     	; 0x1b8e <u8g_dev_scale_2x2_fn+0xee>
-      break;
-    case U8G_DEV_MSG_SET_8PIXEL:
-      pixel = ((u8g_dev_arg_pixel_t *)arg)->pixel;
-      dir = ((u8g_dev_arg_pixel_t *)arg)->dir;
-      scaled_pixel = 0;
-      for( i = 0; i < 8; i++ )
     1b84:	88 24       	eor	r8, r8
-	  scaled_pixel |= 3;
-	}
-	pixel<<=1;
-      }
-      x = ((u8g_dev_arg_pixel_t *)arg)->x;
-      x *= 2;
     1b86:	83 94       	inc	r8
     1b88:	8d 0c       	add	r8, r13
     1b8a:	95 2e       	mov	r9, r21
-      xx = x;
-      y = ((u8g_dev_arg_pixel_t *)arg)->y;
-      y *= 2;
     1b8c:	04 c0       	rjmp	.+8      	; 0x1b96 <u8g_dev_scale_2x2_fn+0xf6>
     1b8e:	99 24       	eor	r9, r9
-      yy = y;
-      if ( ((u8g_dev_arg_pixel_t *)arg)->dir & 1 )
     1b90:	93 94       	inc	r9
     1b92:	95 0e       	add	r9, r21
-      {
-	xx++;
     1b94:	8d 2c       	mov	r8, r13
     1b96:	f3 01       	movw	r30, r6
     1b98:	b2 82       	std	Z+2, r11	; 0x02
-      x = ((u8g_dev_arg_pixel_t *)arg)->x;
-      x *= 2;
-      xx = x;
-      y = ((u8g_dev_arg_pixel_t *)arg)->y;
-      y *= 2;
-      yy = y;
     1b9a:	d0 82       	st	Z, r13
     1b9c:	51 83       	std	Z+1, r21	; 0x01
-      {
-	xx++;
-      }
-      else
-      {
-	yy++;
     1b9e:	93 01       	movw	r18, r6
     1ba0:	4b e3       	ldi	r20, 0x3B	; 59
     1ba2:	b7 01       	movw	r22, r14
-	}
-	pixel<<=1;
-      }
-      x = ((u8g_dev_arg_pixel_t *)arg)->x;
-      x *= 2;
-      xx = x;
     1ba4:	c8 01       	movw	r24, r16
-      else
-      {
-	yy++;
-      }
-      
-      ((u8g_dev_arg_pixel_t *)arg)->pixel = scaled_pixel>>8;      
     1ba6:	59 83       	std	Y+1, r21	; 0x01
     1ba8:	64 dc       	rcall	.-1848   	; 0x1472 <u8g_call_dev_fn>
-      ((u8g_dev_arg_pixel_t *)arg)->x = x;
     1baa:	f3 01       	movw	r30, r6
-      ((u8g_dev_arg_pixel_t *)arg)->y = y;
     1bac:	80 82       	st	Z, r8
-      ((u8g_dev_arg_pixel_t *)arg)->dir = dir;
-      u8g_call_dev_fn(u8g, chain, msg, arg);    
     1bae:	91 82       	std	Z+1, r9	; 0x01
     1bb0:	c3 82       	std	Z+3, r12	; 0x03
     1bb2:	93 01       	movw	r18, r6
@@ -5336,28 +3588,18 @@ uint8_t u8g_dev_scale_2x2_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     1bb6:	b7 01       	movw	r22, r14
     1bb8:	c8 01       	movw	r24, r16
     1bba:	5b dc       	rcall	.-1866   	; 0x1472 <u8g_call_dev_fn>
-
-      
-      ((u8g_dev_arg_pixel_t *)arg)->x = xx;
     1bbc:	f3 01       	movw	r30, r6
     1bbe:	a2 82       	std	Z+2, r10	; 0x02
-      ((u8g_dev_arg_pixel_t *)arg)->y = yy;
     1bc0:	59 81       	ldd	r21, Y+1	; 0x01
-      ((u8g_dev_arg_pixel_t *)arg)->dir = dir;
     1bc2:	f1 e0       	ldi	r31, 0x01	; 1
-      u8g_call_dev_fn(u8g, chain, msg, arg);    
     1bc4:	cf 16       	cp	r12, r31
     1bc6:	81 f0       	breq	.+32     	; 0x1be8 <u8g_dev_scale_2x2_fn+0x148>
     1bc8:	cf 16       	cp	r12, r31
     1bca:	50 f0       	brcs	.+20     	; 0x1be0 <u8g_dev_scale_2x2_fn+0x140>
     1bcc:	22 e0       	ldi	r18, 0x02	; 2
     1bce:	c2 16       	cp	r12, r18
-      
-      ((u8g_dev_arg_pixel_t *)arg)->pixel = scaled_pixel&255;
     1bd0:	79 f0       	breq	.+30     	; 0x1bf0 <u8g_dev_scale_2x2_fn+0x150>
     1bd2:	83 e0       	ldi	r24, 0x03	; 3
-      //((u8g_dev_arg_pixel_t *)arg)->pixel = 0x00;
-      switch(dir)
     1bd4:	c8 12       	cpse	r12, r24
     1bd6:	0f c0       	rjmp	.+30     	; 0x1bf6 <u8g_dev_scale_2x2_fn+0x156>
     1bd8:	58 50       	subi	r21, 0x08	; 8
@@ -5370,98 +3612,50 @@ uint8_t u8g_dev_scale_2x2_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg)
     1be6:	07 c0       	rjmp	.+14     	; 0x1bf6 <u8g_dev_scale_2x2_fn+0x156>
     1be8:	58 5f       	subi	r21, 0xF8	; 248
     1bea:	f8 e0       	ldi	r31, 0x08	; 8
-	case 2:
-	  x-=8;
-	  xx-=8;
-	  break;
-	case 3:
-	  y-=8;
     1bec:	9f 0e       	add	r9, r31
-	  yy-=8;
     1bee:	03 c0       	rjmp	.+6      	; 0x1bf6 <u8g_dev_scale_2x2_fn+0x156>
     1bf0:	28 ef       	ldi	r18, 0xF8	; 248
-	  break;
     1bf2:	d2 0e       	add	r13, r18
-      ((u8g_dev_arg_pixel_t *)arg)->pixel = scaled_pixel&255;
-      //((u8g_dev_arg_pixel_t *)arg)->pixel = 0x00;
-      switch(dir)
-      {
-	case 0:
- 	  x+=8;
     1bf4:	82 0e       	add	r8, r18
     1bf6:	f3 01       	movw	r30, r6
-	  xx+=8;
     1bf8:	d0 82       	st	Z, r13
-	  break;
     1bfa:	51 83       	std	Z+1, r21	; 0x01
-	case 1:
-	  y+=8;
     1bfc:	c3 82       	std	Z+3, r12	; 0x03
-	  yy+=8;
     1bfe:	93 01       	movw	r18, r6
     1c00:	4b e3       	ldi	r20, 0x3B	; 59
-	  break;
     1c02:	b7 01       	movw	r22, r14
-	case 2:
-	  x-=8;
     1c04:	c8 01       	movw	r24, r16
     1c06:	35 dc       	rcall	.-1942   	; 0x1472 <u8g_call_dev_fn>
-	  xx-=8;
     1c08:	f3 01       	movw	r30, r6
-	case 3:
-	  y-=8;
-	  yy-=8;
-	  break;
-      }
-      ((u8g_dev_arg_pixel_t *)arg)->x = x;
     1c0a:	80 82       	st	Z, r8
     1c0c:	91 82       	std	Z+1, r9	; 0x01
-      ((u8g_dev_arg_pixel_t *)arg)->y = y;
     1c0e:	c3 82       	std	Z+3, r12	; 0x03
-      ((u8g_dev_arg_pixel_t *)arg)->dir = dir;
     1c10:	93 01       	movw	r18, r6
-      u8g_call_dev_fn(u8g, chain, msg, arg);    
     1c12:	4b e3       	ldi	r20, 0x3B	; 59
     1c14:	b7 01       	movw	r22, r14
     1c16:	c8 01       	movw	r24, r16
     1c18:	2c dc       	rcall	.-1960   	; 0x1472 <u8g_call_dev_fn>
     1c1a:	81 e0       	ldi	r24, 0x01	; 1
     1c1c:	21 96       	adiw	r28, 0x01	; 1
-      
-      ((u8g_dev_arg_pixel_t *)arg)->x = xx;
     1c1e:	ee e0       	ldi	r30, 0x0E	; 14
     1c20:	51 c4       	rjmp	.+2210   	; 0x24c4 <__epilogue_restores__+0x8>
 
 00001c22 <u8g_UndoScale>:
-
-u8g_dev_t u8g_dev_scale = { u8g_dev_scale_2x2_fn, NULL, NULL };
-
-void u8g_UndoScale(u8g_t *u8g)
-{
-  if ( u8g->dev != &u8g_dev_scale )
     1c22:	fc 01       	movw	r30, r24
     1c24:	22 81       	ldd	r18, Z+2	; 0x02
     1c26:	33 81       	ldd	r19, Z+3	; 0x03
     1c28:	25 57       	subi	r18, 0x75	; 117
     1c2a:	31 40       	sbci	r19, 0x01	; 1
     1c2c:	41 f4       	brne	.+16     	; 0x1c3e <u8g_UndoScale+0x1c>
-    return;
-  u8g->dev = u8g_dev_scale.dev_mem;
     1c2e:	20 91 77 01 	lds	r18, 0x0177
     1c32:	30 91 78 01 	lds	r19, 0x0178
     1c36:	fc 01       	movw	r30, r24
     1c38:	33 83       	std	Z+3, r19	; 0x03
     1c3a:	22 83       	std	Z+2, r18	; 0x02
-  u8g_UpdateDimension(u8g);
     1c3c:	c6 cc       	rjmp	.-1652   	; 0x15ca <u8g_UpdateDimension>
     1c3e:	08 95       	ret
 
 00001c40 <u8g_SetScale2x2>:
-}
-
-void u8g_SetScale2x2(u8g_t *u8g)
-{
-  if ( u8g->dev != &u8g_dev_scale )
     1c40:	fc 01       	movw	r30, r24
     1c42:	22 81       	ldd	r18, Z+2	; 0x02
     1c44:	33 81       	ldd	r19, Z+3	; 0x03
@@ -5469,41 +3663,23 @@ void u8g_SetScale2x2(u8g_t *u8g)
     1c48:	25 37       	cpi	r18, 0x75	; 117
     1c4a:	3f 07       	cpc	r19, r31
     1c4c:	49 f0       	breq	.+18     	; 0x1c60 <u8g_SetScale2x2+0x20>
-  {
-    u8g_dev_scale.dev_mem = u8g->dev;
     1c4e:	30 93 78 01 	sts	0x0178, r19
     1c52:	20 93 77 01 	sts	0x0177, r18
-    u8g->dev = &u8g_dev_scale;
     1c56:	25 e7       	ldi	r18, 0x75	; 117
     1c58:	31 e0       	ldi	r19, 0x01	; 1
     1c5a:	fc 01       	movw	r30, r24
     1c5c:	33 83       	std	Z+3, r19	; 0x03
     1c5e:	22 83       	std	Z+2, r18	; 0x02
-  }
-  u8g_dev_scale.dev_fn = u8g_dev_scale_2x2_fn;
     1c60:	20 e5       	ldi	r18, 0x50	; 80
     1c62:	3d e0       	ldi	r19, 0x0D	; 13
     1c64:	30 93 76 01 	sts	0x0176, r19
     1c68:	20 93 75 01 	sts	0x0175, r18
-  u8g_UpdateDimension(u8g);
     1c6c:	ae cc       	rjmp	.-1700   	; 0x15ca <u8g_UpdateDimension>
 
 00001c6e <u8g_state_dummy_cb>:
-
-#include <stddef.h>
-#include "u8g.h"
-
-void u8g_state_dummy_cb(uint8_t msg)
-{
     1c6e:	08 95       	ret
 
 00001c70 <mpu6050_readBytes.part.0>:
-volatile uint8_t buffer[14];
-
-/*
- * read bytes from chip register
- */
-int8_t mpu6050_readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
     1c70:	8f 92       	push	r8
     1c72:	9f 92       	push	r9
     1c74:	af 92       	push	r10
@@ -5520,17 +3696,11 @@ int8_t mpu6050_readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
     1c8a:	de b7       	in	r29, 0x3e	; 62
     1c8c:	18 2f       	mov	r17, r24
     1c8e:	f6 2e       	mov	r15, r22
-	uint8_t i = 0;
-	int8_t count = 0;
-	if(length > 0) {
-		//request register
-		i2c_start(MPU6050_ADDR | I2C_WRITE);
     1c90:	80 ed       	ldi	r24, 0xD0	; 208
     1c92:	49 83       	std	Y+1, r20	; 0x01
     1c94:	5a 83       	std	Y+2, r21	; 0x02
     1c96:	36 d3       	rcall	.+1644   	; 0x2304 <i2c_start>
     1c98:	81 2f       	mov	r24, r17
-		i2c_write(regAddr);
     1c9a:	80 d3       	rcall	.+1792   	; 0x239c <i2c_write>
     1c9c:	85 e3       	ldi	r24, 0x35	; 53
     1c9e:	8a 95       	dec	r24
@@ -5538,9 +3708,6 @@ int8_t mpu6050_readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
     1ca2:	00 00       	nop
     1ca4:	81 ed       	ldi	r24, 0xD1	; 209
     1ca6:	2e d3       	rcall	.+1628   	; 0x2304 <i2c_start>
-		_delay_us(10);
-		//read data
-		i2c_start(MPU6050_ADDR | I2C_READ);
     1ca8:	49 81       	ldd	r20, Y+1	; 0x01
     1caa:	84 2e       	mov	r8, r20
     1cac:	5a 81       	ldd	r21, Y+2	; 0x02
@@ -5552,33 +3719,19 @@ int8_t mpu6050_readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
     1cb8:	56 01       	movw	r10, r12
     1cba:	e1 e0       	ldi	r30, 0x01	; 1
     1cbc:	ae 1a       	sub	r10, r30
-		for(i=0; i<length; i++) {
-			count++;
-			if(i==length-1)
     1cbe:	b1 08       	sbc	r11, r1
     1cc0:	0c 15       	cp	r16, r12
     1cc2:	1d 05       	cpc	r17, r13
     1cc4:	71 f0       	breq	.+28     	; 0x1ce2 <mpu6050_readBytes.part.0+0x72>
-		i2c_start(MPU6050_ADDR | I2C_WRITE);
-		i2c_write(regAddr);
-		_delay_us(10);
-		//read data
-		i2c_start(MPU6050_ADDR | I2C_READ);
-		for(i=0; i<length; i++) {
     1cc6:	0a 15       	cp	r16, r10
     1cc8:	1b 05       	cpc	r17, r11
     1cca:	11 f4       	brne	.+4      	; 0x1cd0 <mpu6050_readBytes.part.0+0x60>
-			count++;
-			if(i==length-1)
     1ccc:	a0 d3       	rcall	.+1856   	; 0x240e <i2c_readNak>
     1cce:	01 c0       	rjmp	.+2      	; 0x1cd2 <mpu6050_readBytes.part.0+0x62>
     1cd0:	85 d3       	rcall	.+1802   	; 0x23dc <i2c_readAck>
-				data[i] = i2c_readNak();
     1cd2:	f4 01       	movw	r30, r8
     1cd4:	80 83       	st	Z, r24
     1cd6:	0f 5f       	subi	r16, 0xFF	; 255
-			else
-				data[i] = i2c_readAck();
     1cd8:	1f 4f       	sbci	r17, 0xFF	; 255
     1cda:	ff ef       	ldi	r31, 0xFF	; 255
     1cdc:	8f 1a       	sub	r8, r31
@@ -5589,13 +3742,8 @@ int8_t mpu6050_readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
     1ce6:	0f 90       	pop	r0
     1ce8:	0f 90       	pop	r0
     1cea:	df 91       	pop	r29
-		}
-		i2c_stop();
     1cec:	cf 91       	pop	r28
     1cee:	1f 91       	pop	r17
-	}
-	return count;
-}
     1cf0:	0f 91       	pop	r16
     1cf2:	ff 90       	pop	r15
     1cf4:	df 90       	pop	r13
@@ -5607,12 +3755,6 @@ int8_t mpu6050_readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
     1d00:	08 95       	ret
 
 00001d02 <mpu6050_writeBytes.part.1>:
-}
-
-/*
- * write bytes to chip register
- */
-void mpu6050_writeBytes(uint8_t regAddr, uint8_t length, uint8_t* data) {
     1d02:	a2 e0       	ldi	r26, 0x02	; 2
     1d04:	b0 e0       	ldi	r27, 0x00	; 0
     1d06:	e6 e8       	ldi	r30, 0x86	; 134
@@ -5621,15 +3763,11 @@ void mpu6050_writeBytes(uint8_t regAddr, uint8_t length, uint8_t* data) {
     1d0c:	08 2f       	mov	r16, r24
     1d0e:	16 2f       	mov	r17, r22
     1d10:	80 ed       	ldi	r24, 0xD0	; 208
-	if(length > 0) {
-		//write data
-		i2c_start(MPU6050_ADDR | I2C_WRITE);
     1d12:	49 83       	std	Y+1, r20	; 0x01
     1d14:	5a 83       	std	Y+2, r21	; 0x02
     1d16:	f6 d2       	rcall	.+1516   	; 0x2304 <i2c_start>
     1d18:	80 2f       	mov	r24, r16
     1d1a:	40 d3       	rcall	.+1664   	; 0x239c <i2c_write>
-		i2c_write(regAddr); //reg
     1d1c:	49 81       	ldd	r20, Y+1	; 0x01
     1d1e:	04 2f       	mov	r16, r20
     1d20:	e4 2e       	mov	r14, r20
@@ -5640,10 +3778,8 @@ void mpu6050_writeBytes(uint8_t regAddr, uint8_t length, uint8_t* data) {
     1d2a:	81 17       	cp	r24, r17
     1d2c:	28 f4       	brcc	.+10     	; 0x1d38 <mpu6050_writeBytes.part.1+0x36>
     1d2e:	f7 01       	movw	r30, r14
-		for (uint8_t i = 0; i < length; i++) {
     1d30:	81 91       	ld	r24, Z+
     1d32:	7f 01       	movw	r14, r30
-			i2c_write((uint8_t) data[i]);
     1d34:	33 d3       	rcall	.+1638   	; 0x239c <i2c_write>
     1d36:	f7 cf       	rjmp	.-18     	; 0x1d26 <mpu6050_writeBytes.part.1+0x24>
     1d38:	22 d3       	rcall	.+1604   	; 0x237e <i2c_stop>
@@ -5652,12 +3788,6 @@ void mpu6050_writeBytes(uint8_t regAddr, uint8_t length, uint8_t* data) {
     1d3e:	ca c3       	rjmp	.+1940   	; 0x24d4 <__epilogue_restores__+0x18>
 
 00001d40 <mpu6050_readBytes>:
- * read bytes from chip register
- */
-int8_t mpu6050_readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
-	uint8_t i = 0;
-	int8_t count = 0;
-	if(length > 0) {
     1d40:	66 23       	and	r22, r22
     1d42:	09 f0       	breq	.+2      	; 0x1d46 <mpu6050_readBytes+0x6>
     1d44:	95 cf       	rjmp	.-214    	; 0x1c70 <mpu6050_readBytes.part.0>
@@ -5665,23 +3795,11 @@ int8_t mpu6050_readBytes(uint8_t regAddr, uint8_t length, uint8_t *data) {
     1d48:	08 95       	ret
 
 00001d4a <mpu6050_readByte>:
-}
-
-/*
- * read 1 byte from chip register
- */
-int8_t mpu6050_readByte(uint8_t regAddr, uint8_t *data) {
     1d4a:	ab 01       	movw	r20, r22
     1d4c:	61 e0       	ldi	r22, 0x01	; 1
     1d4e:	90 cf       	rjmp	.-224    	; 0x1c70 <mpu6050_readBytes.part.0>
 
 00001d50 <mpu6050_writeByte>:
-}
-
-/*
- * write 1 byte to chip register
- */
-void mpu6050_writeByte(uint8_t regAddr, uint8_t data) {
     1d50:	a1 e0       	ldi	r26, 0x01	; 1
     1d52:	b0 e0       	ldi	r27, 0x00	; 0
     1d54:	ed ea       	ldi	r30, 0xAD	; 173
@@ -5695,17 +3813,9 @@ void mpu6050_writeByte(uint8_t regAddr, uint8_t data) {
     1d64:	ce df       	rcall	.-100    	; 0x1d02 <mpu6050_writeBytes.part.1>
     1d66:	21 96       	adiw	r28, 0x01	; 1
     1d68:	e2 e0       	ldi	r30, 0x02	; 2
-    return mpu6050_writeBytes(regAddr, 1, &data);
-}
     1d6a:	b8 c3       	rjmp	.+1904   	; 0x24dc <__epilogue_restores__+0x20>
 
 00001d6c <mpu6050_writeBits.part.3>:
-}
-
-/*
- * write bit/bits to chip register
- */
-void mpu6050_writeBits(uint8_t regAddr, uint8_t bitStart, uint8_t length, uint8_t data) {
     1d6c:	a2 e0       	ldi	r26, 0x02	; 2
     1d6e:	b0 e0       	ldi	r27, 0x00	; 0
     1d70:	eb eb       	ldi	r30, 0xBB	; 187
@@ -5715,14 +3825,7 @@ void mpu6050_writeBits(uint8_t regAddr, uint8_t bitStart, uint8_t length, uint8_
     1d78:	16 2f       	mov	r17, r22
     1d7a:	f4 2e       	mov	r15, r20
     1d7c:	19 82       	std	Y+1, r1	; 0x01
-    // 00011100 mask byte
-    // 10101111 original value (sample)
-    // 10100011 original & ~mask
-    // 10101011 masked | value
-	if(length > 0) {
-		uint8_t b = 0;
     1d7e:	be 01       	movw	r22, r28
-		if (mpu6050_readByte(regAddr, &b) != 0) { //get current data
     1d80:	6f 5f       	subi	r22, 0xFF	; 255
     1d82:	7f 4f       	sbci	r23, 0xFF	; 255
     1d84:	2a 83       	std	Y+2, r18	; 0x02
@@ -5732,7 +3835,6 @@ void mpu6050_writeBits(uint8_t regAddr, uint8_t bitStart, uint8_t length, uint8_
     1d8c:	01 f1       	breq	.+64     	; 0x1dce <mpu6050_writeBits.part.3+0x62>
     1d8e:	e1 2f       	mov	r30, r17
     1d90:	f0 e0       	ldi	r31, 0x00	; 0
-			uint8_t mask = ((1 << length) - 1) << (bitStart - length + 1);
     1d92:	ef 19       	sub	r30, r15
     1d94:	f1 09       	sbc	r31, r1
     1d96:	31 96       	adiw	r30, 0x01	; 1
@@ -5752,40 +3854,22 @@ void mpu6050_writeBits(uint8_t regAddr, uint8_t bitStart, uint8_t length, uint8_
     1db2:	ea f7       	brpl	.-6      	; 0x1dae <mpu6050_writeBits.part.3+0x42>
     1db4:	01 c0       	rjmp	.+2      	; 0x1db8 <mpu6050_writeBits.part.3+0x4c>
     1db6:	22 0f       	add	r18, r18
-			data <<= (bitStart - length + 1); // shift data into correct position
     1db8:	ea 95       	dec	r30
     1dba:	ea f7       	brpl	.-6      	; 0x1db6 <mpu6050_writeBits.part.3+0x4a>
     1dbc:	64 2f       	mov	r22, r20
     1dbe:	60 95       	com	r22
-			data &= mask; // zero all non-important bits in data
-			b &= ~(mask); // zero all important bits in existing byte
     1dc0:	89 81       	ldd	r24, Y+1	; 0x01
     1dc2:	68 23       	and	r22, r24
     1dc4:	42 23       	and	r20, r18
     1dc6:	64 2b       	or	r22, r20
-	if(length > 0) {
-		uint8_t b = 0;
-		if (mpu6050_readByte(regAddr, &b) != 0) { //get current data
-			uint8_t mask = ((1 << length) - 1) << (bitStart - length + 1);
-			data <<= (bitStart - length + 1); // shift data into correct position
-			data &= mask; // zero all non-important bits in data
     1dc8:	69 83       	std	Y+1, r22	; 0x01
-			b &= ~(mask); // zero all important bits in existing byte
-			b |= data; // combine data with existing byte
     1dca:	80 2f       	mov	r24, r16
     1dcc:	c1 df       	rcall	.-126    	; 0x1d50 <mpu6050_writeByte>
-			mpu6050_writeByte(regAddr, b);
     1dce:	22 96       	adiw	r28, 0x02	; 2
     1dd0:	e5 e0       	ldi	r30, 0x05	; 5
     1dd2:	81 c3       	rjmp	.+1794   	; 0x24d6 <__epilogue_restores__+0x1a>
 
 00001dd4 <mpu6050_writeBit>:
-}
-
-/*
- * write one bit to chip register
- */
-void mpu6050_writeBit(uint8_t regAddr, uint8_t bitNum, uint8_t data) {
     1dd4:	a2 e0       	ldi	r26, 0x02	; 2
     1dd6:	b0 e0       	ldi	r27, 0x00	; 0
     1dd8:	ef ee       	ldi	r30, 0xEF	; 239
@@ -5794,8 +3878,6 @@ void mpu6050_writeBit(uint8_t regAddr, uint8_t bitNum, uint8_t data) {
     1dde:	18 2f       	mov	r17, r24
     1de0:	06 2f       	mov	r16, r22
     1de2:	be 01       	movw	r22, r28
-    uint8_t b;
-    mpu6050_readByte(regAddr, &b);
     1de4:	6f 5f       	subi	r22, 0xFF	; 255
     1de6:	7f 4f       	sbci	r23, 0xFF	; 255
     1de8:	4a 83       	std	Y+2, r20	; 0x02
@@ -5803,7 +3885,6 @@ void mpu6050_writeBit(uint8_t regAddr, uint8_t bitNum, uint8_t data) {
     1dec:	99 81       	ldd	r25, Y+1	; 0x01
     1dee:	4a 81       	ldd	r20, Y+2	; 0x02
     1df0:	44 23       	and	r20, r20
-    b = (data != 0) ? (b | (1 << bitNum)) : (b & ~(1 << bitNum));
     1df2:	49 f0       	breq	.+18     	; 0x1e06 <mpu6050_writeBit+0x32>
     1df4:	61 e0       	ldi	r22, 0x01	; 1
     1df6:	70 e0       	ldi	r23, 0x00	; 0
@@ -5826,30 +3907,17 @@ void mpu6050_writeBit(uint8_t regAddr, uint8_t bitNum, uint8_t data) {
     1e18:	69 83       	std	Y+1, r22	; 0x01
     1e1a:	81 2f       	mov	r24, r17
     1e1c:	99 df       	rcall	.-206    	; 0x1d50 <mpu6050_writeByte>
-    mpu6050_writeByte(regAddr, b);
     1e1e:	22 96       	adiw	r28, 0x02	; 2
     1e20:	e4 e0       	ldi	r30, 0x04	; 4
     1e22:	5a c3       	rjmp	.+1716   	; 0x24d8 <__epilogue_restores__+0x1c>
 
 00001e24 <mpu6050_setSleepDisabled>:
-
-/*
- * set sleep disabled
- */
-void mpu6050_setSleepDisabled() {
-	mpu6050_writeBit(MPU6050_RA_PWR_MGMT_1, MPU6050_PWR1_SLEEP_BIT, 0);
     1e24:	40 e0       	ldi	r20, 0x00	; 0
     1e26:	66 e0       	ldi	r22, 0x06	; 6
     1e28:	8b e6       	ldi	r24, 0x6B	; 107
     1e2a:	d4 cf       	rjmp	.-88     	; 0x1dd4 <mpu6050_writeBit>
 
 00001e2c <mpu6050_init>:
- * initialize the accel and gyro
- */
-void mpu6050_init() {
-	#if MPU6050_I2CINIT == 1
-	//init i2c
-	i2c_init();
     1e2c:	65 d2       	rcall	.+1226   	; 0x22f8 <i2c_init>
     1e2e:	25 e3       	ldi	r18, 0x35	; 53
     1e30:	2a 95       	dec	r18
@@ -5891,12 +3959,6 @@ void mpu6050_init() {
     1e6c:	89 e1       	ldi	r24, 0x19	; 25
     1e6e:	70 df       	rcall	.-288    	; 0x1d50 <mpu6050_writeByte>
     1e70:	23 e0       	ldi	r18, 0x03	; 3
-	//  as the clock reference for improved stability
-	mpu6050_writeBits(MPU6050_RA_PWR_MGMT_1, MPU6050_PWR1_CLKSEL_BIT, MPU6050_PWR1_CLKSEL_LENGTH, MPU6050_CLOCK_PLL_XGYRO);
-	//set DLPF bandwidth to 42Hz
-	mpu6050_writeBits(MPU6050_RA_CONFIG, MPU6050_CFG_DLPF_CFG_BIT, MPU6050_CFG_DLPF_CFG_LENGTH, MPU6050_DLPF_BW_42);
-    //set sampe rate
-	mpu6050_writeByte(MPU6050_RA_SMPLRT_DIV, 4); //1khz / (1 + 4) = 200Hz
     1e72:	42 e0       	ldi	r20, 0x02	; 2
     1e74:	64 e0       	ldi	r22, 0x04	; 4
     1e76:	8b e1       	ldi	r24, 0x1B	; 27
@@ -5908,12 +3970,6 @@ void mpu6050_init() {
     1e82:	74 cf       	rjmp	.-280    	; 0x1d6c <mpu6050_writeBits.part.3>
 
 00001e84 <mpu6050_getRawData>:
-
-//can not accept many request if we alreay have getattitude requests
-/*
- * get raw data
- */
-void mpu6050_getRawData(int16_t* ax, int16_t* ay, int16_t* az, int16_t* gx, int16_t* gy, int16_t* gz) {
     1e84:	a0 e0       	ldi	r26, 0x00	; 0
     1e86:	b0 e0       	ldi	r27, 0x00	; 0
     1e88:	e7 e4       	ldi	r30, 0x47	; 71
@@ -5924,15 +3980,12 @@ void mpu6050_getRawData(int16_t* ax, int16_t* ay, int16_t* az, int16_t* gx, int1
     1e92:	6a 01       	movw	r12, r20
     1e94:	e9 01       	movw	r28, r18
     1e96:	49 e8       	ldi	r20, 0x89	; 137
-	mpu6050_readBytes(MPU6050_RA_ACCEL_XOUT_H, 14, (uint8_t *)buffer);
     1e98:	52 e0       	ldi	r21, 0x02	; 2
     1e9a:	6e e0       	ldi	r22, 0x0E	; 14
     1e9c:	8b e3       	ldi	r24, 0x3B	; 59
     1e9e:	50 df       	rcall	.-352    	; 0x1d40 <mpu6050_readBytes>
     1ea0:	e9 e8       	ldi	r30, 0x89	; 137
     1ea2:	f2 e0       	ldi	r31, 0x02	; 2
-
-    *ax = (((int16_t)buffer[0]) << 8) | buffer[1];
     1ea4:	20 81       	ld	r18, Z
     1ea6:	81 81       	ldd	r24, Z+1	; 0x01
     1ea8:	90 e0       	ldi	r25, 0x00	; 0
@@ -5942,7 +3995,6 @@ void mpu6050_getRawData(int16_t* ax, int16_t* ay, int16_t* az, int16_t* gx, int1
     1eb0:	9c 93       	st	X, r25
     1eb2:	22 81       	ldd	r18, Z+2	; 0x02
     1eb4:	83 81       	ldd	r24, Z+3	; 0x03
-    *ay = (((int16_t)buffer[2]) << 8) | buffer[3];
     1eb6:	90 e0       	ldi	r25, 0x00	; 0
     1eb8:	92 2b       	or	r25, r18
     1eba:	d4 01       	movw	r26, r8
@@ -5950,7 +4002,6 @@ void mpu6050_getRawData(int16_t* ax, int16_t* ay, int16_t* az, int16_t* gx, int1
     1ebe:	9c 93       	st	X, r25
     1ec0:	24 81       	ldd	r18, Z+4	; 0x04
     1ec2:	85 81       	ldd	r24, Z+5	; 0x05
-    *az = (((int16_t)buffer[4]) << 8) | buffer[5];
     1ec4:	90 e0       	ldi	r25, 0x00	; 0
     1ec6:	92 2b       	or	r25, r18
     1ec8:	d6 01       	movw	r26, r12
@@ -5958,14 +4009,12 @@ void mpu6050_getRawData(int16_t* ax, int16_t* ay, int16_t* az, int16_t* gx, int1
     1ecc:	9c 93       	st	X, r25
     1ece:	20 85       	ldd	r18, Z+8	; 0x08
     1ed0:	81 85       	ldd	r24, Z+9	; 0x09
-    *gx = (((int16_t)buffer[8]) << 8) | buffer[9];
     1ed2:	90 e0       	ldi	r25, 0x00	; 0
     1ed4:	92 2b       	or	r25, r18
     1ed6:	99 83       	std	Y+1, r25	; 0x01
     1ed8:	88 83       	st	Y, r24
     1eda:	22 85       	ldd	r18, Z+10	; 0x0a
     1edc:	83 85       	ldd	r24, Z+11	; 0x0b
-    *gy = (((int16_t)buffer[10]) << 8) | buffer[11];
     1ede:	90 e0       	ldi	r25, 0x00	; 0
     1ee0:	92 2b       	or	r25, r18
     1ee2:	d8 01       	movw	r26, r16
@@ -5973,7 +4022,6 @@ void mpu6050_getRawData(int16_t* ax, int16_t* ay, int16_t* az, int16_t* gx, int1
     1ee6:	9c 93       	st	X, r25
     1ee8:	24 85       	ldd	r18, Z+12	; 0x0c
     1eea:	85 85       	ldd	r24, Z+13	; 0x0d
-    *gz = (((int16_t)buffer[12]) << 8) | buffer[13];
     1eec:	90 e0       	ldi	r25, 0x00	; 0
     1eee:	92 2b       	or	r25, r18
     1ef0:	f7 01       	movw	r30, r14
@@ -5981,16 +4029,10 @@ void mpu6050_getRawData(int16_t* ax, int16_t* ay, int16_t* az, int16_t* gx, int1
     1ef4:	80 83       	st	Z, r24
     1ef6:	cd b7       	in	r28, 0x3d	; 61
     1ef8:	de b7       	in	r29, 0x3e	; 62
-}
     1efa:	ec e0       	ldi	r30, 0x0C	; 12
     1efc:	e5 c2       	rjmp	.+1482   	; 0x24c8 <__epilogue_restores__+0xc>
 
 00001efe <mpu6050_getConvData>:
-
-/*
- * get raw data converted to g and deg/sec values
- */
-void mpu6050_getConvData(double* axg, double* ayg, double* azg, double* gxds, double* gyds, double* gzds) {
     1efe:	ac e0       	ldi	r26, 0x0C	; 12
     1f00:	b0 e0       	ldi	r27, 0x00	; 0
     1f02:	e4 e8       	ldi	r30, 0x84	; 132
@@ -6003,25 +4045,18 @@ void mpu6050_getConvData(double* axg, double* ayg, double* azg, double* gxds, do
     1f10:	28 01       	movw	r4, r16
     1f12:	17 01       	movw	r2, r14
     1f14:	1c 86       	std	Y+12, r1	; 0x0c
-	int16_t ax = 0;
     1f16:	1b 86       	std	Y+11, r1	; 0x0b
     1f18:	1a 86       	std	Y+10, r1	; 0x0a
-	int16_t ay = 0;
     1f1a:	19 86       	std	Y+9, r1	; 0x09
     1f1c:	18 86       	std	Y+8, r1	; 0x08
-	int16_t az = 0;
     1f1e:	1f 82       	std	Y+7, r1	; 0x07
     1f20:	1e 82       	std	Y+6, r1	; 0x06
-	int16_t gx = 0;
     1f22:	1d 82       	std	Y+5, r1	; 0x05
     1f24:	1c 82       	std	Y+4, r1	; 0x04
-	int16_t gy = 0;
     1f26:	1b 82       	std	Y+3, r1	; 0x03
     1f28:	1a 82       	std	Y+2, r1	; 0x02
-	int16_t gz = 0;
     1f2a:	19 82       	std	Y+1, r1	; 0x01
     1f2c:	ce 01       	movw	r24, r28
-	mpu6050_getRawData(&ax, &ay, &az, &gx, &gy, &gz);
     1f2e:	01 96       	adiw	r24, 0x01	; 1
     1f30:	7c 01       	movw	r14, r24
     1f32:	8e 01       	movw	r16, r28
@@ -6040,9 +4075,6 @@ void mpu6050_getConvData(double* axg, double* ayg, double* azg, double* gxds, do
     1f4c:	9b df       	rcall	.-202    	; 0x1e84 <mpu6050_getRawData>
     1f4e:	6b 85       	ldd	r22, Y+11	; 0x0b
     1f50:	7c 85       	ldd	r23, Y+12	; 0x0c
-
-	#if MPU6050_CALIBRATEDACCGYRO == 1
-    *axg = (double)(ax-MPU6050_AXOFFSET)/MPU6050_AXGAIN;
     1f52:	07 2e       	mov	r0, r23
     1f54:	00 0c       	add	r0, r0
     1f56:	88 0b       	sbc	r24, r24
@@ -6062,7 +4094,6 @@ void mpu6050_getConvData(double* axg, double* ayg, double* azg, double* gxds, do
     1f72:	7a 85       	ldd	r23, Y+10	; 0x0a
     1f74:	07 2e       	mov	r0, r23
     1f76:	00 0c       	add	r0, r0
-    *ayg = (double)(ay-MPU6050_AYOFFSET)/MPU6050_AYGAIN;
     1f78:	88 0b       	sbc	r24, r24
     1f7a:	99 0b       	sbc	r25, r25
     1f7c:	77 d3       	rcall	.+1774   	; 0x266c <__floatsisf>
@@ -6082,7 +4113,6 @@ void mpu6050_getConvData(double* axg, double* ayg, double* azg, double* gxds, do
     1f98:	00 0c       	add	r0, r0
     1f9a:	88 0b       	sbc	r24, r24
     1f9c:	99 0b       	sbc	r25, r25
-    *azg = (double)(az-MPU6050_AZOFFSET)/MPU6050_AZGAIN;
     1f9e:	66 d3       	rcall	.+1740   	; 0x266c <__floatsisf>
     1fa0:	20 e0       	ldi	r18, 0x00	; 0
     1fa2:	30 e0       	ldi	r19, 0x00	; 0
@@ -6102,7 +4132,6 @@ void mpu6050_getConvData(double* axg, double* ayg, double* azg, double* gxds, do
     1fbe:	00 0c       	add	r0, r0
     1fc0:	88 0b       	sbc	r24, r24
     1fc2:	99 0b       	sbc	r25, r25
-    *gxds = (double)(gx-MPU6050_GXOFFSET)/MPU6050_GXGAIN;
     1fc4:	53 d3       	rcall	.+1702   	; 0x266c <__floatsisf>
     1fc6:	23 e3       	ldi	r18, 0x33	; 51
     1fc8:	33 e3       	ldi	r19, 0x33	; 51
@@ -6124,7 +4153,6 @@ void mpu6050_getConvData(double* axg, double* ayg, double* azg, double* gxds, do
     1fe8:	99 0b       	sbc	r25, r25
     1fea:	40 d3       	rcall	.+1664   	; 0x266c <__floatsisf>
     1fec:	23 e3       	ldi	r18, 0x33	; 51
-	*gyds = (double)(gy-MPU6050_GYOFFSET)/MPU6050_GYGAIN;
     1fee:	33 e3       	ldi	r19, 0x33	; 51
     1ff0:	43 e8       	ldi	r20, 0x83	; 131
     1ff2:	51 e4       	ldi	r21, 0x41	; 65
@@ -6146,7 +4174,6 @@ void mpu6050_getConvData(double* axg, double* ayg, double* azg, double* gxds, do
     2012:	23 e3       	ldi	r18, 0x33	; 51
     2014:	33 e3       	ldi	r19, 0x33	; 51
     2016:	43 e8       	ldi	r20, 0x83	; 131
-	*gzds = (double)(gz-MPU6050_GZOFFSET)/MPU6050_GZGAIN;
     2018:	51 e4       	ldi	r21, 0x41	; 65
     201a:	8d d2       	rcall	.+1306   	; 0x2536 <__divsf3>
     201c:	f1 01       	movw	r30, r2
@@ -6159,12 +4186,6 @@ void mpu6050_getConvData(double* axg, double* ayg, double* azg, double* gxds, do
     202a:	48 c2       	rjmp	.+1168   	; 0x24bc <__epilogue_restores__>
 
 0000202c <u8g_InitCom>:
-
-#include "u8g.h"
-
-uint8_t u8g_InitCom(u8g_t *u8g, u8g_dev_t *dev, uint8_t clk_cycle_time)
-{
-  return dev->com_fn(u8g, U8G_COM_MSG_INIT, clk_cycle_time, NULL);
     202c:	db 01       	movw	r26, r22
     202e:	14 96       	adiw	r26, 0x04	; 4
     2030:	ed 91       	ld	r30, X+
@@ -6174,16 +4195,9 @@ uint8_t u8g_InitCom(u8g_t *u8g, u8g_dev_t *dev, uint8_t clk_cycle_time)
     2038:	30 e0       	ldi	r19, 0x00	; 0
     203a:	61 e0       	ldi	r22, 0x01	; 1
     203c:	09 95       	icall
-}
     203e:	08 95       	ret
 
 00002040 <u8g_SetChipSelect>:
-}
-
-/* cs contains the chip number, which should be enabled */
-void u8g_SetChipSelect(u8g_t *u8g, u8g_dev_t *dev, uint8_t cs)
-{
-  dev->com_fn(u8g, U8G_COM_MSG_CHIP_SELECT, cs, NULL);
     2040:	db 01       	movw	r26, r22
     2042:	14 96       	adiw	r26, 0x04	; 4
     2044:	ed 91       	ld	r30, X+
@@ -6196,11 +4210,6 @@ void u8g_SetChipSelect(u8g_t *u8g, u8g_dev_t *dev, uint8_t cs)
     2052:	08 95       	ret
 
 00002054 <u8g_SetResetLow>:
-}
-
-void u8g_SetResetLow(u8g_t *u8g, u8g_dev_t *dev)
-{
-  dev->com_fn(u8g, U8G_COM_MSG_RESET, 0, NULL);
     2054:	db 01       	movw	r26, r22
     2056:	14 96       	adiw	r26, 0x04	; 4
     2058:	ed 91       	ld	r30, X+
@@ -6214,11 +4223,6 @@ void u8g_SetResetLow(u8g_t *u8g, u8g_dev_t *dev)
     2068:	08 95       	ret
 
 0000206a <u8g_SetResetHigh>:
-}
-
-void u8g_SetResetHigh(u8g_t *u8g, u8g_dev_t *dev)
-{
-  dev->com_fn(u8g, U8G_COM_MSG_RESET, 1, NULL);
     206a:	db 01       	movw	r26, r22
     206c:	14 96       	adiw	r26, 0x04	; 4
     206e:	ed 91       	ld	r30, X+
@@ -6232,12 +4236,6 @@ void u8g_SetResetHigh(u8g_t *u8g, u8g_dev_t *dev)
     207e:	08 95       	ret
 
 00002080 <u8g_SetAddress>:
-}
-
-
-void u8g_SetAddress(u8g_t *u8g, u8g_dev_t *dev, uint8_t address)
-{
-  dev->com_fn(u8g, U8G_COM_MSG_ADDRESS, address, NULL);
     2080:	db 01       	movw	r26, r22
     2082:	14 96       	adiw	r26, 0x04	; 4
     2084:	ed 91       	ld	r30, X+
@@ -6250,11 +4248,6 @@ void u8g_SetAddress(u8g_t *u8g, u8g_dev_t *dev, uint8_t address)
     2092:	08 95       	ret
 
 00002094 <u8g_WriteByte>:
-}
-
-uint8_t u8g_WriteByte(u8g_t *u8g, u8g_dev_t *dev, uint8_t val)
-{
-  return dev->com_fn(u8g, U8G_COM_MSG_WRITE_BYTE, val, NULL);
     2094:	db 01       	movw	r26, r22
     2096:	14 96       	adiw	r26, 0x04	; 4
     2098:	ed 91       	ld	r30, X+
@@ -6264,14 +4257,9 @@ uint8_t u8g_WriteByte(u8g_t *u8g, u8g_dev_t *dev, uint8_t val)
     20a0:	30 e0       	ldi	r19, 0x00	; 0
     20a2:	65 e0       	ldi	r22, 0x05	; 5
     20a4:	09 95       	icall
-}
     20a6:	08 95       	ret
 
 000020a8 <u8g_WriteSequence>:
-
-uint8_t u8g_WriteSequence(u8g_t *u8g, u8g_dev_t *dev, uint8_t cnt, uint8_t *seq)
-{
-  return dev->com_fn(u8g, U8G_COM_MSG_WRITE_SEQ, cnt, seq);
     20a8:	db 01       	movw	r26, r22
     20aa:	14 96       	adiw	r26, 0x04	; 4
     20ac:	ed 91       	ld	r30, X+
@@ -6279,16 +4267,9 @@ uint8_t u8g_WriteSequence(u8g_t *u8g, u8g_dev_t *dev, uint8_t cnt, uint8_t *seq)
     20b0:	15 97       	sbiw	r26, 0x05	; 5
     20b2:	66 e0       	ldi	r22, 0x06	; 6
     20b4:	09 95       	icall
-}
     20b6:	08 95       	ret
 
 000020b8 <u8g_WriteEscSeqP>:
-#define U8G_ESC_255 255, 255
-#define U8G_ESC_RST(x) 255, (0xc0 | ((x)&0x0f))
-
-*/
-uint8_t u8g_WriteEscSeqP(u8g_t *u8g, u8g_dev_t *dev, const uint8_t *esc_seq)
-{
     20b8:	a0 e0       	ldi	r26, 0x00	; 0
     20ba:	b0 e0       	ldi	r27, 0x00	; 0
     20bc:	e1 e6       	ldi	r30, 0x61	; 97
@@ -6298,23 +4279,13 @@ uint8_t u8g_WriteEscSeqP(u8g_t *u8g, u8g_dev_t *dev, const uint8_t *esc_seq)
     20c4:	7b 01       	movw	r14, r22
     20c6:	6a 01       	movw	r12, r20
     20c8:	80 e0       	ldi	r24, 0x00	; 0
-  uint8_t is_escape = 0;
     20ca:	f6 01       	movw	r30, r12
-  uint8_t value;
-  for(;;)
-  {
-    value = u8g_pgm_read(esc_seq);
     20cc:	c4 91       	lpm	r28, Z
     20ce:	81 11       	cpse	r24, r1
-    if ( is_escape == 0 )
     20d0:	09 c0       	rjmp	.+18     	; 0x20e4 <u8g_WriteEscSeqP+0x2c>
     20d2:	cf 3f       	cpi	r28, 0xFF	; 255
-    {
-      if ( value != 255 )
     20d4:	c1 f1       	breq	.+112    	; 0x2146 <u8g_WriteEscSeqP+0x8e>
     20d6:	4c 2f       	mov	r20, r28
-      {
-        if ( u8g_WriteByte(u8g, dev, value) == 0 )
     20d8:	b7 01       	movw	r22, r14
     20da:	c8 01       	movw	r24, r16
     20dc:	db df       	rcall	.-74     	; 0x2094 <u8g_WriteByte>
@@ -6323,37 +4294,16 @@ uint8_t u8g_WriteEscSeqP(u8g_t *u8g, u8g_dev_t *dev, const uint8_t *esc_seq)
     20e2:	36 c0       	rjmp	.+108    	; 0x2150 <u8g_WriteEscSeqP+0x98>
     20e4:	cf 3f       	cpi	r28, 0xFF	; 255
     20e6:	11 f4       	brne	.+4      	; 0x20ec <u8g_WriteEscSeqP+0x34>
-        is_escape = 1;
-      }
-    }
-    else
-    {
-      if ( value == 255 )
     20e8:	4f ef       	ldi	r20, 0xFF	; 255
     20ea:	f6 cf       	rjmp	.-20     	; 0x20d8 <u8g_WriteEscSeqP+0x20>
-      {
-        if ( u8g_WriteByte(u8g, dev, value) == 0 )
     20ec:	ce 3f       	cpi	r28, 0xFE	; 254
     20ee:	91 f1       	breq	.+100    	; 0x2154 <u8g_WriteEscSeqP+0x9c>
-          return 0;
-      }
-      else if ( value == 254 )
     20f0:	c0 3f       	cpi	r28, 0xF0	; 240
     20f2:	10 f5       	brcc	.+68     	; 0x2138 <u8g_WriteEscSeqP+0x80>
-      {
-        break;
-      }
-      else if ( value >= 0x0f0 )
     20f4:	c0 3e       	cpi	r28, 0xE0	; 224
     20f6:	30 f0       	brcs	.+12     	; 0x2104 <u8g_WriteEscSeqP+0x4c>
-      {
-        /* not yet used, do nothing */
-      }
-      else if ( value >= 0xe0  )
     20f8:	4c 2f       	mov	r20, r28
     20fa:	4f 70       	andi	r20, 0x0F	; 15
-      {
-        u8g_SetAddress(u8g, dev, value & 0x0f);
     20fc:	b7 01       	movw	r22, r14
     20fe:	c8 01       	movw	r24, r16
     2100:	bf df       	rcall	.-130    	; 0x2080 <u8g_SetAddress>
@@ -6361,12 +4311,8 @@ uint8_t u8g_WriteEscSeqP(u8g_t *u8g, u8g_dev_t *dev, const uint8_t *esc_seq)
     2104:	c0 3d       	cpi	r28, 0xD0	; 208
     2106:	30 f0       	brcs	.+12     	; 0x2114 <u8g_WriteEscSeqP+0x5c>
     2108:	4c 2f       	mov	r20, r28
-      }
-      else if ( value >= 0xd0 )
     210a:	4f 70       	andi	r20, 0x0F	; 15
     210c:	b7 01       	movw	r22, r14
-      {
-        u8g_SetChipSelect(u8g, dev, value & 0x0f);
     210e:	c8 01       	movw	r24, r16
     2110:	97 df       	rcall	.-210    	; 0x2040 <u8g_SetChipSelect>
     2112:	12 c0       	rjmp	.+36     	; 0x2138 <u8g_WriteEscSeqP+0x80>
@@ -6374,88 +4320,39 @@ uint8_t u8g_WriteEscSeqP(u8g_t *u8g, u8g_dev_t *dev, const uint8_t *esc_seq)
     2116:	90 f0       	brcs	.+36     	; 0x213c <u8g_WriteEscSeqP+0x84>
     2118:	b7 01       	movw	r22, r14
     211a:	c8 01       	movw	r24, r16
-      }
-      else if ( value >= 0xc0 )
     211c:	9b df       	rcall	.-202    	; 0x2054 <u8g_SetResetLow>
     211e:	c2 95       	swap	r28
-      {
-        u8g_SetResetLow(u8g, dev);
     2120:	c0 7f       	andi	r28, 0xF0	; 240
     2122:	ce 5f       	subi	r28, 0xFE	; 254
     2124:	d0 e0       	ldi	r29, 0x00	; 0
     2126:	ce 01       	movw	r24, r28
-        value &= 0x0f;
-        value <<= 4;
     2128:	0e 94 39 07 	call	0xe72	; 0xe72 <u8g_Delay>
-        value+=2;
     212c:	b7 01       	movw	r22, r14
-        u8g_Delay(value);
     212e:	c8 01       	movw	r24, r16
     2130:	9c df       	rcall	.-200    	; 0x206a <u8g_SetResetHigh>
     2132:	ce 01       	movw	r24, r28
     2134:	0e 94 39 07 	call	0xe72	; 0xe72 <u8g_Delay>
-        u8g_SetResetHigh(u8g, dev);
     2138:	80 e0       	ldi	r24, 0x00	; 0
     213a:	06 c0       	rjmp	.+12     	; 0x2148 <u8g_WriteEscSeqP+0x90>
     213c:	c7 fd       	sbrc	r28, 7
-        u8g_Delay(value);
     213e:	fc cf       	rjmp	.-8      	; 0x2138 <u8g_WriteEscSeqP+0x80>
     2140:	8c 2f       	mov	r24, r28
     2142:	90 e0       	ldi	r25, 0x00	; 0
-      }
-      else if ( value <= 127 )
-      {
-        u8g_Delay(value);
-      }
-      is_escape = 0;
     2144:	f7 cf       	rjmp	.-18     	; 0x2134 <u8g_WriteEscSeqP+0x7c>
     2146:	81 e0       	ldi	r24, 0x01	; 1
-      else if ( value >= 0xbe )
-      {
-	/* not yet implemented */
-        /* u8g_SetVCC(u8g, dev, value & 0x01); */
-      }
-      else if ( value <= 127 )
     2148:	ff ef       	ldi	r31, 0xFF	; 255
     214a:	cf 1a       	sub	r12, r31
-      {
-        u8g_Delay(value);
     214c:	df 0a       	sbc	r13, r31
     214e:	bd cf       	rjmp	.-134    	; 0x20ca <u8g_WriteEscSeqP+0x12>
     2150:	80 e0       	ldi	r24, 0x00	; 0
-        if ( u8g_WriteByte(u8g, dev, value) == 0 )
-          return 0;
-      }
-      else
-      {
-        is_escape = 1;
     2152:	01 c0       	rjmp	.+2      	; 0x2156 <u8g_WriteEscSeqP+0x9e>
-      {
-        u8g_Delay(value);
-      }
-      is_escape = 0;
-    }
-    esc_seq++;
     2154:	81 e0       	ldi	r24, 0x01	; 1
     2156:	cd b7       	in	r28, 0x3d	; 61
     2158:	de b7       	in	r29, 0x3e	; 62
-  }
     215a:	e8 e0       	ldi	r30, 0x08	; 8
-    if ( is_escape == 0 )
-    {
-      if ( value != 255 )
-      {
-        if ( u8g_WriteByte(u8g, dev, value) == 0 )
-          return 0;
     215c:	b9 c1       	rjmp	.+882    	; 0x24d0 <__epilogue_restores__+0x14>
 
 0000215e <u8g_atmega_st7920_sw_spi_shift_out>:
-
-#if defined(__AVR__)
-
-static void u8g_atmega_st7920_sw_spi_shift_out(u8g_t *u8g, uint8_t val) U8G_NOINLINE;
-static void u8g_atmega_st7920_sw_spi_shift_out(u8g_t *u8g, uint8_t val)
-{
     215e:	0f 93       	push	r16
     2160:	1f 93       	push	r17
     2162:	cf 93       	push	r28
@@ -6463,36 +4360,24 @@ static void u8g_atmega_st7920_sw_spi_shift_out(u8g_t *u8g, uint8_t val)
     2166:	8c 01       	movw	r16, r24
     2168:	d6 2f       	mov	r29, r22
     216a:	c8 e0       	ldi	r28, 0x08	; 8
-  uint8_t i = 8;
-  do
-  {
-    u8g_SetPILevel(u8g, U8G_PI_MOSI, val & 128 );
     216c:	4d 2f       	mov	r20, r29
     216e:	40 78       	andi	r20, 0x80	; 128
     2170:	65 e0       	ldi	r22, 0x05	; 5
     2172:	c8 01       	movw	r24, r16
     2174:	0e 94 30 07 	call	0xe60	; 0xe60 <u8g_SetPILevel>
-    val <<= 1;
     2178:	dd 0f       	add	r29, r29
-    u8g_SetPILevel(u8g, U8G_PI_SCK, 1 );
     217a:	41 e0       	ldi	r20, 0x01	; 1
     217c:	64 e0       	ldi	r22, 0x04	; 4
     217e:	c8 01       	movw	r24, r16
     2180:	0e 94 30 07 	call	0xe60	; 0xe60 <u8g_SetPILevel>
-    u8g_MicroDelay();		/* 15 Aug 2012: added for high speed uC */
     2184:	0e 94 43 07 	call	0xe86	; 0xe86 <u8g_MicroDelay>
-    u8g_SetPILevel(u8g, U8G_PI_SCK, 0 );
     2188:	40 e0       	ldi	r20, 0x00	; 0
     218a:	64 e0       	ldi	r22, 0x04	; 4
     218c:	c8 01       	movw	r24, r16
     218e:	0e 94 30 07 	call	0xe60	; 0xe60 <u8g_SetPILevel>
-    u8g_MicroDelay();		/* 15 Aug 2012: added for high speed uC */
     2192:	0e 94 43 07 	call	0xe86	; 0xe86 <u8g_MicroDelay>
     2196:	c1 50       	subi	r28, 0x01	; 1
-    i--;
-  } while( i != 0 );
     2198:	49 f7       	brne	.-46     	; 0x216c <u8g_atmega_st7920_sw_spi_shift_out+0xe>
-}
     219a:	df 91       	pop	r29
     219c:	cf 91       	pop	r28
     219e:	1f 91       	pop	r17
@@ -6500,66 +4385,39 @@ static void u8g_atmega_st7920_sw_spi_shift_out(u8g_t *u8g, uint8_t val)
     21a2:	08 95       	ret
 
 000021a4 <u8g_com_atmega_st7920_write_byte>:
-
-static void u8g_com_atmega_st7920_write_byte(u8g_t *u8g, uint8_t rs, uint8_t val) U8G_NOINLINE;
-static void u8g_com_atmega_st7920_write_byte(u8g_t *u8g, uint8_t rs, uint8_t val)
-{
     21a4:	1f 93       	push	r17
     21a6:	cf 93       	push	r28
     21a8:	df 93       	push	r29
     21aa:	ec 01       	movw	r28, r24
     21ac:	14 2f       	mov	r17, r20
-  uint8_t i;
-  
-  if ( rs == 0 )
     21ae:	61 11       	cpse	r22, r1
     21b0:	02 c0       	rjmp	.+4      	; 0x21b6 <u8g_com_atmega_st7920_write_byte+0x12>
-  {
-    /* command */
-    u8g_atmega_st7920_sw_spi_shift_out(u8g, 0x0f8);
     21b2:	68 ef       	ldi	r22, 0xF8	; 248
     21b4:	03 c0       	rjmp	.+6      	; 0x21bc <u8g_com_atmega_st7920_write_byte+0x18>
-  }
-  else if ( rs == 1 )
     21b6:	61 30       	cpi	r22, 0x01	; 1
     21b8:	19 f4       	brne	.+6      	; 0x21c0 <u8g_com_atmega_st7920_write_byte+0x1c>
-  {
-    /* data */
-    u8g_atmega_st7920_sw_spi_shift_out(u8g, 0x0fa);
     21ba:	6a ef       	ldi	r22, 0xFA	; 250
     21bc:	ce 01       	movw	r24, r28
     21be:	cf df       	rcall	.-98     	; 0x215e <u8g_atmega_st7920_sw_spi_shift_out>
     21c0:	61 2f       	mov	r22, r17
-  }
-  
-  u8g_atmega_st7920_sw_spi_shift_out(u8g, val & 0x0f0);
     21c2:	60 7f       	andi	r22, 0xF0	; 240
     21c4:	ce 01       	movw	r24, r28
     21c6:	cb df       	rcall	.-106    	; 0x215e <u8g_atmega_st7920_sw_spi_shift_out>
     21c8:	61 2f       	mov	r22, r17
     21ca:	62 95       	swap	r22
-  u8g_atmega_st7920_sw_spi_shift_out(u8g, val << 4);
     21cc:	60 7f       	andi	r22, 0xF0	; 240
     21ce:	ce 01       	movw	r24, r28
     21d0:	c6 df       	rcall	.-116    	; 0x215e <u8g_atmega_st7920_sw_spi_shift_out>
     21d2:	0e 94 48 07 	call	0xe90	; 0xe90 <u8g_10MicroDelay>
     21d6:	0e 94 48 07 	call	0xe90	; 0xe90 <u8g_10MicroDelay>
-
-  for( i = 0; i < 4; i++ )
-    u8g_10MicroDelay();
     21da:	0e 94 48 07 	call	0xe90	; 0xe90 <u8g_10MicroDelay>
     21de:	0e 94 48 07 	call	0xe90	; 0xe90 <u8g_10MicroDelay>
     21e2:	df 91       	pop	r29
     21e4:	cf 91       	pop	r28
     21e6:	1f 91       	pop	r17
-}
     21e8:	08 95       	ret
 
 000021ea <u8g_com_atmega_st7920_sw_spi_fn>:
-
-
-uint8_t u8g_com_atmega_st7920_sw_spi_fn(u8g_t *u8g, uint8_t msg, uint8_t arg_val, void *arg_ptr)
-{
     21ea:	ef 92       	push	r14
     21ec:	ff 92       	push	r15
     21ee:	0f 93       	push	r16
@@ -6569,7 +4427,6 @@ uint8_t u8g_com_atmega_st7920_sw_spi_fn(u8g_t *u8g, uint8_t msg, uint8_t arg_val
     21f6:	ec 01       	movw	r28, r24
     21f8:	14 2f       	mov	r17, r20
     21fa:	79 01       	movw	r14, r18
-  switch(msg)
     21fc:	86 2f       	mov	r24, r22
     21fe:	90 e0       	ldi	r25, 0x00	; 0
     2200:	fc 01       	movw	r30, r24
@@ -6582,126 +4439,58 @@ uint8_t u8g_com_atmega_st7920_sw_spi_fn(u8g_t *u8g, uint8_t msg, uint8_t arg_val
     220e:	ff 4f       	sbci	r31, 0xFF	; 255
     2210:	33 c1       	rjmp	.+614    	; 0x2478 <__tablejump2__>
     2212:	02 e0       	ldi	r16, 0x02	; 2
-      {
-        register uint8_t *ptr = arg_ptr;
-        while( arg_val > 0 )
-        {
-          u8g_com_atmega_st7920_write_byte(u8g, u8g->pin_list[U8G_PI_A0_STATE], u8g_pgm_read(ptr));
-	  u8g->pin_list[U8G_PI_A0_STATE] = 2; 
     2214:	42 c0       	rjmp	.+132    	; 0x229a <u8g_com_atmega_st7920_sw_spi_fn+0xb0>
     2216:	02 e0       	ldi	r16, 0x02	; 2
-      {
-        register uint8_t *ptr = arg_ptr;
-        while( arg_val > 0 )
-        {
-          u8g_com_atmega_st7920_write_byte(u8g, u8g->pin_list[U8G_PI_A0_STATE], *ptr++);
-	  u8g->pin_list[U8G_PI_A0_STATE] = 2; 
     2218:	35 c0       	rjmp	.+106    	; 0x2284 <u8g_com_atmega_st7920_sw_spi_fn+0x9a>
     221a:	64 e0       	ldi	r22, 0x04	; 4
-uint8_t u8g_com_atmega_st7920_sw_spi_fn(u8g_t *u8g, uint8_t msg, uint8_t arg_val, void *arg_ptr)
-{
-  switch(msg)
-  {
-    case U8G_COM_MSG_INIT:
-      u8g_SetPIOutput(u8g, U8G_PI_SCK);
     221c:	ce 01       	movw	r24, r28
     221e:	0e 94 28 07 	call	0xe50	; 0xe50 <u8g_SetPIOutput>
     2222:	65 e0       	ldi	r22, 0x05	; 5
-      u8g_SetPIOutput(u8g, U8G_PI_MOSI);
     2224:	ce 01       	movw	r24, r28
     2226:	0e 94 28 07 	call	0xe50	; 0xe50 <u8g_SetPIOutput>
     222a:	62 e0       	ldi	r22, 0x02	; 2
-      /* u8g_SetPIOutput(u8g, U8G_PI_A0); */
-      u8g_SetPIOutput(u8g, U8G_PI_CS);
     222c:	ce 01       	movw	r24, r28
     222e:	0e 94 28 07 	call	0xe50	; 0xe50 <u8g_SetPIOutput>
     2232:	60 e0       	ldi	r22, 0x00	; 0
-      u8g_SetPIOutput(u8g, U8G_PI_RESET);
     2234:	ce 01       	movw	r24, r28
     2236:	0e 94 28 07 	call	0xe50	; 0xe50 <u8g_SetPIOutput>
     223a:	40 e0       	ldi	r20, 0x00	; 0
-      
-      u8g_SetPILevel(u8g, U8G_PI_SCK, 0 );
     223c:	64 e0       	ldi	r22, 0x04	; 4
     223e:	ce 01       	movw	r24, r28
     2240:	0e 94 30 07 	call	0xe60	; 0xe60 <u8g_SetPILevel>
     2244:	40 e0       	ldi	r20, 0x00	; 0
-      u8g_SetPILevel(u8g, U8G_PI_MOSI, 0 );
     2246:	65 e0       	ldi	r22, 0x05	; 5
     2248:	ce 01       	movw	r24, r28
     224a:	0e 94 30 07 	call	0xe60	; 0xe60 <u8g_SetPILevel>
     224e:	40 e0       	ldi	r20, 0x00	; 0
-      u8g_SetPILevel(u8g, U8G_PI_CS, 0 );
     2250:	62 e0       	ldi	r22, 0x02	; 2
     2252:	ce 01       	movw	r24, r28
     2254:	0e 94 30 07 	call	0xe60	; 0xe60 <u8g_SetPILevel>
     2258:	1e a2       	std	Y+38, r1	; 0x26
-      /* u8g_SetPILevel(u8g, U8G_PI_A0, 0); */
-    
-      u8g->pin_list[U8G_PI_A0_STATE] = 0;       /* inital RS state: command mode */
     225a:	2c c0       	rjmp	.+88     	; 0x22b4 <u8g_com_atmega_st7920_sw_spi_fn+0xca>
-      break;
     225c:	60 e0       	ldi	r22, 0x00	; 0
-    
-    case U8G_COM_MSG_STOP:
-      break;
-
-    case U8G_COM_MSG_RESET:
-      u8g_SetPILevel(u8g, U8G_PI_RESET, arg_val);
     225e:	06 c0       	rjmp	.+12     	; 0x226c <u8g_com_atmega_st7920_sw_spi_fn+0x82>
     2260:	4e a3       	std	Y+38, r20	; 0x26
-      break;
-    
-    case U8G_COM_MSG_ADDRESS:                     /* define cmd (arg_val = 0) or data mode (arg_val = 1) */
-      u8g->pin_list[U8G_PI_A0_STATE] = arg_val;
     2262:	28 c0       	rjmp	.+80     	; 0x22b4 <u8g_com_atmega_st7920_sw_spi_fn+0xca>
-      break;
     2264:	41 11       	cpse	r20, r1
-
-    case U8G_COM_MSG_CHIP_SELECT:      
-      if ( arg_val == 0 )
     2266:	06 c0       	rjmp	.+12     	; 0x2274 <u8g_com_atmega_st7920_sw_spi_fn+0x8a>
     2268:	40 e0       	ldi	r20, 0x00	; 0
-      {
-        /* disable, note: the st7920 has an active high chip select */
-        u8g_SetPILevel(u8g, U8G_PI_CS, 0);
     226a:	62 e0       	ldi	r22, 0x02	; 2
     226c:	ce 01       	movw	r24, r28
     226e:	0e 94 30 07 	call	0xe60	; 0xe60 <u8g_SetPILevel>
     2272:	20 c0       	rjmp	.+64     	; 0x22b4 <u8g_com_atmega_st7920_sw_spi_fn+0xca>
     2274:	41 e0       	ldi	r20, 0x01	; 1
-      }
-      else
-      {
-        /* u8g_SetPILevel(u8g, U8G_PI_SCK, 0 ); */
-        /* enable */
-        u8g_SetPILevel(u8g, U8G_PI_CS, 1); /* CS = 1 (high active) */
     2276:	f9 cf       	rjmp	.-14     	; 0x226a <u8g_com_atmega_st7920_sw_spi_fn+0x80>
     2278:	6e a1       	ldd	r22, Y+38	; 0x26
-      }
-      break;
-      
-
-    case U8G_COM_MSG_WRITE_BYTE:
-      u8g_com_atmega_st7920_write_byte(u8g, u8g->pin_list[U8G_PI_A0_STATE], arg_val);
     227a:	ce 01       	movw	r24, r28
     227c:	93 df       	rcall	.-218    	; 0x21a4 <u8g_com_atmega_st7920_write_byte>
     227e:	82 e0       	ldi	r24, 0x02	; 2
     2280:	8e a3       	std	Y+38, r24	; 0x26
-      u8g->pin_list[U8G_PI_A0_STATE] = 2; 
     2282:	18 c0       	rjmp	.+48     	; 0x22b4 <u8g_com_atmega_st7920_sw_spi_fn+0xca>
     2284:	11 23       	and	r17, r17
-      break;
     2286:	b1 f0       	breq	.+44     	; 0x22b4 <u8g_com_atmega_st7920_sw_spi_fn+0xca>
-    
-    case U8G_COM_MSG_WRITE_SEQ:
-      {
-        register uint8_t *ptr = arg_ptr;
-        while( arg_val > 0 )
     2288:	f7 01       	movw	r30, r14
     228a:	41 91       	ld	r20, Z+
-        {
-          u8g_com_atmega_st7920_write_byte(u8g, u8g->pin_list[U8G_PI_A0_STATE], *ptr++);
     228c:	7f 01       	movw	r14, r30
     228e:	6e a1       	ldd	r22, Y+38	; 0x26
     2290:	ce 01       	movw	r24, r28
@@ -6709,148 +4498,71 @@ uint8_t u8g_com_atmega_st7920_sw_spi_fn(u8g_t *u8g, uint8_t msg, uint8_t arg_val
     2294:	0e a3       	std	Y+38, r16	; 0x26
     2296:	11 50       	subi	r17, 0x01	; 1
     2298:	f5 cf       	rjmp	.-22     	; 0x2284 <u8g_com_atmega_st7920_sw_spi_fn+0x9a>
-	  u8g->pin_list[U8G_PI_A0_STATE] = 2; 
     229a:	11 23       	and	r17, r17
-          arg_val--;
     229c:	59 f0       	breq	.+22     	; 0x22b4 <u8g_com_atmega_st7920_sw_spi_fn+0xca>
     229e:	f7 01       	movw	r30, r14
-      break;
-
-      case U8G_COM_MSG_WRITE_SEQ_P:
-      {
-        register uint8_t *ptr = arg_ptr;
-        while( arg_val > 0 )
     22a0:	44 91       	lpm	r20, Z
     22a2:	6e a1       	ldd	r22, Y+38	; 0x26
-        {
-          u8g_com_atmega_st7920_write_byte(u8g, u8g->pin_list[U8G_PI_A0_STATE], u8g_pgm_read(ptr));
     22a4:	ce 01       	movw	r24, r28
     22a6:	7e df       	rcall	.-260    	; 0x21a4 <u8g_com_atmega_st7920_write_byte>
     22a8:	0e a3       	std	Y+38, r16	; 0x26
     22aa:	ff ef       	ldi	r31, 0xFF	; 255
     22ac:	ef 1a       	sub	r14, r31
     22ae:	ff 0a       	sbc	r15, r31
-	  u8g->pin_list[U8G_PI_A0_STATE] = 2; 
     22b0:	11 50       	subi	r17, 0x01	; 1
-          ptr++;
     22b2:	f3 cf       	rjmp	.-26     	; 0x229a <u8g_com_atmega_st7920_sw_spi_fn+0xb0>
     22b4:	81 e0       	ldi	r24, 0x01	; 1
     22b6:	cd b7       	in	r28, 0x3d	; 61
-          arg_val--;
     22b8:	de b7       	in	r29, 0x3e	; 62
     22ba:	e6 e0       	ldi	r30, 0x06	; 6
-        }
-      }
-      break;
-  }
-  return 1;
-}
     22bc:	0b c1       	rjmp	.+534    	; 0x24d4 <__epilogue_restores__+0x18>
 
 000022be <u8g_page_First>:
-  p->page = 0;
-  u8g_page_First(p);
-}
-
-void u8g_page_First(u8g_page_t *p)
-{
     22be:	fc 01       	movw	r30, r24
-  p->page_y0 = 0;
     22c0:	12 82       	std	Z+2, r1	; 0x02
-  p->page_y1 = p->page_height;
-  p->page_y1--;
     22c2:	80 81       	ld	r24, Z
     22c4:	81 50       	subi	r24, 0x01	; 1
     22c6:	83 83       	std	Z+3, r24	; 0x03
-  p->page = 0;
     22c8:	14 82       	std	Z+4, r1	; 0x04
     22ca:	08 95       	ret
 
 000022cc <u8g_page_Next>:
-}
-
-uint8_t u8g_page_Next(u8g_page_t * p)
-{
     22cc:	fc 01       	movw	r30, r24
-  register u8g_uint_t y1;
-  p->page_y0 += p->page_height;
     22ce:	80 81       	ld	r24, Z
     22d0:	92 81       	ldd	r25, Z+2	; 0x02
     22d2:	98 0f       	add	r25, r24
     22d4:	92 83       	std	Z+2, r25	; 0x02
-  if ( p->page_y0 >= p->total_height )
     22d6:	21 81       	ldd	r18, Z+1	; 0x01
     22d8:	92 17       	cp	r25, r18
     22da:	60 f4       	brcc	.+24     	; 0x22f4 <u8g_page_Next+0x28>
-    return 0;
-  p->page++;
     22dc:	94 81       	ldd	r25, Z+4	; 0x04
     22de:	9f 5f       	subi	r25, 0xFF	; 255
     22e0:	94 83       	std	Z+4, r25	; 0x04
-  y1 = p->page_y1;
     22e2:	93 81       	ldd	r25, Z+3	; 0x03
-  y1 += p->page_height;
     22e4:	89 0f       	add	r24, r25
-  if ( y1 >= p->total_height )
     22e6:	82 17       	cp	r24, r18
     22e8:	10 f0       	brcs	.+4      	; 0x22ee <u8g_page_Next+0x22>
-  {
-    y1 = p->total_height;
-    y1--;
     22ea:	8f ef       	ldi	r24, 0xFF	; 255
     22ec:	82 0f       	add	r24, r18
-  }
-  p->page_y1 = y1;
     22ee:	83 83       	std	Z+3, r24	; 0x03
-  
-  return 1;
     22f0:	81 e0       	ldi	r24, 0x01	; 1
     22f2:	08 95       	ret
-uint8_t u8g_page_Next(u8g_page_t * p)
-{
-  register u8g_uint_t y1;
-  p->page_y0 += p->page_height;
-  if ( p->page_y0 >= p->total_height )
-    return 0;
     22f4:	80 e0       	ldi	r24, 0x00	; 0
-    y1--;
-  }
-  p->page_y1 = y1;
-  
-  return 1;
-}
     22f6:	08 95       	ret
 
 000022f8 <i2c_init>:
-*************************************************************************/
-void i2c_init(void)
-{
-  /* initialize TWI clock: 100 kHz clock, TWPS = 0 => prescaler = 1 */
-  
-  TWSR = 0;                         /* no prescaler */
     22f8:	10 92 b9 00 	sts	0x00B9, r1
-  TWBR = ((F_CPU/SCL_CLOCK)-16)/2;  /* must be > 10 for stable operation */
     22fc:	8c e0       	ldi	r24, 0x0C	; 12
     22fe:	80 93 b8 00 	sts	0x00B8, r24
     2302:	08 95       	ret
 
 00002304 <i2c_start>:
-{
-	uint32_t  i2c_timer = 0;
-    uint8_t   twst;
-
-	// send START condition
-	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
     2304:	94 ea       	ldi	r25, 0xA4	; 164
     2306:	90 93 bc 00 	sts	0x00BC, r25
-
-	// wait until transmission completed
-	i2c_timer = I2C_TIMER_DELAY;
     230a:	4f ef       	ldi	r20, 0xFF	; 255
     230c:	50 e0       	ldi	r21, 0x00	; 0
     230e:	60 e0       	ldi	r22, 0x00	; 0
     2310:	70 e0       	ldi	r23, 0x00	; 0
-	while(!(TWCR & (1<<TWINT)) && i2c_timer--);
     2312:	90 91 bc 00 	lds	r25, 0x00BC
     2316:	97 fd       	sbrc	r25, 7
     2318:	06 c0       	rjmp	.+12     	; 0x2326 <i2c_start+0x22>
@@ -6860,39 +4572,25 @@ void i2c_init(void)
     2320:	71 09       	sbc	r23, r1
     2322:	b8 f7       	brcc	.-18     	; 0x2312 <i2c_start+0xe>
     2324:	06 c0       	rjmp	.+12     	; 0x2332 <i2c_start+0x2e>
-	if(i2c_timer == 0)
     2326:	45 2b       	or	r20, r21
     2328:	46 2b       	or	r20, r22
     232a:	47 2b       	or	r20, r23
     232c:	11 f4       	brne	.+4      	; 0x2332 <i2c_start+0x2e>
-		return 1;
     232e:	81 e0       	ldi	r24, 0x01	; 1
     2330:	08 95       	ret
-
-	// check value of TWI Status Register. Mask prescaler bits.
-	twst = TW_STATUS & 0xF8;
     2332:	90 91 b9 00 	lds	r25, 0x00B9
     2336:	98 7f       	andi	r25, 0xF8	; 248
-	if ( (twst != TW_START) && (twst != TW_REP_START)) return 1;
     2338:	98 30       	cpi	r25, 0x08	; 8
     233a:	11 f0       	breq	.+4      	; 0x2340 <i2c_start+0x3c>
     233c:	90 31       	cpi	r25, 0x10	; 16
     233e:	b9 f7       	brne	.-18     	; 0x232e <i2c_start+0x2a>
-
-	// send device address
-	TWDR = address;
     2340:	80 93 bb 00 	sts	0x00BB, r24
-	TWCR = (1<<TWINT) | (1<<TWEN);
     2344:	84 e8       	ldi	r24, 0x84	; 132
     2346:	80 93 bc 00 	sts	0x00BC, r24
-
-	// wail until transmission completed and ACK/NACK has been received
-	i2c_timer = I2C_TIMER_DELAY;
     234a:	8f ef       	ldi	r24, 0xFF	; 255
     234c:	90 e0       	ldi	r25, 0x00	; 0
     234e:	a0 e0       	ldi	r26, 0x00	; 0
     2350:	b0 e0       	ldi	r27, 0x00	; 0
-	while(!(TWCR & (1<<TWINT)) && i2c_timer--);
     2352:	20 91 bc 00 	lds	r18, 0x00BC
     2356:	27 fd       	sbrc	r18, 7
     2358:	05 c0       	rjmp	.+10     	; 0x2364 <i2c_start+0x60>
@@ -6901,42 +4599,22 @@ void i2c_init(void)
     235e:	b1 09       	sbc	r27, r1
     2360:	c0 f7       	brcc	.-16     	; 0x2352 <i2c_start+0x4e>
     2362:	04 c0       	rjmp	.+8      	; 0x236c <i2c_start+0x68>
-	if(i2c_timer == 0)
     2364:	89 2b       	or	r24, r25
     2366:	8a 2b       	or	r24, r26
     2368:	8b 2b       	or	r24, r27
     236a:	09 f3       	breq	.-62     	; 0x232e <i2c_start+0x2a>
-		return 1;
-
-	// check value of TWI Status Register. Mask prescaler bits.
-	twst = TW_STATUS & 0xF8;
     236c:	80 91 b9 00 	lds	r24, 0x00B9
     2370:	88 7f       	andi	r24, 0xF8	; 248
-	if ( (twst != TW_MT_SLA_ACK) && (twst != TW_MR_SLA_ACK) ) return 1;
     2372:	88 31       	cpi	r24, 0x18	; 24
     2374:	11 f0       	breq	.+4      	; 0x237a <i2c_start+0x76>
     2376:	80 34       	cpi	r24, 0x40	; 64
     2378:	d1 f6       	brne	.-76     	; 0x232e <i2c_start+0x2a>
-
-	return 0;
     237a:	80 e0       	ldi	r24, 0x00	; 0
-
-}/* i2c_start */
     237c:	08 95       	ret
 
 0000237e <i2c_stop>:
-void i2c_stop(void)
-{
-	uint32_t  i2c_timer = 0;
-
-    /* send stop condition */
-	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
     237e:	84 e9       	ldi	r24, 0x94	; 148
     2380:	80 93 bc 00 	sts	0x00BC, r24
-	
-	// wait until stop condition is executed and bus released
-	i2c_timer = I2C_TIMER_DELAY;
-	while((TWCR & (1<<TWSTO)) && i2c_timer--);
     2384:	80 e0       	ldi	r24, 0x00	; 0
     2386:	90 e0       	ldi	r25, 0x00	; 0
     2388:	20 91 bc 00 	lds	r18, 0x00BC
@@ -6950,24 +4628,13 @@ void i2c_stop(void)
     239a:	08 95       	ret
 
 0000239c <i2c_write>:
-{	
-	uint32_t  i2c_timer = 0;
-    uint8_t   twst;
-    
-	// send data to the previously addressed device
-	TWDR = data;
     239c:	80 93 bb 00 	sts	0x00BB, r24
-	TWCR = (1<<TWINT) | (1<<TWEN);
     23a0:	84 e8       	ldi	r24, 0x84	; 132
     23a2:	80 93 bc 00 	sts	0x00BC, r24
-
-	// wait until transmission completed
-	i2c_timer = I2C_TIMER_DELAY;
     23a6:	8f ef       	ldi	r24, 0xFF	; 255
     23a8:	90 e0       	ldi	r25, 0x00	; 0
     23aa:	a0 e0       	ldi	r26, 0x00	; 0
     23ac:	b0 e0       	ldi	r27, 0x00	; 0
-	while(!(TWCR & (1<<TWINT)) && i2c_timer--);
     23ae:	20 91 bc 00 	lds	r18, 0x00BC
     23b2:	27 fd       	sbrc	r18, 7
     23b4:	05 c0       	rjmp	.+10     	; 0x23c0 <i2c_write+0x24>
@@ -6976,53 +4643,27 @@ void i2c_stop(void)
     23ba:	b1 09       	sbc	r27, r1
     23bc:	c0 f7       	brcc	.-16     	; 0x23ae <i2c_write+0x12>
     23be:	04 c0       	rjmp	.+8      	; 0x23c8 <i2c_write+0x2c>
-	if(i2c_timer == 0)
     23c0:	89 2b       	or	r24, r25
     23c2:	8a 2b       	or	r24, r26
     23c4:	8b 2b       	or	r24, r27
     23c6:	41 f0       	breq	.+16     	; 0x23d8 <i2c_write+0x3c>
-		return 1;
-
-	// check value of TWI Status Register. Mask prescaler bits
-	twst = TW_STATUS & 0xF8;
     23c8:	90 91 b9 00 	lds	r25, 0x00B9
     23cc:	98 7f       	andi	r25, 0xF8	; 248
-	if( twst != TW_MT_DATA_ACK) return 1;
     23ce:	81 e0       	ldi	r24, 0x01	; 1
     23d0:	98 32       	cpi	r25, 0x28	; 40
     23d2:	19 f4       	brne	.+6      	; 0x23da <i2c_write+0x3e>
     23d4:	80 e0       	ldi	r24, 0x00	; 0
     23d6:	08 95       	ret
-
-	// wait until transmission completed
-	i2c_timer = I2C_TIMER_DELAY;
-	while(!(TWCR & (1<<TWINT)) && i2c_timer--);
-	if(i2c_timer == 0)
-		return 1;
     23d8:	81 e0       	ldi	r24, 0x01	; 1
-	// check value of TWI Status Register. Mask prescaler bits
-	twst = TW_STATUS & 0xF8;
-	if( twst != TW_MT_DATA_ACK) return 1;
-	return 0;
-
-}/* i2c_write */
     23da:	08 95       	ret
 
 000023dc <i2c_readAck>:
-*************************************************************************/
-unsigned char i2c_readAck(void)
-{
-	uint32_t  i2c_timer = 0;
-
-	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWEA);
     23dc:	84 ec       	ldi	r24, 0xC4	; 196
     23de:	80 93 bc 00 	sts	0x00BC, r24
-	i2c_timer = I2C_TIMER_DELAY;
     23e2:	8f ef       	ldi	r24, 0xFF	; 255
     23e4:	90 e0       	ldi	r25, 0x00	; 0
     23e6:	a0 e0       	ldi	r26, 0x00	; 0
     23e8:	b0 e0       	ldi	r27, 0x00	; 0
-	while(!(TWCR & (1<<TWINT)) && i2c_timer--);
     23ea:	20 91 bc 00 	lds	r18, 0x00BC
     23ee:	27 fd       	sbrc	r18, 7
     23f0:	05 c0       	rjmp	.+10     	; 0x23fc <i2c_readAck+0x20>
@@ -7031,44 +4672,22 @@ unsigned char i2c_readAck(void)
     23f6:	b1 09       	sbc	r27, r1
     23f8:	c0 f7       	brcc	.-16     	; 0x23ea <i2c_readAck+0xe>
     23fa:	04 c0       	rjmp	.+8      	; 0x2404 <i2c_readAck+0x28>
-	if(i2c_timer == 0)
     23fc:	89 2b       	or	r24, r25
     23fe:	8a 2b       	or	r24, r26
     2400:	8b 2b       	or	r24, r27
     2402:	19 f0       	breq	.+6      	; 0x240a <i2c_readAck+0x2e>
-		return 0;
-
-    return TWDR;
     2404:	80 91 bb 00 	lds	r24, 0x00BB
     2408:	08 95       	ret
-
-	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWEA);
-	i2c_timer = I2C_TIMER_DELAY;
-	while(!(TWCR & (1<<TWINT)) && i2c_timer--);
-	if(i2c_timer == 0)
-		return 0;
     240a:	80 e0       	ldi	r24, 0x00	; 0
-
-    return TWDR;
-
-}/* i2c_readAck */
     240c:	08 95       	ret
 
 0000240e <i2c_readNak>:
-*************************************************************************/
-unsigned char i2c_readNak(void)
-{
-	uint32_t  i2c_timer = 0;
-
-	TWCR = (1<<TWINT) | (1<<TWEN);
     240e:	84 e8       	ldi	r24, 0x84	; 132
     2410:	80 93 bc 00 	sts	0x00BC, r24
-	i2c_timer = I2C_TIMER_DELAY;
     2414:	8f ef       	ldi	r24, 0xFF	; 255
     2416:	90 e0       	ldi	r25, 0x00	; 0
     2418:	a0 e0       	ldi	r26, 0x00	; 0
     241a:	b0 e0       	ldi	r27, 0x00	; 0
-	while(!(TWCR & (1<<TWINT)) && i2c_timer--);
     241c:	20 91 bc 00 	lds	r18, 0x00BC
     2420:	27 fd       	sbrc	r18, 7
     2422:	05 c0       	rjmp	.+10     	; 0x242e <i2c_readNak+0x20>
@@ -7077,27 +4696,13 @@ unsigned char i2c_readNak(void)
     2428:	b1 09       	sbc	r27, r1
     242a:	c0 f7       	brcc	.-16     	; 0x241c <i2c_readNak+0xe>
     242c:	04 c0       	rjmp	.+8      	; 0x2436 <i2c_readNak+0x28>
-	if(i2c_timer == 0)
     242e:	89 2b       	or	r24, r25
     2430:	8a 2b       	or	r24, r26
     2432:	8b 2b       	or	r24, r27
     2434:	19 f0       	breq	.+6      	; 0x243c <i2c_readNak+0x2e>
-		return 0;
-	
-    return TWDR;
     2436:	80 91 bb 00 	lds	r24, 0x00BB
     243a:	08 95       	ret
-
-	TWCR = (1<<TWINT) | (1<<TWEN);
-	i2c_timer = I2C_TIMER_DELAY;
-	while(!(TWCR & (1<<TWINT)) && i2c_timer--);
-	if(i2c_timer == 0)
-		return 0;
     243c:	80 e0       	ldi	r24, 0x00	; 0
-	
-    return TWDR;
-
-}/* i2c_readNak */
     243e:	08 95       	ret
 
 00002440 <__divmodsi4>:

@@ -4,7 +4,8 @@ TARGETNAME = u8m2
 MCU:=atmega168
 F_CPU:=16000000
 WORKDIR:=.
-U8GM2DIR:=../src
+U8GM2DIR:=../u8glib
+MPU6050DIR:=../mpu
 
 # Type: "avrdude -c ?" to get a full listing.
 AVRDUDE_PROGRAMMER := avrispmkii
@@ -18,10 +19,11 @@ AR  = @avr-ar
 # Compile all .c files in all directories
 SRC = $(shell ls $(WORKDIR)/*.c 2>/dev/null)
 SRC += $(shell ls $(U8GM2DIR)/*.c 2>/dev/null)
+SRC += $(shell ls $(MPU6050)/*.c 2>/dev/null)
 
 # Flags for the linker and the compiler
 COMMON_FLAGS = -DF_CPU=$(F_CPU) -mmcu=$(MCU) $(DOGDEFS)
-COMMON_FLAGS += -I$(WORKDIR) -I$(U8GM2DIR)
+COMMON_FLAGS += -I$(WORKDIR) -I$(U8GM2DIR) -I$(MPU6050DIR)
 COMMON_FLAGS += -g -Os -Wall -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 COMMON_FLAGS += -ffunction-sections -fdata-sections -Wl,--gc-sections
 COMMON_FLAGS += -Wl,--relax -mcall-prologues
